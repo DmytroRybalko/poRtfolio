@@ -1,0 +1,112 @@
+---
+title: "Lab2"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Load necessary libraries
+```{r}
+library(tidyverse)
+library(readxl)
+library(lubridate)
+```
+## Load data
+First we have to load Lab2Start.xlsx file into R. Let`s use readxl package:
+```{r}
+my_data <- read_excel("./Lab2Start.xlsx")
+```
+We can use View(my_data) for viewing data.
+## Question 1: What is the total revenue for all the sales in the United States?
+```{r}
+(my_data %>%
+    filter(Country == "United States") %>%
+    summarise(US_revenue = sum(Revenue)))
+#TODO: add separator for numbers
+```
+First, let's add a "Month" column. Insert a new column to the left of the
+Customer ID column, and use formula to derive the month of sales from the Date
+column.
+```{r}
+my_data <- my_data %>%
+    mutate(Month = month(Date)) %>%
+    select(Date:Year, Month, everything())
+```
+## Question 2: What is the total revenue for all the sales in the month of December?
+```{r}
+(my_data %>% filter(Month == 12) %>%
+    summarise(TotalRevenue = sum(Revenue)))
+#TODO: add separator for numbers
+```
+Next, let's add an "Age Group" column. Insert a new column to the left of the
+Customer Gender, and use formula to derive the age group from the Customer Age
+column. Let's group the customers based on the following criteria:
+- Youth (<25);
+- Young Adults (25-34);
+- Adults (35-64);
+- Seniors (>64)
+```{r}
+age_group <- function(age) {
+        if (age < 25) {
+            "Youth"
+        } else if (age > 24 & age < 35) {
+            "Young Adults"
+        } else if (age > 34 & age < 65) {
+            "Adults"
+        } else {
+            "Seniors"
+        }
+}
+my_data <- my_data %>%
+    mutate('Age Group' = map_chr(.$`Customer Age`, age_group)) %>%
+    select(Date:`Customer Age`, `Age Group`, everything())
+```
+## Question 3: What is the total revenue for all the sales for Young Adults Age Group?
+```{r}
+(my_data %>%
+    filter(`Age Group` == "Young Adults") %>%
+    summarise(Total = sum(Revenue)))
+#TODO: add separator for numbers
+```
+Now, let's add a "Frame Size" column. Insert a new column to the left of the
+Order Quantity Use formula to derive the frame size of a bicycle from the last
+two characters of the Product column, when the Product Category is Bikes.
+Otherwise - NA.
+```{r}
+my_data <- my_data %>%
+    mutate('Frame Size' = ifelse(my_data$`Product Category` == 'Bikes',
+                                 my_data$Product, NA) %>%
+               str_extract("\\d\\d$") %>%
+               as.numeric()) %>%
+    select(Date:Product, 'Frame Size', everything())
+```
+## Question 4: What is the total revenue for all the bikes with frame size 62
+## for the customer age group Seniors?
+```{r}
+my_data %>%
+    filter(`Product Category` == "Bikes",
+           `Frame Size` == 62,
+           `Age Group` == "Seniors") %>%
+    summarise(TotalRev = sum(Revenue))
+```
+Let's add a "Profit" column. Insert a new column to the right of the Revenue,
+and use formula to derive the Profit from both the Revenue and Cost columns.
+Show the total for the Profit column. Use the Sum aggregation in the total row
+of the table, for the Profit column. 
+```{r}
+my_data <- my_data %>%
+    mutate(Profit = Revenue - Cost)
+```
+## Question 5: What is the total profit for United States sales in the month of
+## October 2015, for customer age group Adults?
+```{r}
+(my_data %>%
+    filter(Country == "United States", Year == 2015, Month == 10,
+           `Age Group` == "Adults") %>%
+    summarise(`Total Profit` = sum(Profit), n = n()))
+```
+Save data for next lab:
+```{r}
+saveRDS(my_data, "data4week3.rds")
+```
