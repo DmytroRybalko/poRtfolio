@@ -1,0 +1,2 @@
+Here is the result of my work on the course "Microsoft:DAT205x-Introduction to Data Analysis using Excel" (https://courses.edx.org/courses/course-v1:Microsoft+DAT205x+3T2016/course/).
+I've done tasks using R and its pretty nice tidyverse and ggplot2 packages.
