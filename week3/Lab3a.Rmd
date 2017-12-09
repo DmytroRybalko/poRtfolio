@@ -1,0 +1,62 @@
+---
+title: "Lab3a"
+output: html_document
+---
+# Intro
+ In this lab we will be looking into the yearly sales data broken down by
+ countries, product categories, and age groups. Let's start!
+## Load necessary libraries
+```{r}
+library(tidyverse)
+library(scales)
+```
+## Load data for Lab3a
+```{r}
+my_data <- readRDS("data4week3.rds")
+```
+## Question 1: Which year did the company start selling Touring Bikes?
+```{r}
+(ans_1 <- my_data %>%
+    arrange(Date) %>%
+    filter(`Sub Category` == 'Touring Bikes') %>%
+    summarise(first(Year)))
+```
+## Question 2: Rank the States for Germany, from the highest to lowest revenue
+```{r}
+ans_2 <- my_data %>%
+    filter(Country == 'Germany') %>%
+    group_by(State) %>%
+    summarise(total = sum(Revenue)) %>%
+    arrange(desc(total)) %>%
+    mutate(rank = min_rank(desc(total)))
+View(ans_2)
+```
+## Question 3: Rank the States for Germany, from the highest to lowest revenue
+## for year 2013
+```{r}
+ans_3 <- my_data %>%
+    filter(Country == 'Germany', Year == 2013) %>%
+    group_by(State) %>%
+    summarise(total = sum(Revenue)) %>%
+    arrange(desc(total)) %>%
+    mutate(rank = min_rank(desc(total)))
+View(ans_3)
+```
+## Question 4: Which frame size sold the most?
+```{r}
+ans_4 <- my_data %>%
+    filter(`Product Category` == 'Bikes') %>%
+    group_by(`Frame Size`) %>%
+    summarise(pop_frame_size = sum(Revenue)) %>%
+    arrange(desc(pop_frame_size)) %>%
+    mutate(rank = min_rank(desc(pop_frame_size)))
+View(ans_4)
+```
+## Question 5: Which Age Group has the lowest revenue?
+```{r}
+ans_5 <- my_data %>%
+    group_by(`Age Group`) %>%
+    summarise(total = sum(Revenue)) %>%
+    arrange(total)
+View(ans_5)
+```
