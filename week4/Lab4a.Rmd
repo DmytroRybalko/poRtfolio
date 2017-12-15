@@ -1,0 +1,124 @@
+---
+title: "Lab4a"
+output: html_document
+---
+
+# Load necessary libraries
+```{r}
+library(tidyverse)
+library(lubridate)
+library(scales)
+```
+## Load data for Lab3b
+```{r}
+my_data <- readRDS("data4week4.rds")
+```
+In this Lab we continue to work with data from Lab3b and with the same type of 
+charts but will use other data subsets.
+
+## Question 1: A quick glance on the Yearly Sales by Country shows that
+## Australia has an unusual trend compared to the other countries.
+## Which year does Australia have the least sales?
+```{r}
+ans_1 <- my_data %>%
+    group_by(Year, Country) %>%
+    summarise(Total = sum(Revenue))
+
+ans_1$Country <- factor(ans_1$Country,
+                         levels = c("United States", "Australia", "United Kingdom",
+                                    "Germany", "France", "Canada"), ordered = T)
+
+p <- ggplot(ans_1, aes(x = Year, y = Total, color = Country))
+p + geom_line(size = 1.2) +
+    geom_point(size = 2) +
+    scale_y_continuous(labels = scales::dollar) +
+    labs(x = "Year", y = "Total Revenue",
+         title = "Yearly Sales by Country") +
+    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+```
+Create an additional pivot chart to show Sales by Country using Pie chart.
+Show percentages for each slice of the pie. Overall, Australia commands 25%
+of the company's total sales. But in some of the years, this proportion changes.
+## Question 2: What is the percentage of Australia sales (of total sales) in the
+## year that it has the least sales (previous question)?
+```{r}
+ans_2 <- my_data %>%
+    filter(Year == "2011") %>%
+    group_by(Country) %>%
+    summarise(Total = sum(Revenue)) %>%
+    arrange(desc(Total)) %>%
+    mutate(Prop = formatC(Total / sum(Total), digits = 3, format = "f") %>%
+               as.numeric(),
+           Percent = paste(Prop * 100, "%"),
+           y_tick = cumsum(Prop) - Prop / 2)
+View(ans_2)
+
+ans_2$`Country` <- factor(ans_2$`Country`,
+                                     levels = ans_2$`Country`)
+
+ggplot(ans_2, aes(x = "", y = Prop, fill = Country)) +
+    geom_bar(width = 1, stat = "identity") +
+    coord_polar(theta = "y") +
+    labs(title = "Sales by Country", x = NULL, y = NULL) +
+    geom_text(aes(x = c(1.0, 1.1, 1.2, 1.25, 1.25, 1.3),
+                  y = 1 - y_tick,
+                  label = Percent),
+              size = 5) +
+    theme(panel.background = element_rect(fill = "white", color = "white"),
+          plot.title = element_text(face = "bold", size = 16, hjust = 0.6,
+                                    margin = margin(t = 10)),
+          legend.title = element_text(face = "bold", colour = "black", size = 12),
+          legend.text = element_text(size = 10, color = "black"),
+          axis.text = element_blank(),
+          axis.ticks = element_blank())
+```
+## Question 3 and 4: For all the years that has all the three categories,
+## which year does the Bikes has the least proportion?
+```{r}
+ans_4 <- my_data %>%
+    filter(Country == "Australia", Year > 2012) %>%
+    group_by(Year, `Product Category`) %>%
+    summarise(Total = sum(Revenue))
+View(ans_4)
+
+ans_4$`Product Category` <- factor(ans_4$`Product Category`,
+                                     levels = c("Bikes", "Accessories", "Clothing"))
+
+ggplot(ans_4, aes(x = Year, y = Total, color = `Product Category`)) +
+    geom_line(size = 1.2) +
+    geom_point(size = 2) +
+    scale_y_continuous(labels = scales::dollar) +
+    labs(x = "Year", y = "Total Revenue",
+         title = "Australia Sales by Category") +
+    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+```
+## Question 5: What is the percentage of Bikes sales (of total sales) in that year?
+```{r}
+y <- 2014
+ans_5 <- my_data %>%
+    filter(Country == "Australia", Year == y) %>%
+    group_by(`Product Category`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    mutate(Prop = formatC(Total / sum(Total), digits = 3, format = "f") %>%
+               as.numeric(),
+           Percent = paste(Prop * 100, "%"),
+           y_tick = cumsum(Prop) - Prop / 2)
+View(ans_5)
+
+ggplot(ans_5, aes(x = "", y = Prop, fill = `Product Category`)) +
+    geom_bar(width = 1, stat = "identity") +
+    coord_polar(theta = "y") +
+    labs(title = paste("Proportion by Product Category for Australia in", y),
+         x = NULL, y = NULL) +
+    geom_text(aes(x = c(1.0, 1.0, 1.0),
+                  y = 1 - y_tick,
+                  label = Percent),
+              size = 5) +
+    theme(panel.background = element_rect(fill = "white", color = "white"),
+          plot.title = element_text(face = "bold", size = 16, hjust = 0.0,
+                                    margin = margin(t = 10)),
+          legend.title = element_text(face = "bold", colour = "black", size = 12),
+          legend.text = element_text(size = 10, color = "black"),
+          axis.text = element_blank(),
+          axis.ticks = element_blank())
+```
