@@ -6,7 +6,6 @@ output: html_document
 # Load necessary libraries
 ```{r}
 library(tidyverse)
-library(lubridate)
 library(scales)
 ```
 ## Load data for Lab3b
@@ -24,12 +23,8 @@ ans_1 <- my_data %>%
     group_by(Year, Country) %>%
     summarise(Total = sum(Revenue))
 
-ans_1$Country <- factor(ans_1$Country,
-                         levels = c("United States", "Australia", "United Kingdom",
-                                    "Germany", "France", "Canada"), ordered = T)
-
-p <- ggplot(ans_1, aes(x = Year, y = Total, color = Country))
-p + geom_line(size = 1.2) +
+ggplot(ans_1, aes(x = Year, y = Total, color = reorder(Country, -Total))) +
+    geom_line(size = 1.2) +
     geom_point(size = 2) +
     scale_y_continuous(labels = scales::dollar) +
     labs(x = "Year", y = "Total Revenue",
@@ -51,12 +46,8 @@ ans_2 <- my_data %>%
                as.numeric(),
            Percent = paste(Prop * 100, "%"),
            y_tick = cumsum(Prop) - Prop / 2)
-View(ans_2)
 
-ans_2$`Country` <- factor(ans_2$`Country`,
-                                     levels = ans_2$`Country`)
-
-ggplot(ans_2, aes(x = "", y = Prop, fill = Country)) +
+ggplot(ans_2, aes(x = "", y = Prop, fill = reorder(Country, -Prop))) +
     geom_bar(width = 1, stat = "identity") +
     coord_polar(theta = "y") +
     labs(title = "Sales by Country", x = NULL, y = NULL) +
@@ -79,16 +70,12 @@ ans_4 <- my_data %>%
     filter(Country == "Australia", Year > 2012) %>%
     group_by(Year, `Product Category`) %>%
     summarise(Total = sum(Revenue))
-View(ans_4)
 
-ans_4$`Product Category` <- factor(ans_4$`Product Category`,
-                                     levels = c("Bikes", "Accessories", "Clothing"))
-
-ggplot(ans_4, aes(x = Year, y = Total, color = `Product Category`)) +
+ggplot(ans_4, aes(x = Year, y = Total, color = reorder(`Product Category`, - Total))) +
     geom_line(size = 1.2) +
     geom_point(size = 2) +
     scale_y_continuous(labels = scales::dollar) +
-    labs(x = "Year", y = "Total Revenue",
+    labs(x = "Year", y = "Total Revenue", color = "Product Category",
          title = "Australia Sales by Category") +
     theme(plot.title = element_text(face = "bold", hjust = 0.5))
 ```
@@ -103,14 +90,13 @@ ans_5 <- my_data %>%
                as.numeric(),
            Percent = paste(Prop * 100, "%"),
            y_tick = cumsum(Prop) - Prop / 2)
-View(ans_5)
 
 ggplot(ans_5, aes(x = "", y = Prop, fill = `Product Category`)) +
     geom_bar(width = 1, stat = "identity") +
     coord_polar(theta = "y") +
     labs(title = paste("Proportion by Product Category for Australia in", y),
          x = NULL, y = NULL) +
-    geom_text(aes(x = c(1.0, 1.0, 1.0),
+    geom_text(aes(x = c(1.2, .9, 1.3),
                   y = 1 - y_tick,
                   label = Percent),
               size = 5) +

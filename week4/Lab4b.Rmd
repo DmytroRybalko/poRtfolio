@@ -22,7 +22,6 @@ ans_1 <- my_data %>%
     filter(!is.na(`Frame Size`)) %>%
     group_by(`Frame Size`, `Customer Gender`) %>%
     summarise(Total = sum(Revenue))
-View(ans_1)
 ```
 Make bar chart:
 ```{r}
@@ -58,12 +57,6 @@ ans_2 <- my_data %>%
     mutate(Prop = formatC(Total / sum(Total), digits = 3, format = "f") %>%
                as.numeric(),
            Percent = paste(Prop * 100, "%"))
-
-ans_2$`Customer Gender` <- factor(ans_2$`Customer Gender`)
-ans_2$`Age Group` <- factor(ans_2$`Age Group`,
-                            levels = c("Youth", "Young Adults", "Adults", "Seniors"),
-                            ordered = TRUE)
-View(ans_2)
 ```
 Make chart:
 ```{r}
