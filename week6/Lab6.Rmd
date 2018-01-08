@@ -1,0 +1,200 @@
+---
+title: "Lab6"
+output: html_document
+---
+# Load necessary libraries
+```{r}
+library(tidyverse)
+library(scales)
+```
+## Load data for Lab5b
+```{r}
+my_data <- readRDS("data4week6.rds")
+#theme_set(theme_classic())
+```
+In this Lab we'll be review the sales difference (growth) for Product Category
+and Sub Category between year 2015 and 2016.
+So, we will create two type of reports. One with the sales for each year and the
+other with the % Change in Revenue from Year to Year. Each report is a
+cross-tabular format with Product Categories and Sub categories on the rows and
+Year on the columns, with Sum of Revenue as the aggregate data. Also we will
+create chart representation for each report.
+Let's start! First, create two reports
+
+Report #1 ============================
+Category1     | 2011 | 2012 |... |2016
+ Subcategory1 |
+Category2
+ Subcategory2
+ 
+Report #2 ============================
+Category1     | 2012 | 2013 |... |2016
+ Subcategory1 |
+Category2
+ Subcategory2
+
+Let's make quick EDA for our data:
+```{r}
+my_data %>%
+    group_by(`Product Category`, `Sub Category`, Year) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ggplot(aes(x = Year, y = Total, colour = `Sub Category`)) +
+    geom_line() +
+    scale_y_log10() +
+    theme(plot.margin = unit(c(1, 0, 0.1, 0.1), "cm"))
+```
+We can see that for years 2011, 2012 there is data for only two products:
+mounting bikes and road bikes. To make our data symmetric (table-like) let's
+turns implicit missing values into explicit missing values:
+```{r}
+report_1 <- my_data %>%
+    group_by(`Product Category`, `Sub Category`, Year) %>%
+    summarise(Total = sum(Revenue)) %>%
+    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016)
+```
+Create heatmap chart
+```{r}
+ggplot(report_1, aes(x = Year, y = `Sub Category`)) +
+    geom_tile(aes(fill = Total), colour = "black", size = 0.5) +
+    geom_text(aes(label = format(prettyNum(report_1$Total, ","), justify = "right")),
+              colour = "black", fontface = "bold", size = 5, hjust = 0.6) +
+    scale_fill_gradient(low = "white", high = "red") +
+    scale_x_continuous(expand = c(0, 0),
+                       breaks = seq(min(report_1$Year), max(report_1$Year), 1)) +
+    scale_y_discrete(expand = c(0, 0)) +
+    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
+    labs(title = "Sales by Years, $", x = NULL, y = NULL) +
+    theme(
+        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
+        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
+        panel.grid.major.y = element_line(colour = "black", size = 0.2),
+        panel.grid.major.x = element_blank(),
+        strip.background = element_rect(colour = "black", fill = "lightblue", size = 0.5),
+        strip.text = element_text(size = rel(1.1)),
+        axis.text = element_text(size = 10, colour = "black"))
+```
+Next make second report
+```{r}
+report_2 <- report_1
+report_2 <- report_2 %>%
+    group_by(`Sub Category`) %>%
+    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
+               as.numeric()) %>%
+    ungroup() %>%
+    filter(Year > 2011)
+View(report_2)
+```
+Create heatmap chart
+```{r}
+percent_label <- ifelse(!is.na(report_2$`Margin,%`),
+                        paste(report_2$`Margin,%`, "%"),
+                        paste(report_2$`Margin,%`))
+
+ggplot(report_2, aes(x = Year, y = `Sub Category`)) +
+    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
+    geom_text(aes(label = format(percent_label, justify = "right")),
+              colour = "white", fontface = "bold", size = 5) +
+    scale_fill_gradient(limits = c(-60, 60), breaks = seq(-60, 60, by = 20),
+                        oob = scales::squish) +
+    scale_x_continuous(expand = c(0, 0),
+                       breaks = seq(min(report_2$Year), max(report_2$Year), 1)) +
+    scale_y_discrete(expand = c(0, 0)) +
+    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
+    labs(title = "Change in Revenue from Year to Year, %", x = NULL, y = NULL) +
+    theme(
+        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
+        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
+        panel.grid.major.y = element_line(colour = "black", size = 0.2),
+        panel.grid.major.x = element_blank(),
+        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
+        strip.text = element_text(size = rel(1.1)),
+        axis.text = element_text(size = 10, colour = "black"))
+```
+## Question 1: Without applying any filter, which year does the Accessories
+## category have negative growth?
+## Answer: 2015.
+
+## Question 2: Filter the report for Youth Age Group. Which two years do the
+## Accessories category have negative growth?
+```{r}
+ans2 <- my_data %>%
+    filter(`Age Group` == "Youth") %>%
+    group_by(`Product Category`, `Sub Category`, `Year`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ungroup() %>%
+    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016) %>%
+    group_by(`Sub Category`) %>%
+    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
+               as.numeric()) %>%
+    ungroup() %>%
+    filter(Year > 2011)
+View(ans2)
+```
+Heat map
+```{r}
+ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
+    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
+    geom_text(aes(label = format(`Margin,%`, justify = "right")),
+              colour = "white", fontface = "bold", size = 5) +
+    scale_x_continuous(expand = c(0, 0),
+                       breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
+    scale_y_discrete(expand = c(0, 0)) +
+    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
+    labs(title = "Which two years do the Accessories category have negative growth?",
+         x = NULL, y = NULL) +
+    theme(
+        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
+        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
+        panel.grid.major.y = element_line(colour = "black", size = 0.2),
+        panel.grid.major.x = element_blank(),
+        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
+        strip.text = element_text(size = rel(1.1)),
+        axis.text = element_text(size = 10, colour = "black"))
+```
+## Question 3: Without applying any filter, which two years do the Bikes
+## category have negative growth?
+## Answer: take a look at heat map report_2 - 2014, 2016.
+
+## Filter the report for Australia
+```{r}
+ans4 <- my_data %>%
+    filter(Country == "Australia") %>%
+    group_by(`Product Category`, `Sub Category`, `Year`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ungroup() %>%
+    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016) %>%
+    group_by(`Sub Category`) %>%
+    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
+               as.numeric()) %>%
+    ungroup() %>%
+    filter(Year > 2011)
+View(ans4)
+```
+Heat map:
+```{r}
+ggplot(ans4, aes(x = Year, y = `Sub Category`)) +
+    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
+    geom_text(aes(label = format(`Margin,%`, justify = "right")),
+              colour = "white", fontface = "bold", size = 5) +
+    scale_x_continuous(expand = c(0, 0),
+                       breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
+    scale_y_discrete(expand = c(0, 0)) +
+    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
+    labs(title = "Which year do the Bikes category have the highest growth?",
+         x = NULL, y = NULL) +
+    theme(
+        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
+        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
+        panel.grid.major.y = element_line(colour = "black", size = 0.2),
+        panel.grid.major.x = element_blank(),
+        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
+        strip.text = element_text(size = rel(1.1)),
+        axis.text = element_text(size = 10, colour = "black"))
+```
+## Question 4: Which year do the Bikes category have the highest growth?
+## Answer: 2015
+
+## Question 5: Keep the Australia filter. In the year that Bikes sales have the
+## highest growth (previous question), which Sub Category of Bikes has the
+## highest growth?
+## Answer: Mounting Bikes (71%)
