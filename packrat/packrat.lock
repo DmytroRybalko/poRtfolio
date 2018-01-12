@@ -142,6 +142,12 @@ Source: CRAN
 Version: 0.8-69
 Hash: 6cb09ceba757189aff90eb9bb72c8983
 
+Package: ggfittext
+Source: CRAN
+Version: 0.5.0
+Hash: 9d42599286d625379dd0b9f0f3b76e3d
+Requires: ggplot2, stringi
+
 Package: ggplot2
 Source: CRAN
 Version: 2.2.1
@@ -406,6 +412,12 @@ Requires: broom, cli, crayon, dbplyr, dplyr, forcats, ggplot2, haven,
     hms, httr, jsonlite, lubridate, magrittr, modelr, purrr, readr,
     readxl, reprex, rlang, rstudioapi, rvest, stringr, tibble, tidyr,
     xml2
+
+Package: treemapify
+Source: CRAN
+Version: 2.4.0
+Hash: b0ff968acf6d0ba34ce0dc2bab6c2ba2
+Requires: ggfittext, ggplot2, plyr
 
 Package: viridisLite
 Source: CRAN
