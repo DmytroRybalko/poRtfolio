@@ -1,0 +1,108 @@
+---
+title: "Lab8"
+output: html_document
+---
+# Load necessary libraries
+```{r}
+library(tidyverse)
+library(treemapify)
+```
+## Load data for Lab5b
+```{r}
+my_data <- readRDS("data4week8.rds")
+add_data <- read.table("Customer_demographics.txt", sep = ",", header = T) %>%
+    as_data_frame()
+```
+Lastly, in this Lab we want to have more information about the customer
+demographics in addition to the already available age and gender. 
+
+Add the MaritalStatus and TotalChildren to my_data
+```{r}
+ext_data_1 <- add_data %>%
+    select(Customer.ID, MaritalStatus, TotalChildren)
+
+new_data_1 <- my_data %>%
+    select(`Customer ID`, `Order Quantity`, `Product Category`) %>%
+    left_join(ext_data_1, c("Customer ID" = "Customer.ID"))
+```
+## Question 1: For those customers who bought bikes, what are the top three
+## (bought the most quantity) customer profiles (marital status and number of
+## children)?
+```{r}
+ans_1 <- new_data_1 %>%
+    filter(`Product Category` == "Bikes") %>%
+    group_by(MaritalStatus, TotalChildren) %>%
+    summarise(`Total Order` = sum(`Order Quantity`)) %>%
+    arrange(desc(`Total Order`))
+ans_1
+```
+## Answer:
+## 1) Single without child
+## 2) Married with one child
+## 3) Married with two children
+Now, replace the MaritalStatus and TotalChildren fields with the YearlyIncome
+field from the Customer_demographic table
+```{r}
+ext_data_2 <- add_data %>%
+    select(Customer.ID, YearlyIncome)
+
+new_data_2 <- my_data %>%
+    select(`Customer ID`, `Order Quantity`, `Product Category`) %>%
+    left_join(ext_data_2, c("Customer ID" = "Customer.ID"))
+```
+## Question 2: For those customers who bought bikes, what are the top three
+## (bought the most quantity) income brackets? (Rank from highest to Lowest) 
+```{r}
+(ans_2 <- new_data_2 %>%
+    filter(`Product Category` == "Bikes") %>%
+    group_by(YearlyIncome)%>%
+    summarise(Total = sum(`Order Quantity`)) %>%
+    arrange(desc(Total)))
+```
+Now, remove the YearlyIncome field and replace it with the EnglishEducation
+field from the add_data tibble.
+```{r}
+ext_data_3 <- add_data %>%
+    select(Customer.ID, EnglishEducation)
+
+new_data_3 <- my_data %>%
+    select(`Customer ID`, `Order Quantity`, `Product Category`) %>%
+    left_join(ext_data_3, c("Customer ID" = "Customer.ID"))
+```
+## Question 3: For those customers who bought bikes, what are the top two
+## (bought the most quantity) education levels?
+```{r}
+(ans_3 <- new_data_3 %>%
+    filter(`Product Category` == "Bikes") %>%
+    group_by(EnglishEducation)%>%
+    summarise(Total = sum(`Order Quantity`)) %>%
+    arrange(desc(Total)))
+```
+## Answer:
+## 1) Bachelors
+## 2) Partial College
+
+Lastly, remove the EnglishEducation field from the Rows and replace it with the
+HouseOwnerFlag field from the Customer_demographics table. Format the Sum of
+Order Quantity to show as Percentage of Grand Total with two decimal places.
+```{r}
+ext_data_4 <- add_data %>%
+    select(Customer.ID, HouseOwnerFlag)
+
+new_data_4 <- my_data %>%
+    select(`Customer ID`, `Order Quantity`, `Product Category`) %>%
+    left_join(ext_data_4, c("Customer ID" = "Customer.ID"))
+```
+## Question 4: What is the percentage of the customers who bought Bikes and are
+## house owners?
+```{r}
+(ans_4 <- new_data_4 %>%
+    filter(`Product Category` == "Bikes") %>%
+    group_by(HouseOwnerFlag)%>%
+    summarise(Total = sum(`Order Quantity`)) %>%
+    mutate(`Grand Total, %` = formatC(Total / sum(Total) * 100, digits = 2, format = "f") %>%
+               as.numeric()) %>%
+    arrange(desc(`Grand Total, %`))
+ )
+```
+## Answer: 68.72%
