@@ -1,0 +1,108 @@
+---
+title: "DAT205x: Introduction to Data Analysis using R"
+output: html_document
+---
+# Scenario
+You are the new marketing manager of an established Bicycle company. The company
+sells bicycles and accessories, such as clothing and other accessories to bikers
+in six countries.  
+The company has just hired Lucy as its new Sales manager. You are tasked to
+introduce Lucy to the company, its product portfolio and its sales performance
+since 2011. To do this, you have asked Jack, the IT manager to prepare some data
+for you.   
+Now, it's your job to present this data in a compelling manner.  
+
+## Lab1 - Preparation  
+Load [tidyverse](https://www.tidyverse.org), [readxl](https://cran.r-project.org/web/packages/readxl/index.html) libraries.
+```{r setup , include=FALSE}
+library(tidyverse)
+library(readxl)
+```
+Also load raw data from **Lab2Start.xlsx** file.
+```{r my_data, cache.extra = file.info("./raw_data.xlsx")}
+my_data <- read_excel("./raw_data.xlsx")
+```
+Let's view what our raw data look like:  
+```{r}
+(my_data)
+# TODO: make better look for wide table (xtable, datatable(jQuery))
+```
+
+## Lab1 - Workflow  
+The first thing you'd like to do is to present the data graphically. You do this
+by creating charts for the three groups of data you received from Jack, your IT
+manager. If you haven't done so, give the chart a descriptive title.  
+
+Your first solution should look like this (numbers may not be the same).
+![](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/6d5311d2f9935b5128c6880f13e980d2/asset-v1:Microsoft+DAT205x+3T2016+type@asset+block/lab1x.PNG)
+Create three type of chart as showed above and answer the next questions.  
+
+---
+
+#### **Question 1:** What does the Yearly total sales look like?  
+```{r echo=FALSE, out.width="100%"}
+theme_set(theme_classic())
+
+my_data %>%
+    group_by(Year, `Product Category`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ggplot(aes(x = Year, y = Total, color = reorder(`Product Category`, -Total))) +
+    geom_line(size = 1.2) +
+    geom_point(size = 2) +
+    scale_y_continuous(labels = scales::dollar) +
+    labs(x = "Year", y = "Total Revenue", color = " Product\nCategory",
+         title = "Yearly Sales by Category") +
+    theme(plot.title = element_text(face = "bold"),
+          panel.grid.major = element_line(colour = "gray"),
+          panel.grid.minor = element_line(colour = "gray", size = 0.1),
+          legend.title = element_text(face = "bold", colour = "black", size = 12),
+          legend.text = element_text(size = 10, color = "black"))
+```
+
+#### **Answer:** Similar to the yearly bikes revenue   
+
+---
+
+#### **Question 2:** What percentage of the total revenue comes from the Bikes category?   
+```{r echo=FALSE}
+my_data %>%
+    group_by(`Product Category`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    arrange(desc(Total)) %>%
+    mutate(Prop = formatC(Total / sum(Total), digits = 2, format = "f") %>%
+               as.numeric(),
+           Percent = paste(Prop * 100, "%"),
+           y_tick = cumsum(Prop) - Prop / 2) %>%
+    ggplot(aes(x = "", y = Prop, fill = reorder(`Product Category`, -Prop))) +
+    geom_bar(width = 1, stat = "identity") +
+    coord_polar(theta = "y") +
+    labs(title = "Revenue by Category", x = NULL, y = NULL) +
+    geom_text(aes(x = c(1.0, 1.2, 1.3), y = 1 - y_tick, label = Percent), size = 5) +
+    theme(panel.background = element_rect(fill = "white", color = "white"),
+          plot.title = element_text(face = "bold"),
+          legend.title = element_blank(),
+          legend.text = element_text(size = 10, color = "black"),
+          axis.text = element_blank(),
+          axis.ticks = element_blank(),
+          axis.line = element_blank())
+```
+
+#### **Answer:** 72%  
+
+---
+
+#### **Question 3:** For the Revenue by Country, sort the countries from the one with highest revenue to lowest revenue.   
+```{r echo=FALSE}
+my_data %>%
+    group_by(Country) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ggplot(aes(x = reorder(Country, Total), y = Total)) +
+    geom_bar(stat = "identity", show.legend = F, width = .5, fill = "blue") +
+    scale_y_continuous(labels = scales::dollar) +
+    coord_flip() +
+    labs(title = "Revenue by Country", x = NULL, y = NULL) +
+    theme(panel.background = element_rect(fill = "white", color = "white"),
+          plot.title = element_text(face = "bold"),
+          legend.title = element_text(face = "bold", colour = "black", size = 12),
+          legend.text = element_text(size = 10, color = "black"))
+```
