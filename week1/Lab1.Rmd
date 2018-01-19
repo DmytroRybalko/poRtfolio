@@ -1,6 +1,8 @@
 ---
 title: "DAT205x: Introduction to Data Analysis using R"
-output: html_document
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
 ---
 # Scenario
 You are the new marketing manager of an established Bicycle company. The company
@@ -19,8 +21,8 @@ library(tidyverse)
 library(readxl)
 ```
 Also load raw data from **Lab2Start.xlsx** file.
-```{r my_data, cache.extra = file.info("./raw_data.xlsx")}
-my_data <- read_excel("./raw_data.xlsx")
+```{r my_data, cache.extra = file.info("./week1/raw_data.xlsx")}
+my_data <- read_excel("./week1/raw_data.xlsx")
 ```
 Let's view what our raw data look like:  
 ```{r}
@@ -105,4 +107,8 @@ my_data %>%
           plot.title = element_text(face = "bold"),
           legend.title = element_text(face = "bold", colour = "black", size = 12),
           legend.text = element_text(size = 10, color = "black"))
+```
+Save data for next lab:
+```{r}
+saveRDS(my_data, "./week2/data4week2.rds")
 ```
