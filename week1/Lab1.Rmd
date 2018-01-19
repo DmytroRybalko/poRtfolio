@@ -110,5 +110,5 @@ my_data %>%
 ```
 Save data for next lab:
 ```{r}
-saveRDS(my_data, "./week2/data4week2.rds")
+saveRDS(my_data, "week1/data4week2.rds")
 ```

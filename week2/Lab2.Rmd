@@ -1,51 +1,71 @@
 ---
-title: "Lab2"
-output: html_document
+title: "DAT205x: Introduction to Data Analysis using R. Lab2"
+output: html_notebook
 ---
+# Scenario
+While your first attempt to show the company's performance to Lucy was not bad, clearly she has a lot more requirements than what you provided. She wants to know more about the year over year sales, sliced into different categories, sub-categories, and countries. She also wants to see additional information such as customer demographics.
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+Jack has provided you with a different data source. This time the data has more than one hundred thousand rows.
+
+Before you can create additional reports to Lucy, first you need to prepare the data.
+```{r setup , include=FALSE}
+knitr::opts_knit$set(root.dir = getwd())
 ```
-# Load necessary libraries
+Load libraries
 ```{r}
 library(tidyverse)
-library(readxl)
 library(lubridate)
 ```
-## Load data
-First we have to load Lab2Start.xlsx file into R. Let`s use readxl package:
-```{r}
-my_data <- read_excel("./Lab2Start.xlsx")
+Load data for Lab2:
+```{r my_data, cache = TRUE, cache.extra = file.info("./week1/data4week2.rds")}
+my_data <- readRDS("./week1/data4week2.rds")
 ```
-We can use View(my_data) for viewing data.
-## Question 1: What is the total revenue for all the sales in the United States?
+
+---
+
+#### **Question 1:** What is the total revenue for all the sales in the United States?
 ```{r}
-(my_data %>%
+my_data %>%
     filter(Country == "United States") %>%
-    summarise(US_revenue = sum(Revenue)))
-#TODO: add separator for numbers
+    summarise(`US Revenue` = sum(Revenue)) %>%
+    prettyNum(., big.mark = ",") %>%
+    paste0("$", .)
 ```
+
+---
+
+Now, you need to add several columns, derived from existing columns in the data.
+
 First, let's add a "Month" column. Insert a new column to the left of the
 Customer ID column, and use formula to derive the month of sales from the Date
 column.
-```{r}
+
+```{r results = 'hide'}
 my_data <- my_data %>%
     mutate(Month = month(Date)) %>%
     select(Date:Year, Month, everything())
 ```
-## Question 2: What is the total revenue for all the sales in the month of December?
+
+#### **Question 2:** What is the total revenue for all the sales in the month of December?
 ```{r}
-(my_data %>% filter(Month == 12) %>%
-    summarise(TotalRevenue = sum(Revenue)))
-#TODO: add separator for numbers
+my_data %>% filter(Month == 12) %>%
+    summarise(`Total Revenue` = sum(Revenue)) %>%
+    prettyNum(., big.mark = ",") %>%
+    paste0("$", .)
 ```
+
+---
+
 Next, let's add an "Age Group" column. Insert a new column to the left of the
 Customer Gender, and use formula to derive the age group from the Customer Age
 column. Let's group the customers based on the following criteria:
-- Youth (<25);
-- Young Adults (25-34);
-- Adults (35-64);
-- Seniors (>64)
+
+* Youth (<25);
+* Young Adults (25-34);
+* Adults (35-64);
+* Seniors (>64)
+
+Define function age_group()
 ```{r}
 age_group <- function(age) {
         if (age < 25) {
@@ -58,55 +78,73 @@ age_group <- function(age) {
             "Seniors"
         }
 }
+```
+Add an "Age Group" column
+```{r results = 'hide'}
 my_data <- my_data %>%
     mutate('Age Group' = map_chr(.$`Customer Age`, age_group)) %>%
     select(Date:`Customer Age`, `Age Group`, everything())
 ```
-## Question 3: What is the total revenue for all the sales for Young Adults Age Group?
+
+#### **Question 3:** What is the total revenue for all the sales for Young Adults Age Group?
 ```{r}
-(my_data %>%
+my_data %>%
     filter(`Age Group` == "Young Adults") %>%
-    summarise(Total = sum(Revenue)))
-#TODO: add separator for numbers
+    summarise(Total = sum(Revenue)) %>%
+    prettyNum(., big.mark = ",") %>%
+    paste0("$", .)
 ```
+
+---
+
 Now, let's add a "Frame Size" column. Insert a new column to the left of the
 Order Quantity Use formula to derive the frame size of a bicycle from the last
 two characters of the Product column, when the Product Category is Bikes.
 Otherwise - NA.
-```{r}
+
+```{r results = 'hide'}
 my_data <- my_data %>%
-    mutate('Frame Size' = ifelse(my_data$`Product Category` == 'Bikes',
-                                 my_data$Product, NA) %>%
+    mutate('Frame Size' = ifelse(my_data$`Product Category` == 'Bikes', my_data$Product, NA) %>%
                str_extract("\\d\\d$") %>%
                as.numeric()) %>%
     select(Date:Product, 'Frame Size', everything())
 ```
-## Question 4: What is the total revenue for all the bikes with frame size 62
-## for the customer age group Seniors?
+
+#### **Question 4:** What is the total revenue for all the bikes with frame size 62 for the customer age group Seniors?
+
 ```{r}
 my_data %>%
     filter(`Product Category` == "Bikes",
            `Frame Size` == 62,
            `Age Group` == "Seniors") %>%
-    summarise(TotalRev = sum(Revenue))
+    summarise(`Total Revenue` = sum(Revenue)) %>%
+    prettyNum(., big.mark = ",") %>%
+    paste0("$", .)
 ```
+
+---
+
 Let's add a "Profit" column. Insert a new column to the right of the Revenue,
 and use formula to derive the Profit from both the Revenue and Cost columns.
 Show the total for the Profit column. Use the Sum aggregation in the total row
 of the table, for the Profit column. 
-```{r}
+```{r results = 'hide'}
 my_data <- my_data %>%
     mutate(Profit = Revenue - Cost)
 ```
-## Question 5: What is the total profit for United States sales in the month of
-## October 2015, for customer age group Adults?
+
+#### **Question 5:** What is the total profit for United States sales in the month of October 2015, for customer age group Adults?
 ```{r}
-(my_data %>%
-    filter(Country == "United States", Year == 2015, Month == 10,
-           `Age Group` == "Adults") %>%
-    summarise(`Total Profit` = sum(Profit), n = n()))
+my_data %>%
+    filter(Country == "United States", Year == 2015, Month == 10, `Age Group` == "Adults") %>%
+    summarise(`Total Profit` = sum(Profit)) %>%
+    prettyNum(., big.mark = ",") %>%
+    paste0("$", .)
 ```
+
+---
+
 Save data for next lab:
 ```{r}
-saveRDS(my_data, "data4week3.rds")
+saveRDS(my_data, "week2/data4week3.rds")
 ```
