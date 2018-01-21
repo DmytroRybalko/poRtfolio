@@ -1,62 +1,86 @@
 ---
-title: "Lab3a"
-output: html_document
+title: "DAT205x: Introduction to Data Analysis using R. Lab3a"
+output: html_notebook
 ---
-# Intro
- In this lab we will be looking into the yearly sales data broken down by
- countries, product categories, and age groups. Let's start!
-## Load necessary libraries
+# Scenario
+
+Now that you have prepared the data in an Excel table, you can start to create pivot tables to aggregate the data and create some reports.
+
+From your conversation with Lucy, you know that she is interested in looking into the yearly sales data broken down by countries, product categories, and age groups.
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(root.dir = getwd())
+```
+Load libraries
 ```{r}
 library(tidyverse)
-library(scales)
+library(knitr)
 ```
-## Load data for Lab3a
-```{r}
-my_data <- readRDS("data4week3.rds")
+Load data for Lab3a from here: week2/data4week3.rds
+```{r my_data, cache = TRUE, cache.extra = file.info("./week2/data4week3.rds")}
+my_data <- readRDS("./week2/data4week3.rds")
 ```
-## Question 1: Which year did the company start selling Touring Bikes?
+
+#### **Question 1:** Which year did the company start selling Touring Bikes?
+
 ```{r}
-(ans_1 <- my_data %>%
+my_data %>%
     arrange(Date) %>%
     filter(`Sub Category` == 'Touring Bikes') %>%
-    summarise(first(Year)))
+    summarise(`Which Year` = first(Year)) %>%
+    kable(align = 'l')
 ```
-## Question 2: Rank the States for Germany, from the highest to lowest revenue
+
+---
+
+#### **Question 2:** Rank the States for Germany, from the highest to lowest revenue
+
 ```{r}
-ans_2 <- my_data %>%
+my_data %>%
     filter(Country == 'Germany') %>%
     group_by(State) %>%
-    summarise(total = sum(Revenue)) %>%
-    arrange(desc(total)) %>%
-    mutate(rank = min_rank(desc(total)))
-View(ans_2)
+    summarise(Total = sum(Revenue)) %>%
+    arrange(desc(Total)) %>%
+    mutate(Rank = min_rank(desc(Total))) %>%
+    kable(align = 'lcr')
 ```
-## Question 3: Rank the States for Germany, from the highest to lowest revenue
-## for year 2013
+
+---
+
+#### **Question 3:** Rank the States for Germany, from the highest to lowest revenue for year 2013
+
 ```{r}
-ans_3 <- my_data %>%
+my_data %>%
     filter(Country == 'Germany', Year == 2013) %>%
     group_by(State) %>%
-    summarise(total = sum(Revenue)) %>%
-    arrange(desc(total)) %>%
-    mutate(rank = min_rank(desc(total)))
-View(ans_3)
+    summarise(Total = sum(Revenue)) %>%
+    arrange(desc(Total)) %>%
+    mutate(Rank = min_rank(desc(Total))) %>%
+    kable(align = 'lcr')
 ```
-## Question 4: Which frame size sold the most?
+
+---
+
+#### **Question 4:** Which frame size sold the most?
+
 ```{r}
-ans_4 <- my_data %>%
+my_data %>%
     filter(`Product Category` == 'Bikes') %>%
     group_by(`Frame Size`) %>%
-    summarise(pop_frame_size = sum(Revenue)) %>%
-    arrange(desc(pop_frame_size)) %>%
-    mutate(rank = min_rank(desc(pop_frame_size)))
-View(ans_4)
+    summarise(Total = sum(Revenue)) %>%
+    arrange(desc(Total)) %>%
+    mutate(rank = min_rank(desc(Total))) %>%
+    kable(align = 'lcr')
 ```
-## Question 5: Which Age Group has the lowest revenue?
+
+---
+
+#### **Question 5:** Which Age Group has the lowest revenue?
+
 ```{r}
-ans_5 <- my_data %>%
+my_data %>%
     group_by(`Age Group`) %>%
-    summarise(total = sum(Revenue)) %>%
-    arrange(total)
-View(ans_5)
+    summarise(Total = sum(Revenue)) %>%
+    arrange(Total) %>%
+    kable(align = 'lr')
 ```

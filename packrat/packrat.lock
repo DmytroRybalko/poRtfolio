@@ -13,6 +13,12 @@ Source: CRAN
 Version: 0.7
 Hash: 1ab72df487f06ad5f0de05446cdd4bd6
 
+Package: DT
+Source: CRAN
+Version: 0.2
+Hash: 36b032203797956fedad5a25055016a9
+Requires: htmltools, htmlwidgets, magrittr
+
 Package: MASS
 Source: CRAN
 Version: 7.3-47
@@ -203,6 +209,12 @@ Source: CRAN
 Version: 0.3.6
 Hash: 10db2fe4e1ac6057e5555db165a0d870
 Requires: Rcpp, digest
+
+Package: htmlwidgets
+Source: CRAN
+Version: 1.0
+Hash: f34dd51a49b6d2947bc853223897854b
+Requires: htmltools, jsonlite, yaml
 
 Package: httr
 Source: CRAN
