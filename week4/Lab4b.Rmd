@@ -1,55 +1,58 @@
 ---
-title: "Lab4b"
-output: html_document
+title: "DAT205x: Introduction to Data Analysis using R. Lab4b"
+output: html_notebook
 ---
 
-# Load necessary libraries
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.height = 7)
+```
+Load libraries
 ```{r}
 library(tidyverse)
 library(scales)
 ```
-## Load data for Lab3b
+Load data for Lab4b
 ```{r}
-my_data <- readRDS("data4week4.rds")
+my_data <- readRDS("./week2/data4week3.rds")
 ```
-Create an additional pivot chart to show Sales by Customer Gender using
-Pie chart. Show percentages for each slice of the pie. Overall, it is split
-evenly with 51%:49% of Male to Female ratio.
-## Question 1: Which Bike's frame size is more popular for each Gender?
-Prepare data:
-```{r}
+Create an additional pivot chart to show **Sales by Customer Gender** using pie chart. Show percentages for each slice of the pie. Overall, it is split evenly with 51%:49% of Male to Female ratio.  
+
+#### **Question 1:** Which Bike's frame size is more popular for each **Gender**?
+```{r ans_1}
 ans_1 <- my_data %>%
     filter(!is.na(`Frame Size`)) %>%
     group_by(`Frame Size`, `Customer Gender`) %>%
     summarise(Total = sum(Revenue))
 ```
-Make bar chart:
-```{r}
-bar_theme <- theme(
-    plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
-    panel.background = element_rect(fill = "white"),
-    legend.title = element_text(colour = "black", size = 10, face = "bold"),
-    legend.text = element_text(colour = "black", size = 10, face = "bold"),
-    axis.line = element_line(colour = "black"),
-    axis.text = element_text(size = 10, colour = "black"),
-    axis.title = element_text(size = 12)
-    )
 
+```{r}
 ggplot(ans_1, aes(x = factor(`Frame Size`), y = Total, fill = factor(`Customer Gender`))) +
     geom_bar(stat = "identity", position = position_dodge(0.6), width = 0.5) +
     scale_x_discrete(expand = c(0, 0)) +
     scale_y_continuous(labels = scales::dollar, expand = c(0, 0)) +
     labs(title = "Which Bike's frame size is more popular for each Gender",
          x = "Frame Size", y = "Sales", fill = "Customer\n  Gender") +
-    bar_theme
+    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
+          panel.background = element_rect(fill = "white"),
+          legend.title = element_text(colour = "black", size = 10, face = "bold"),
+          legend.text = element_text(colour = "black", size = 10, face = "bold"),
+          legend.position = c(.95, .90),
+          legend.background = element_rect(color = "black"),
+          axis.line = element_line(colour = "black"),
+          axis.text = element_text(size = 10, colour = "black"),
+          axis.title = element_text(size = 12))
 ```
-What about Customer Gender vs age group? Right now the Sales by Age Group chart
-does not differentiate by Gender. Modify this chart to be a Column chart. Show
-the Customer Gender side-by-side for each age group. Sort the Age Group
-appropriately.
-## Question 2: In Australia, which Age Group has more sales revenue to females
-## than to males? (Select two that apply)
-```{r}
+
+#### **Answer:** Mail - 42; Femail - 38
+
+---
+
+What about Customer Gender vs age group? Right now the **Sales by Age Group** chart does not differentiate by **Gender**. Modify this chart to be a column chart. Show the **Customer Gender** side-by-side for each age group. Sort the **Age Group** appropriately.  
+
+#### **Question 2:** In **Australia**, which **Age Group** has more sales revenue to females than to males? (Select two that apply)
+```{r ans_2}
 ans_2 <- my_data %>%
     filter(Country == "Australia") %>%
     group_by(`Age Group`, `Customer Gender`) %>%
@@ -58,29 +61,24 @@ ans_2 <- my_data %>%
                as.numeric(),
            Percent = paste(Prop * 100, "%"))
 ```
-Make chart:
+
 ```{r}
-my_theme <- theme(
-    plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
-    panel.background = element_rect(fill = "white"),
-    legend.title = element_text(colour = "black", size = 10),
-    legend.text = element_text(colour = "black", size = 10, face = "bold"),
-    axis.line = element_line(colour = "black"),
-    axis.text.x = element_text(size = 10, colour = "black"),
-    axis.text.y = element_blank(),
-    axis.title = element_text(size = 12, face = "bold")
-    )
 ggplot(ans_2, aes(x = `Age Group`, y = Prop, fill = `Customer Gender`)) +
-    geom_bar(stat = "identity", position = "dodge", width = 0.9) +
+    geom_bar(stat = "identity", position = position_dodge(0.8), width = 0.75) +
     scale_x_discrete(expand = c(0, 0)) +
-    scale_y_continuous(expand = c(0, 0),
-                       limits = c(0, max(ans_2$Prop)*1.05)) +
+    scale_y_continuous(expand = c(0, 0), limits = c(0, max(ans_2$Prop)*1.05)) +
     labs(title = "How does Age Group differentiate by Gender in Australia?",
          y = "Sales, %", fill = "Customer\n  Gender") +
-    geom_text(aes(label = Percent),
-              vjust = 1.7,
-              colour = "black",
-              position = position_dodge(0.8)) +
-    my_theme
+    geom_text(aes(label = Percent), vjust = 1.7, colour = "black", position = position_dodge(0.8)) +
+    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
+          panel.background = element_rect(fill = "white"),
+          legend.title = element_text(colour = "black", size = 10, face = "bold"),
+          legend.text = element_text(colour = "black", size = 10, face = "bold"),
+          legend.background = element_rect(color = "black"),
+          axis.line = element_line(colour = "black"),
+          axis.text.x = element_text(size = 10, colour = "black"),
+          axis.text.y = element_blank(),
+          axis.title = element_text(size = 12, face = "bold"))
 ```
 
+#### **Answer:** 1-Young Adults (25-34); 2-Adults (35-64)
