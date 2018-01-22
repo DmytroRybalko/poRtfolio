@@ -17,6 +17,7 @@ Load libraries
 ```{r include = FALSE}
 library(tidyverse)
 library(scales)
+library(RColorBrewer)
 ```
 Load data for Lab3b here: week2/data4week3.rds
 ```{r}
@@ -27,6 +28,8 @@ the yearly trend. Make sure that the Years are located in the X axis,
 the Revenue in the Y axis, and the Countries as categories.
 
 In this chart, you can clearly see the sales trend for each Country.
+
+---
 
 #### **Question 1:** Which country’s trend is the most different when compared to the other countries?
 ```{r include = FALSE}
@@ -54,7 +57,7 @@ my_data %>%
 
 ---
 
-#### **Question 2:** Which year does the Bikes category have the least sales?
+#### **Question 2:** Which year does the Bikes category have the least sales?  
 ```{r}
 my_data %>%
     group_by(Year, `Product Category`) %>%
@@ -67,6 +70,8 @@ my_data %>%
          title = "Yearly Sales by Category") +
     line_theme
 ```
+  
+#### **Answer:** 2014
 
 ---
 
@@ -91,30 +96,25 @@ ans_3$`Age Group` <- factor(ans_3$`Age Group`,
 
 In this chart, we can clearly see the proportion of sales for each Age Group
 
+---  
+
 #### **Question 3:** What is the proportion of sales for Young Adults?
 ```{r}
 ggplot(ans_3, aes(x = "", y = Prop, fill = `Age Group`)) +
-    geom_bar(width = 1, stat = "identity") +
+    geom_bar(width = 1, stat = "identity", colour = "white", size = 0.7) +
     coord_polar(theta = "y") +
     labs(title = "Sales by Age Group", x = NULL, y = NULL) +
-    geom_text(aes(x = c(1.6, 1.2, 1.0, 1.0),
-                  y = 1 - y_tick,
-                  label = Percent),
-              size = 5) +
+    geom_text(aes(x = c(1.6, 1.2, 1.0, 1.0), y = 1 - y_tick, label = Percent), size = 5) +
     theme(panel.background = element_rect(fill = "white", color = "white"),
-          plot.title = element_text(face = "bold", size = 16, hjust = 0.6,
-                                    margin = margin(t = 10)),
+          plot.title = element_text(face = "bold", size = 16, hjust = 0.6),
           legend.title = element_text(face = "bold", colour = "black", size = 12),
           legend.text = element_text(size = 10, color = "black"),
           axis.text = element_blank(),
-          axis.ticks = element_blank())
-
-ans_3 <- ans_3 %>%
-    filter(`Age Group` == "Young Adults") %>%
-    .$Percent
+          axis.ticks = element_blank()) +
+    scale_fill_brewer(palette = "Set1")
 ```
 
-#### **Answer:** `r ans_3`
+#### **Answer:** `r ans_3[ans_3$'Age Group' == "Young Adults", ]$Percent`
 
 ---
 
@@ -130,6 +130,8 @@ ans_4 <- my_data %>%
 
 ans_4$`Frame Size` <- factor(ans_4$`Frame Size`, levels = ans_4$`Frame Size`)
 ```
+
+---
 
 #### **Question 4:** In this chart, you can clearly see the order of sales by Frame size. Which frame size sold the least?
 ```{r}

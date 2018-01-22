@@ -9,7 +9,7 @@ Now that you have prepared the data in an Excel table, you can start to create p
 From your conversation with Lucy, you know that she is interested in looking into the yearly sales data broken down by countries, product categories, and age groups.
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(root.dir = getwd())
+#knitr::opts_chunk$set(root.dir = getwd())
 ```
 Load libraries
 ```{r}
@@ -17,12 +17,13 @@ library(tidyverse)
 library(knitr)
 ```
 Load data for Lab3a from here: week2/data4week3.rds
-```{r my_data, cache = TRUE, cache.extra = file.info("./week2/data4week3.rds")}
+```{r}
 my_data <- readRDS("./week2/data4week3.rds")
 ```
 
-#### **Question 1:** Which year did the company start selling Touring Bikes?
+---
 
+#### **Question 1:** Which year did the company start selling Touring Bikes?
 ```{r}
 my_data %>%
     arrange(Date) %>%
@@ -48,7 +49,6 @@ my_data %>%
 ---
 
 #### **Question 3:** Rank the States for Germany, from the highest to lowest revenue for year 2013
-
 ```{r}
 my_data %>%
     filter(Country == 'Germany', Year == 2013) %>%
@@ -62,7 +62,6 @@ my_data %>%
 ---
 
 #### **Question 4:** Which frame size sold the most?
-
 ```{r}
 my_data %>%
     filter(`Product Category` == 'Bikes') %>%
@@ -76,7 +75,6 @@ my_data %>%
 ---
 
 #### **Question 5:** Which Age Group has the lowest revenue?
-
 ```{r}
 my_data %>%
     group_by(`Age Group`) %>%
