@@ -1,55 +1,81 @@
 ---
-title: "Lab3b"
-output: html_document
+title: "DAT205x: Introduction to Data Analysis using R. Lab3b"
+output: html_notebook
 ---
 
-# Load necessary libraries
-```{r}
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.height = 7)
+```
+
+# Scenario
+
+Now you can start adding some charts to the sheet.
+
+Load libraries
+```{r include = FALSE}
 library(tidyverse)
-#library(lubridate)
 library(scales)
 ```
-## Load data for Lab3b
+Load data for Lab3b here: week2/data4week3.rds
 ```{r}
-my_data <- readRDS("data4week3.rds")
+my_data <- readRDS("./week2/data4week3.rds")
 ```
 Add a chart that shows yearly sales by Country. Select a Line chart to display
 the yearly trend. Make sure that the Years are located in the X axis,
 the Revenue in the Y axis, and the Countries as categories.
-## Question 1: Which country’s trend is the most different when compared to
-## the other countries?
-```{r}
-ans_1 <- my_data %>%
-    group_by(Year, Country) %>%
-    summarise(Total = sum(Revenue))
 
-ggplot(ans_1, aes(x = Year, y = Total, color = reorder(Country, -Total))) +
+In this chart, you can clearly see the sales trend for each Country.
+
+#### **Question 1:** Which country’s trend is the most different when compared to the other countries?
+```{r include = FALSE}
+line_theme <- theme_classic() +
+    theme(plot.title = element_text(face = "bold", hjust = 0.5),
+          panel.grid.major = element_line(colour = "gray"),
+          panel.grid.minor = element_line(colour = "gray", size = 0.1),
+          legend.title = element_text(face = "bold", colour = "black", size = 12),
+          legend.text = element_text(size = 10, color = "black"))
+```
+
+```{r}
+my_data %>%
+    group_by(Year, Country) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ggplot(aes(x = Year, y = Total, color = reorder(Country, -Total))) +
     geom_line(size = 1.2) +
     geom_point(size = 2) +
-    scale_y_continuous(labels = scales::dollar) +
-    labs(x = "Year", y = "Total Revenue", color = "Country",
-         title = "Yearly Sales by Country") +
-    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+    scale_y_continuous(breaks = seq(1e6, 6e6, by = 1e6), labels = scales::dollar) +
+    labs(x = "Year", y = "Total Revenue", color = "Country", title = "Yearly Sales by Country") +
+    line_theme
 ```
-## Question 2: Which year does the Bikes category have the least sales?
-```{r}
-ans_2 <- my_data %>%
-    group_by(Year, `Product Category`) %>%
-    summarise(Total = sum(Revenue))
 
-ggplot(ans_2, aes(x = Year, y = Total, color = reorder(`Product Category`,- Total))) +
+#### **Answer:** Australia
+
+---
+
+#### **Question 2:** Which year does the Bikes category have the least sales?
+```{r}
+my_data %>%
+    group_by(Year, `Product Category`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ggplot(aes(x = Year, y = Total, color = reorder(`Product Category`,- Total))) +
     geom_line(size = 1.2) +
     geom_point(size = 2) +
     scale_y_continuous(labels = scales::dollar) +
     labs(x = "Year", y = "Total Revenue", color = " Product\nCategory",
          title = "Yearly Sales by Category") +
-    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+    line_theme
 ```
+
+---
+
 Add another pivot chart, this time for the pivot table that shows Revenue by
 Age Group. Select a Pie chart to display the proportion of each Age Group.
 Add the Data labels to show percentage, formatted to two decimal points. 
-First of all preparing data for visualize:
-```{r}
+
+First of all prepare data for visualize:
+```{r ans_3}
 ans_3 <- my_data %>%
     group_by(`Age Group`) %>%
     summarise(Total = sum(Revenue)) %>%
@@ -62,8 +88,10 @@ ans_3 <- my_data %>%
 ans_3$`Age Group` <- factor(ans_3$`Age Group`,
                                       levels = ans_3$`Age Group`)
 ```
+
 In this chart, we can clearly see the proportion of sales for each Age Group
-## Question 3: What is the proportion of sales for Young Adults?
+
+#### **Question 3:** What is the proportion of sales for Young Adults?
 ```{r}
 ggplot(ans_3, aes(x = "", y = Prop, fill = `Age Group`)) +
     geom_bar(width = 1, stat = "identity") +
@@ -80,11 +108,20 @@ ggplot(ans_3, aes(x = "", y = Prop, fill = `Age Group`)) +
           legend.text = element_text(size = 10, color = "black"),
           axis.text = element_blank(),
           axis.ticks = element_blank())
+
+ans_3 <- ans_3 %>%
+    filter(`Age Group` == "Young Adults") %>%
+    .$Percent
 ```
+
+#### **Answer:** `r ans_3`
+
+---
+
 Add another pivot chart, this time for the pivot table that shows Revenue by
 Frame size. Select a Bar chart to display the order of sales by Frame size.
 Sort the Y axis to show the Frame size that has the most sales on the top. 
-```{r}
+```{r ans_4}
 ans_4 <- my_data %>%
     filter(!is.na(`Frame Size`)) %>%
     group_by(`Frame Size`) %>%
@@ -93,11 +130,11 @@ ans_4 <- my_data %>%
 
 ans_4$`Frame Size` <- factor(ans_4$`Frame Size`, levels = ans_4$`Frame Size`)
 ```
-## Question 4: In this chart, you can clearly see the order of sales by
-## Frame size. Which frame size sold the least?
+
+#### **Question 4:** In this chart, you can clearly see the order of sales by Frame size. Which frame size sold the least?
 ```{r}
 ggplot(ans_4, aes(x = `Frame Size`, y = `Total Revenue`, fill = `Frame Size`)) +
-    geom_bar(stat = "identity", show.legend = FALSE) +
+    geom_bar(stat = "identity", width = 0.7, show.legend = FALSE) +
     scale_x_discrete(expand = c(0, 0)) +
     scale_y_continuous(labels = scales::dollar, expand = c(0, 0),
                        limits = c(0, max(ans_4$`Total Revenue`)*1.05)) +
@@ -105,8 +142,10 @@ ggplot(ans_4, aes(x = `Frame Size`, y = `Total Revenue`, fill = `Frame Size`)) +
     geom_text(aes(label = paste("$", prettyNum(`Total Revenue`, ","))),
               hjust = 1.1, colour = "black") +
     labs(title = "Sales by Frame Size") +
+    theme_bw() +
     theme(plot.title = element_text(face = "bold", hjust = 0.5),
-          panel.border = element_rect(linetype = "solid", fill = NA, size = 1),
           axis.text = element_text(size = 10, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
 ```
+
+#### **Answer:** 54
