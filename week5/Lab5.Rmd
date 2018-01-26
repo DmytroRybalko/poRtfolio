@@ -1,104 +1,144 @@
 ---
-title: "Lab5"
-output: html_document
+title: "DAT205x: Introduction to Data Analysis using R. Lab5"
+output: html_notebook
 ---
-# Load necessary libraries
+
+## Scenario  
+
+Lucy was impressed with the dashboard you created. With the dashboard, she is able to narrow down her interest. Specifically, she is interested with the sales in Australia. She would like to perform simple profitability analysis on the product category and sub-category, for specific year. Furthermore, she wants to have the option of going deeper to product level.
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.height = 7)
+```
+Load libraries
 ```{r}
 library(tidyverse)
 library(scales)
 ```
-## Load data for Lab5b
+Load data for Lab5b
 ```{r}
-my_data <- readRDS("data4week5.rds")
-theme_set(theme_classic())
+my_data <- readRDS("./week2/data4week3.rds")
+#theme_set(theme_classic())
 ```
-In this Lab we will be interested with the sales in Australia. We perform simple
-profitability analysis on the product category and sub-category, for specific
-year. Furthermore, we would like to have the option of going deeper to product
-level.
-Let's start! Filter the pivot table for Australia and 2016, and answer the
+
+---
+
+Let's start! Filter the pivot table for **Australia** and **2016**, and answer the
 following questions.
-## Question 1: Which Sub Category sold the most quantity?
+
+#### **Question 1:** Which **Sub Category** sold the most quantity?
 ```{r}
 ans_1 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
     group_by(`Sub Category`) %>%
-    summarise(Quantity = sum(`Order Quantity`))
-
+    summarise(Quantity = sum(`Order Quantity`)) %>% 
+    arrange(desc(Quantity))
+```
+```{r}
 ggplot(ans_1, aes(x = reorder(`Sub Category`, -Quantity), y = Quantity)) +
     geom_bar(stat = "identity", width = 0.5, fill="tomato2") +
-    labs(title="Which Sub Category sold the most quantity?",
-         x = "Sub Category") +
-    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
-          axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
+    xlab("Sub Category") +
+    scale_y_continuous(breaks = seq(0, 3e4, by = 5e3)) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
           axis.text = element_text(size = 11, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
 ```
-## Question 2: Which Sub Category has the most revenue?
+
+#### **Answer:** `r prettyNum(ans_1$Quantity[1], big.mark = "'")`
+
+---
+
+#### **Question 2:** Which **Sub Category** has the most revenue?
 ```{r}
 ans_2 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
     group_by(`Sub Category`) %>%
     summarise(`Total Revenue` = sum(Revenue))
-
+```
+```{r}
 ggplot(ans_2, aes(x = reorder(`Sub Category`, -`Total Revenue`), y = `Total Revenue`)) +
     geom_bar(stat = "identity", width = 0.5, fill="tomato2") +
-    labs(title = "Which Sub Category has the most revenue?",
-         x = "Sub Category") +
-    scale_y_continuous(labels = scales::dollar) +
-    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
-          axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
+    xlab("Sub Category") +
+    scale_y_continuous(breaks = seq(0, 1.25e6, by = 25e4), labels = scales::dollar) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
           axis.text = element_text(size = 11, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
 ```
-Now add a calculated field Margin with the value derived from the Profit and
-Revenue column. Format the field as percentage with two decimal places. 
-HINT: Margin = Profit / Revenue
-## Question 3: What is the total margin for Australia in the year 2016?
+
+#### **Answer:** "Road Bikes"
+
+---
+
+Now add a calculated field Margin with the value derived from the Profit and Revenue column. Format the field as percentage with two decimal places. HINT: Margin = Profit / Revenue
+
+#### **Question 3:** What is the total margin for **Australia** in the year **2016**?
 ```{r}
-(ans_3 <- my_data %>%
+ans_3 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
     summarise(`Total Margin` = formatC(sum(Profit) / sum(Revenue) * 100,
-                                       digits = 2, format = "f") %>% paste("%")))
+                                        digits = 2, format = "f") %>% paste("%"))
 ```
-## Question 4: Using the same filters, which category has the lowest margin?
+  
+#### **Answer:** `r ans_3[[1]]`
+
+---
+
+#### **Question 4:** Using the same filters, which **Category** has the lowest **Margin**?
 ```{r}
 ans_4 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
     group_by(`Product Category`) %>%
     summarise(`Margin` = sum(Profit) / sum(Revenue))
-
-ggplot(ans_4, aes(x = reorder(`Product Category`, -`Margin`),
-                  y = `Margin`, fill = `Product Category`)) +
+```
+```{r}
+ggplot(ans_4,
+       aes(x = reorder(`Product Category`, -`Margin`),
+           y = `Margin`, fill = `Product Category`)) +
     geom_bar(stat = "identity", width = 0.5, show.legend = FALSE) +
-    labs(title = "Which category has the lowest margin?",
-         x = "Product Category") +
+    xlab("Product Category") +
     geom_text(aes(label = paste(formatC(`Margin` * 100, digits = 2, format = "f"), "%")),
-              vjust = -0.2, colour = "black", fontface = "bold") +
-    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
-          axis.text.y = element_blank(),
+              vjust = -0.2, colour = "black", fontface = "bold", size = 6) +
+    theme_classic() +
+    theme(axis.text.y = element_blank(),
+          axis.title.x = element_blank(),
           axis.text = element_text(size = 11, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
 ```
-## Question 5: Which Sub Category has the lowest margin?
+
+#### **Answer:** `r top_n(ans_4, -1)$'Product Category'`
+
+---
+
+#### **Question 5:** Which Sub Category has the lowest margin?
 ```{r}
 ans_5 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
     group_by(`Sub Category`) %>%
     summarise(`Margin` = sum(Profit) / sum(Revenue))
-
+```
+```{r}
 ggplot(ans_5, aes(x = reorder(`Sub Category`, -`Margin`),
                   y = `Margin`, fill = `Sub Category`)) +
     geom_bar(stat = "identity", width = 0.5, fill = "tomato2") +
-    labs(title = "Which Sub Category has the lowest margin?",
-         x = "Product sub category") +
-    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
-          axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
+    xlab("Sub Category") +
+    scale_y_continuous(breaks = seq(0, .6, by = .1),
+                       labels = map_chr(seq(0, 60, by = 10) ,paste0, "%")) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
           axis.text = element_text(size = 11, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
 ```
-## Question 6: Which product has the least margin?
-```{r}
+
+#### **Answer:** `r top_n(ans_5, -1)$'Sub Category'`
+
+---
+
+#### **Question 6:** Which Product has the least margin?
+```{r ans_6, results = "hide"}
 ans_6 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
     group_by(Product) %>%
@@ -106,10 +146,19 @@ ans_6 <- my_data %>%
                                digits = 2, format = "f") %>%
                   as.numeric()) %>%
     arrange(Margin)
-
-View(ans_6)
-ans_6[1, ]
-ans_6[1, ][2]
-ans_6[1, ][2] <- percent(ans_6[1, ][[2]])
-ans_6[1, ]
 ```
+#### **Answer:** `r top_n(ans_6, -1)$Product`
+```{r include = FALSE}
+# Придумати тип графіка, який найкраще репрезентуватиме дані!!!
+ggplot(ans_6, aes(x = reorder(Product, - `Margin`),
+                  y = Margin, fill = Product)) +
+    geom_bar(stat = "identity", width = 0.5, fill = "tomato2") +
+    xlab("Sub Category") +
+    #scale_y_continuous(breaks = seq(0, .6, by = .1),
+    #                   labels = map_chr(seq(0, 60, by = 10) ,paste0, "%")) +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
+          axis.text = element_text(size = 11, colour = "black"),
+          axis.title = element_text(size = 12, face = "bold"))
+```
+
