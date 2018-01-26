@@ -1,38 +1,38 @@
 ---
-title: "Lab6"
-output: html_document
+title: "DAT205x: Introduction to Data Analysis using R. Lab6"
+output: html_notebook
 ---
-# Load necessary libraries
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.height = 7)
+```
+
+## Scenario
+
+Lucy seems intrigued your presentation on Australia's sales.
+
+Now, she wants to review the sales difference (growth) for Product Category and Sub Category between year 2015 and 2016. She wants to be able to filter the report by all the options available, including Customer Gender and Age Group.
+
+Load libraries
 ```{r}
 library(tidyverse)
 library(scales)
 ```
-## Load data for Lab5b
+Load data for Lab6
 ```{r}
-my_data <- readRDS("data4week6.rds")
-#theme_set(theme_classic())
+my_data <- readRDS("./week2/data4week3.rds")
 ```
-In this Lab we'll be review the sales difference (growth) for Product Category
-and Sub Category between year 2015 and 2016.
-So, we will create two type of reports. One with the sales for each year and the
-other with the % Change in Revenue from Year to Year. Each report is a
-cross-tabular format with Product Categories and Sub categories on the rows and
-Year on the columns, with Sum of Revenue as the aggregate data. Also we will
-create chart representation for each report.
+
+In this Lab we'll be review the sales difference (growth) for Product Category and Sub Category between year 2015 and 2016. So, we will create two type of reports. One with the sales for each year and the other with the % Change in Revenue from Year to Year. Each report is a cross-tabular format with Product Categories and Sub categories on the rows and Year on the columns, with Sum of Revenue as the aggregate data. Also we will create chart representation for each report.
+
 Let's start! First, create two reports
 
-Report #1 ============================
-Category1     | 2011 | 2012 |... |2016
- Subcategory1 |
-Category2
- Subcategory2
- 
-Report #2 ============================
-Category1     | 2012 | 2013 |... |2016
- Subcategory1 |
-Category2
- Subcategory2
-
+![](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/2bcdc0372b88f4c6ae0bda0d5bb00806/asset-v1:Microsoft+DAT205x+3T2016+type@asset+block/mod6-lab6-img1.png)
+  
+---  
+  
 Let's make quick EDA for our data:
 ```{r}
 my_data %>%
@@ -43,21 +43,18 @@ my_data %>%
     scale_y_log10() +
     theme(plot.margin = unit(c(1, 0, 0.1, 0.1), "cm"))
 ```
-We can see that for years 2011, 2012 there is data for only two products:
-mounting bikes and road bikes. To make our data symmetric (table-like) let's
-turns implicit missing values into explicit missing values:
+We can see that for years 2011, 2012 there is data for only two products: Mounting Bikes and Road Bikes. To make our data symmetric (table-like) let's turns implicit missing values into explicit missing values using *complete()* function from *tidyr* package   
 ```{r}
 report_1 <- my_data %>%
     group_by(`Product Category`, `Sub Category`, Year) %>%
     summarise(Total = sum(Revenue)) %>%
     complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016)
 ```
-Create heatmap chart
 ```{r}
 ggplot(report_1, aes(x = Year, y = `Sub Category`)) +
     geom_tile(aes(fill = Total), colour = "black", size = 0.5) +
     geom_text(aes(label = format(prettyNum(report_1$Total, ","), justify = "right")),
-              colour = "black", fontface = "bold", size = 5, hjust = 0.6) +
+              colour = "black", fontface = "bold", size = 4, hjust = 0.6) +
     scale_fill_gradient(low = "white", high = "red") +
     scale_x_continuous(expand = c(0, 0),
                        breaks = seq(min(report_1$Year), max(report_1$Year), 1)) +
@@ -82,7 +79,6 @@ report_2 <- report_2 %>%
                as.numeric()) %>%
     ungroup() %>%
     filter(Year > 2011)
-View(report_2)
 ```
 Create heatmap chart
 ```{r}
@@ -110,12 +106,15 @@ ggplot(report_2, aes(x = Year, y = `Sub Category`)) +
         strip.text = element_text(size = rel(1.1)),
         axis.text = element_text(size = 10, colour = "black"))
 ```
-## Question 1: Without applying any filter, which year does the Accessories
-## category have negative growth?
-## Answer: 2015.
 
-## Question 2: Filter the report for Youth Age Group. Which two years do the
-## Accessories category have negative growth?
+---
+
+#### **Question 1:** Without applying any filter, which year does the Accessories category have negative growth?
+#### **Answer:** 2015
+
+---
+
+#### **Question 2:** Filter the report for Youth Age Group. Which two years do the Accessories category have negative growth?
 ```{r}
 ans2 <- my_data %>%
     filter(`Age Group` == "Youth") %>%
@@ -128,9 +127,7 @@ ans2 <- my_data %>%
                as.numeric()) %>%
     ungroup() %>%
     filter(Year > 2011)
-View(ans2)
 ```
-Heat map
 ```{r}
 ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
     geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
@@ -140,7 +137,7 @@ ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
                        breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
     scale_y_discrete(expand = c(0, 0)) +
     facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
-    labs(title = "Which two years do the Accessories category have negative growth?",
+    labs(title = "Change in Revenue from Year to Year for Youth Age Group, %",
          x = NULL, y = NULL) +
     theme(
         plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
@@ -151,12 +148,18 @@ ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
         strip.text = element_text(size = rel(1.1)),
         axis.text = element_text(size = 10, colour = "black"))
 ```
-## Question 3: Without applying any filter, which two years do the Bikes
-## category have negative growth?
-## Answer: take a look at heat map report_2 - 2014, 2016.
 
-## Filter the report for Australia
-```{r}
+#### **Answer:** 2014, 2016
+
+---
+
+#### **Question 3:** Without applying any filter, which two years do the Bikes category have negative growth?  
+#### **Answer:** 2014, 2016 (take a look at heat map report_2)
+
+---
+
+#### **Question 4:** Filter the report for Australia. Which year do the Bikes category have the highest growth?
+```{r warning = FALSE}
 ans4 <- my_data %>%
     filter(Country == "Australia") %>%
     group_by(`Product Category`, `Sub Category`, `Year`) %>%
@@ -168,9 +171,8 @@ ans4 <- my_data %>%
                as.numeric()) %>%
     ungroup() %>%
     filter(Year > 2011)
-View(ans4)
 ```
-Heat map:
+
 ```{r}
 ggplot(ans4, aes(x = Year, y = `Sub Category`)) +
     geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
@@ -180,7 +182,7 @@ ggplot(ans4, aes(x = Year, y = `Sub Category`)) +
                        breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
     scale_y_discrete(expand = c(0, 0)) +
     facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
-    labs(title = "Which year do the Bikes category have the highest growth?",
+    labs(title = "Change in Revenue from Year to Year for Australia, %",
          x = NULL, y = NULL) +
     theme(
         plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
@@ -191,10 +193,11 @@ ggplot(ans4, aes(x = Year, y = `Sub Category`)) +
         strip.text = element_text(size = rel(1.1)),
         axis.text = element_text(size = 10, colour = "black"))
 ```
-## Question 4: Which year do the Bikes category have the highest growth?
-## Answer: 2015
 
-## Question 5: Keep the Australia filter. In the year that Bikes sales have the
-## highest growth (previous question), which Sub Category of Bikes has the
-## highest growth?
-## Answer: Mounting Bikes (71%)
+#### **Answer:** 2015
+
+---
+
+#### **Question 5:** Keep the Australia filter. In the year that Bikes sales have the highest growth (previous question), which Sub Category of Bikes has the highest growth?
+
+#### **Answer:** Mounting Bikes, 71%
