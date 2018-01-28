@@ -1,91 +1,136 @@
 ---
-title: "Lab7"
-output: html_document
+title: "DAT205x: Introduction to Data Analysis using R. Lab7"
+output: html_notebook
 ---
-# Load necessary libraries
-```{r}
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.height = 7)
+```
+
+## Scenario
+
+Upon reviewing the growth report you created, Lucy asked for a report that shows composition of Product Categories and Sub Categories based on certain filters, including Year, Country, Customer Gender, and Age Group.
+
+Specifically, Lucy wants to see the report visualized using a hierarchical chart.
+
+Load necessary libraries
+```{r results = "hide"}
 library(tidyverse)
 library(treemapify)
+library(RColorBrewer)
+library(knitr)
 ```
-## Load data for Lab5b
+Load data for Lab7
 ```{r}
-my_data <- readRDS("data4week7.rds")
+my_data <- readRDS("./week2/data4week3.rds")
 ```
-In this Lab we'll create report that shows composition of Product Categories
-and Sub Categories based on certain filters, including Year, Country, Customer
-Gender, and Age Group.
-Specifically, we wants to see the report visualized using a hierarchical chart.
-## Question 1: Explore the sales composition of Bikes category for each Age Group.
-## Which Age Group does the composition (rank of sales) differ than the rest?
+
+#### **Question 1:** Explore the sales composition of Bikes category for each Age Group. Which Age Group does the composition (rank of sales) differ than the rest?
+
 ```{r}
 ans_1 <- my_data %>%
     filter(`Product Category` == "Bikes") %>%
     group_by(`Age Group`, `Sub Category`) %>%
     summarise(Total = sum(Revenue)) %>%
-    arrange(desc(Total))
+    arrange(desc(Total)) %>% 
+    ungroup() 
+kable(ans_1, align = 'lcr')
 ```
-Make treemap:
 ```{r}
-ggplot(ans_1, aes(area = Total, fill = `Sub Category`, group = `Age Group`,
-                  label = `Age Group` )) +
-    geom_treemap() +
-    geom_treemap_text(colour = "black", place = "centre", grow = T, min.size = 3)
+ggplot(ans_1, aes(area = Total, fill = `Sub Category`, group = `Age Group`, label = `Age Group` )) +
+    geom_treemap(colour = "white", size = 2) +
+    geom_treemap_text(colour = "black", place = "centre", grow = T, min.size = 3) +
+    scale_fill_brewer(palette = "Set2", labels = paste(ans_1$`Sub Category`, '\t')) +
+    theme(legend.position = "top",
+          legend.title = element_blank(),
+          legend.text = element_text(size = 14, face = "bold"))
 ```
-## Answer: Seniors (right upper corner)
-Now explore the sales composition of Bikes category for each Age Group,
-for the Male customers.
+
+#### **Answer:** `r top_n(ans_1, -1)$'Age Group'` (right upper corner)
+
+---
+
+Now explore the sales composition of Bikes category for each Age Group for the Male customers.
 ```{r}
 ans_2 <- my_data %>%
-    filter(`Product Category` == "Bikes") %>%
-    group_by(`Age Group`, `Sub Category`, `Customer Gender`) %>%
+    filter(`Product Category` == "Bikes", `Customer Gender` == "M") %>%
+    group_by(`Age Group`, `Sub Category`) %>%
     summarise(Total = sum(Revenue)) %>%
-    arrange(desc(Total))
-View(ans_2)
+    arrange(desc(Total)) %>% 
+    ungroup()
+kable(ans_2, align = 'lcr')
 ```
-## Question 2: Which Age Group does the composition differ than the rest?
-```{r}
-ggplot(ans_2, aes(area = Total, fill = `Customer Gender`, group = `Age Group`,
-                  label = `Age Group` )) +
-    geom_treemap() +
-    geom_treemap_text(colour = "black", place = "centre", grow = T, min.size = 3)
-```
-## Answer 2: The composition are the same across Age Group for Male customers.
 
-Clear all filters. Now, filter for the year 2016 and Germany. 
+---
+
+#### **Question 2:** Now explore the sales composition of Bikes category for each Age Group, for the Male customers. Which Age Group does the composition differ than the rest?
+```{r}
+ggplot(ans_2, aes(area = Total, fill = `Sub Category`, group = `Sub Category`, label = `Age Group` )) +
+    geom_treemap(colour = "white", size = 2) +
+    geom_treemap_text(colour = "black", place = "centre", grow = T, min.size = 3) +
+    scale_fill_brewer(palette = "Set2", labels = paste(ans_2$`Sub Category`, '\t')) +
+    theme(legend.position = "top",
+          legend.title = element_blank(),
+          legend.text = element_text(size = 14, face = "bold"))
+```
+
+#### **Answer 2:** The composition are the same across Age Group for Male customers.
+
+---
+
+#### **Question 3:** Clear all filters. Now, filter for the year 2016 and Germany. Rank the sales from the highest to lowest for the Clothing category
 ```{r}
 ans_3 <- my_data %>%
     filter(Year == 2016, Country == "Germany", `Product Category` == "Clothing") %>%
     group_by(`Sub Category`) %>%
     summarise(Total = sum(Revenue)) %>%
-    arrange(desc(Total))
+    arrange(desc(Total)) %>% 
+    ungroup()
 ```
-## Question 3: Rank the sales from the highest to lowest for the Clothing category
+
+#### **Answer:**
 ```{r}
-ans_3
+kable(ans_3, align = 'lr')
 ```
-Keep the filter settings and add filter by Male customers.
+
+---
+
+#### **Question 4:** Rank the sales from the highest to lowest for the Clothing category. Keep the filter settings and add filter by Male customers.
+
 ```{r}
 ans_4 <- my_data %>%
     filter(Year == 2016, Country == "Germany",
            `Product Category` == "Clothing", `Customer Gender` == "M") %>%
     group_by(`Sub Category`) %>%
     summarise(Total = sum(Revenue)) %>%
-    arrange(desc(Total))
+    arrange(desc(Total)) %>% 
+    ungroup()
 ```
-## Question 4: Rank the sales from the highest to lowest for the Clothing category.
+
+#### **Answer:**
+
 ```{r}
-ans_4
+kable(ans_4, align = 'lr')
 ```
-Keep the filter settings and add filter by Youth Age Group.
+
+---
+
+#### **Question 5:** Rank the sales from the highest to lowest for the Clothing category. Keep the filter settings and add filter by Youth Age Group.
+
 ```{r}
 ans_5 <- my_data %>%
     filter(Year == 2016, Country == "Germany", `Product Category` == "Clothing",
            `Customer Gender` == "M", `Age Group` == "Youth") %>%
     group_by(`Sub Category`) %>%
     summarise(Total = sum(Revenue)) %>%
-    arrange(desc(Total))
+    arrange(desc(Total)) %>% 
+    ungroup()
 ```
-## Question 5: Rank the sales from the highest to lowest for the Clothing category
+
+#### **Answer:**
+
 ```{r}
-ans_5
+kable(ans_5, align = 'lr')
 ```
