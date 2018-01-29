@@ -7,6 +7,7 @@ output: html_notebook
 knitr::opts_chunk$set(
     fig.width = 9,
     fig.height = 7)
+# hide output!
 ```
 
 ## Scenario
@@ -69,6 +70,8 @@ ggplot(report_1, aes(x = Year, y = `Sub Category`)) +
         strip.background = element_rect(colour = "black", fill = "lightblue", size = 0.5),
         strip.text = element_text(size = rel(1.1)),
         axis.text = element_text(size = 10, colour = "black"))
+        
+# TODO: add other type of chart
 ```
 Next make second report
 ```{r}
@@ -105,6 +108,7 @@ ggplot(report_2, aes(x = Year, y = `Sub Category`)) +
         strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
         strip.text = element_text(size = rel(1.1)),
         axis.text = element_text(size = 10, colour = "black"))
+# TODO: add other type of chart
 ```
 
 ---
@@ -147,6 +151,7 @@ ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
         strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
         strip.text = element_text(size = rel(1.1)),
         axis.text = element_text(size = 10, colour = "black"))
+# TODO: add other type of chart
 ```
 
 #### **Answer:** 2014, 2016
@@ -192,6 +197,7 @@ ggplot(ans4, aes(x = Year, y = `Sub Category`)) +
         strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
         strip.text = element_text(size = rel(1.1)),
         axis.text = element_text(size = 10, colour = "black"))
+# TODO: add other type of chart
 ```
 
 #### **Answer:** 2015

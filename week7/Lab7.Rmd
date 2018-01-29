@@ -7,6 +7,7 @@ output: html_notebook
 knitr::opts_chunk$set(
     fig.width = 9,
     fig.height = 7)
+# hide output!
 ```
 
 ## Scenario
@@ -27,6 +28,8 @@ Load data for Lab7
 my_data <- readRDS("./week2/data4week3.rds")
 ```
 
+---
+
 #### **Question 1:** Explore the sales composition of Bikes category for each Age Group. Which Age Group does the composition (rank of sales) differ than the rest?
 
 ```{r}
@@ -37,6 +40,7 @@ ans_1 <- my_data %>%
     arrange(desc(Total)) %>% 
     ungroup() 
 kable(ans_1, align = 'lcr')
+# TODO: add chart instead of kable
 ```
 ```{r}
 ggplot(ans_1, aes(area = Total, fill = `Sub Category`, group = `Age Group`, label = `Age Group` )) +
@@ -46,6 +50,7 @@ ggplot(ans_1, aes(area = Total, fill = `Sub Category`, group = `Age Group`, labe
     theme(legend.position = "top",
           legend.title = element_blank(),
           legend.text = element_text(size = 14, face = "bold"))
+# TODO: add sunburst or mosaic chart
 ```
 
 #### **Answer:** `r top_n(ans_1, -1)$'Age Group'` (right upper corner)
@@ -61,6 +66,7 @@ ans_2 <- my_data %>%
     arrange(desc(Total)) %>% 
     ungroup()
 kable(ans_2, align = 'lcr')
+# TODO: add chart instead of kable
 ```
 
 ---
@@ -74,6 +80,7 @@ ggplot(ans_2, aes(area = Total, fill = `Sub Category`, group = `Sub Category`, l
     theme(legend.position = "top",
           legend.title = element_blank(),
           legend.text = element_text(size = 14, face = "bold"))
+# TODO: add sunburst or mosaic chart
 ```
 
 #### **Answer 2:** The composition are the same across Age Group for Male customers.
@@ -93,6 +100,7 @@ ans_3 <- my_data %>%
 #### **Answer:**
 ```{r}
 kable(ans_3, align = 'lr')
+# TODO: add bar chart
 ```
 
 ---
@@ -113,6 +121,7 @@ ans_4 <- my_data %>%
 
 ```{r}
 kable(ans_4, align = 'lr')
+# TODO: add bar chart
 ```
 
 ---
@@ -133,4 +142,5 @@ ans_5 <- my_data %>%
 
 ```{r}
 kable(ans_5, align = 'lr')
+# TODO: add bar chart
 ```

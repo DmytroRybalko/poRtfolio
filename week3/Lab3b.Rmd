@@ -7,27 +7,26 @@ output: html_notebook
 knitr::opts_chunk$set(
     fig.width = 9,
     fig.height = 7)
+# hide output
 ```
 
 # Scenario
 
-Now you can start adding some charts to the sheet.
+Now you can start adding some charts.
 
 Load libraries
-```{r include = FALSE}
+```{r}
 library(tidyverse)
 library(scales)
 library(RColorBrewer)
 ```
-Load data for Lab3b here: week2/data4week3.rds
+Load data for Lab3b
 ```{r}
 my_data <- readRDS("./week2/data4week3.rds")
 ```
-Add a chart that shows yearly sales by Country. Select a Line chart to display
-the yearly trend. Make sure that the Years are located in the X axis,
-the Revenue in the Y axis, and the Countries as categories.
+Add a chart that shows yearly **Sales by Country**. Select a line chart to display the yearly trend. Make sure that the Years are located in the X axis, the **Revenue** in the Y axis, and the **Countries** as categories.
 
-In this chart, you can clearly see the sales trend for each Country.
+In this chart, you can clearly see the sales trend for each **Country**.
 
 ---
 
@@ -75,11 +74,7 @@ my_data %>%
 
 ---
 
-Add another pivot chart, this time for the pivot table that shows Revenue by
-Age Group. Select a Pie chart to display the proportion of each Age Group.
-Add the Data labels to show percentage, formatted to two decimal points. 
-
-First of all prepare data for visualize:
+Add another pivot chart, this time for the pivot table that shows **Revenue** by **Age Group**. Select a pie chart to display the proportion of each **Age Group**. Add the labels to show percentage, formatted to two decimal points.  
 ```{r ans_3}
 ans_3 <- my_data %>%
     group_by(`Age Group`) %>%
@@ -94,7 +89,7 @@ ans_3$`Age Group` <- factor(ans_3$`Age Group`,
                                       levels = ans_3$`Age Group`)
 ```
 
-In this chart, we can clearly see the proportion of sales for each Age Group
+In this chart, we can clearly see the proportion of sales for each **Age Group**.
 
 ---  
 
@@ -112,15 +107,14 @@ ggplot(ans_3, aes(x = "", y = Prop, fill = `Age Group`)) +
           axis.text = element_blank(),
           axis.ticks = element_blank()) +
     scale_fill_brewer(palette = "Set1")
+# TODO: replace title
 ```
 
 #### **Answer:** `r ans_3[ans_3$'Age Group' == "Young Adults", ]$Percent`
 
 ---
 
-Add another pivot chart, this time for the pivot table that shows Revenue by
-Frame size. Select a Bar chart to display the order of sales by Frame size.
-Sort the Y axis to show the Frame size that has the most sales on the top. 
+Add another pivot chart, this time for the pivot table that shows **Revenue** by **Frame size**. Select a bar chart to display the order of sales by **Frame size**. Sort the Y axis to show the **Frame size** that has the most sales on the top.  
 ```{r ans_4}
 ans_4 <- my_data %>%
     filter(!is.na(`Frame Size`)) %>%

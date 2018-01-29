@@ -2,21 +2,24 @@
 title: "DAT205x: Introduction to Data Analysis using R. Lab3a"
 output: html_notebook
 ---
-# Scenario
-
-Now that you have prepared the data in an Excel table, you can start to create pivot tables to aggregate the data and create some reports.
-
-From your conversation with Lucy, you know that she is interested in looking into the yearly sales data broken down by countries, product categories, and age groups.
 
 ```{r setup, include = FALSE}
-#knitr::opts_chunk$set(root.dir = getwd())
+knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.height = 7)
+# hide output
 ```
+
+# Scenario
+
+Now that you have prepared the data, you can start to create pivot tables to aggregate the data and create some reports. From your conversation with Lucy, you know that she is interested in looking into the yearly sales data broken down by **Countries**, **Product Categories**, and **Age Groups**.
+
 Load libraries
 ```{r}
 library(tidyverse)
 library(knitr)
 ```
-Load data for Lab3a from here: week2/data4week3.rds
+Load data for Lab3a
 ```{r}
 my_data <- readRDS("./week2/data4week3.rds")
 ```
@@ -30,6 +33,7 @@ my_data %>%
     filter(`Sub Category` == 'Touring Bikes') %>%
     summarise(`Which Year` = first(Year)) %>%
     kable(align = 'l')
+# TODO: add chart
 ```
 
 ---
@@ -44,6 +48,7 @@ my_data %>%
     arrange(desc(Total)) %>%
     mutate(Rank = min_rank(desc(Total))) %>%
     kable(align = 'lcr')
+# TODO: add chart
 ```
 
 ---
@@ -57,6 +62,7 @@ my_data %>%
     arrange(desc(Total)) %>%
     mutate(Rank = min_rank(desc(Total))) %>%
     kable(align = 'lcr')
+# TODO: add chart
 ```
 
 ---
@@ -70,6 +76,7 @@ my_data %>%
     arrange(desc(Total)) %>%
     mutate(rank = min_rank(desc(Total))) %>%
     kable(align = 'lcr')
+# TODO: add chart
 ```
 
 ---
@@ -81,4 +88,5 @@ my_data %>%
     summarise(Total = sum(Revenue)) %>%
     arrange(Total) %>%
     kable(align = 'lr')
+# TODO: add chart
 ```

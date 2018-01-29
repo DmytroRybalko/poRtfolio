@@ -35,23 +35,20 @@ my_data %>%
 ---
 
 Now, you need to add several columns, derived from existing columns in the data.
-
-First, let's add a "Month" column. Insert a new column to the left of the
-Customer ID column, and use formula to derive the month of sales from the Date
-column.
-
+First, let's add a **Month** column. Insert a new column to the left of the **Customer ID** column.
 ```{r results = 'hide'}
 my_data <- my_data %>%
     mutate(Month = month(Date)) %>%
     select(Date:Year, Month, everything())
 ```
 
-#### **Question 2:** What is the total revenue for all the sales in the month of December?
+#### **Question 2:** What is the total revenue for all the sales in the Month of December?
 ```{r}
 my_data %>% filter(Month == 12) %>%
     summarise(`Total Revenue` = sum(Revenue)) %>%
     prettyNum(., big.mark = ",") %>%
     paste0("$", .)
+# TODO: use top_n for filter data; add chart or table
 ```
 
 ---
@@ -93,6 +90,7 @@ my_data %>%
     summarise(Total = sum(Revenue)) %>%
     prettyNum(., big.mark = ",") %>%
     paste0("$", .)
+# TODO: use top_n for filter data; add chart or table
 ```
 
 ---
@@ -120,14 +118,12 @@ my_data %>%
     summarise(`Total Revenue` = sum(Revenue)) %>%
     prettyNum(., big.mark = ",") %>%
     paste0("$", .)
+# TODO: use top_n for filter data; add chart or table
 ```
 
 ---
 
-Let's add a "Profit" column. Insert a new column to the right of the Revenue,
-and use formula to derive the Profit from both the Revenue and Cost columns.
-Show the total for the Profit column. Use the Sum aggregation in the total row
-of the table, for the Profit column. 
+Let's add a **Profit** column. Insert a new column to the right of the **Revenue**, and use formula to derive the **Profit** from both the **Revenue** and **Cost** columns. Show the **Total** for the **Profit** column.  
 ```{r results = 'hide'}
 my_data <- my_data %>%
     mutate(Profit = Revenue - Cost)

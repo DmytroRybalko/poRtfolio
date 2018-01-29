@@ -11,6 +11,7 @@ Lucy was impressed with the dashboard you created. With the dashboard, she is ab
 knitr::opts_chunk$set(
     fig.width = 9,
     fig.height = 7)
+# hide output
 ```
 Load libraries
 ```{r}
@@ -20,7 +21,6 @@ library(scales)
 Load data for Lab5b
 ```{r}
 my_data <- readRDS("./week2/data4week3.rds")
-#theme_set(theme_classic())
 ```
 
 ---
@@ -28,8 +28,8 @@ my_data <- readRDS("./week2/data4week3.rds")
 Let's start! Filter the pivot table for **Australia** and **2016**, and answer the
 following questions.
 
-#### **Question 1:** Which **Sub Category** sold the most quantity?
-```{r}
+#### **Question 1:** Which Sub Category sold the most quantity?
+```{r ans_1}
 ans_1 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
     group_by(`Sub Category`) %>%
@@ -45,13 +45,14 @@ ggplot(ans_1, aes(x = reorder(`Sub Category`, -Quantity), y = Quantity)) +
     theme(axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
           axis.text = element_text(size = 11, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
+# TODO: try log scale for y-axis
 ```
 
 #### **Answer:** `r prettyNum(ans_1$Quantity[1], big.mark = "'")`
 
 ---
 
-#### **Question 2:** Which **Sub Category** has the most revenue?
+#### **Question 2:** Which Sub Category has the most revenue?
 ```{r}
 ans_2 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
@@ -67,6 +68,7 @@ ggplot(ans_2, aes(x = reorder(`Sub Category`, -`Total Revenue`), y = `Total Reve
     theme(axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
           axis.text = element_text(size = 11, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
+# TODO: try log scale for y-axis
 ```
 
 #### **Answer:** "Road Bikes"
@@ -75,7 +77,7 @@ ggplot(ans_2, aes(x = reorder(`Sub Category`, -`Total Revenue`), y = `Total Reve
 
 Now add a calculated field Margin with the value derived from the Profit and Revenue column. Format the field as percentage with two decimal places. HINT: Margin = Profit / Revenue
 
-#### **Question 3:** What is the total margin for **Australia** in the year **2016**?
+#### **Question 3:** What is the total margin for Australia in the year 2016?
 ```{r}
 ans_3 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
@@ -87,7 +89,7 @@ ans_3 <- my_data %>%
 
 ---
 
-#### **Question 4:** Using the same filters, which **Category** has the lowest **Margin**?
+#### **Question 4:** Using the same filters, which Category has the lowest Margin?
 ```{r}
 ans_4 <- my_data %>%
     filter(Country == "Australia", Year == 2016) %>%
@@ -107,6 +109,8 @@ ggplot(ans_4,
           axis.title.x = element_blank(),
           axis.text = element_text(size = 11, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
+# TODO: set breaks for y axis
+# decrease space between bars and x-axis
 ```
 
 #### **Answer:** `r top_n(ans_4, -1)$'Product Category'`
@@ -133,7 +137,7 @@ ggplot(ans_5, aes(x = reorder(`Sub Category`, -`Margin`),
           axis.title = element_text(size = 12, face = "bold"))
 ```
 
-#### **Answer:** `r top_n(ans_5, -1)$'Sub Category'`
+#### **Answer:** `r dependson = "ans_5", top_n(ans_5, -1)$'Sub Category'`
 
 ---
 

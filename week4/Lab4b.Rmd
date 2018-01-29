@@ -7,6 +7,7 @@ output: html_notebook
 knitr::opts_chunk$set(
     fig.width = 9,
     fig.height = 7)
+# hide output
 ```
 Load libraries
 ```{r}
@@ -19,7 +20,9 @@ my_data <- readRDS("./week2/data4week3.rds")
 ```
 Create an additional pivot chart to show **Sales by Customer Gender** using pie chart. Show percentages for each slice of the pie. Overall, it is split evenly with 51%:49% of Male to Female ratio.  
 
-#### **Question 1:** Which Bike's frame size is more popular for each **Gender**?
+---
+
+#### **Question 1:** Which Bike's frame size is more popular for each Gender?
 ```{r ans_1}
 ans_1 <- my_data %>%
     filter(!is.na(`Frame Size`)) %>%
@@ -43,15 +46,16 @@ ggplot(ans_1, aes(x = factor(`Frame Size`), y = Total, fill = factor(`Customer G
           axis.line = element_line(colour = "black"),
           axis.text = element_text(size = 10, colour = "black"),
           axis.title = element_text(size = 12))
+# TODO: replace title
 ```
 
 #### **Answer:** Mail - 42; Femail - 38
 
 ---
 
-What about Customer Gender vs age group? Right now the **Sales by Age Group** chart does not differentiate by **Gender**. Modify this chart to be a column chart. Show the **Customer Gender** side-by-side for each age group. Sort the **Age Group** appropriately.  
+What about **Customer Gender** vs **Age Group**? Right now the **Sales by Age Group** chart does not differentiate by **Gender**. Modify this chart to be a column chart. Show the **Customer Gender** side-by-side for each age group. Sort the **Age Group** appropriately.  
 
-#### **Question 2:** In **Australia**, which **Age Group** has more sales revenue to females than to males? (Select two that apply)
+#### **Question 2:** In Australia, which Age Group has more sales revenue to females than to males? (Select two that apply)
 ```{r ans_2}
 ans_2 <- my_data %>%
     filter(Country == "Australia") %>%
@@ -79,6 +83,10 @@ ggplot(ans_2, aes(x = `Age Group`, y = Prop, fill = `Customer Gender`)) +
           axis.text.x = element_text(size = 10, colour = "black"),
           axis.text.y = element_blank(),
           axis.title = element_text(size = 12, face = "bold"))
+# TODO:
+# - replace title
+# - positioning legend on top
+# - add scale to y-axis
 ```
 
 #### **Answer:** 1-Young Adults (25-34); 2-Adults (35-64)
