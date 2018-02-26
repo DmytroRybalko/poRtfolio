@@ -19,7 +19,7 @@ You can download the latest report here: week2/data4week3.rds
 my_data <- readRDS("./week2/data4week3.rds")
 ```
 Load libraries
-```{r results = "hide"}
+```{r results='hide'}
 library(tidyverse)
 library(scales)
 library(RColorBrewer)
@@ -35,8 +35,7 @@ So far everything has been well received by her. However, she would like to have
 * Sub Category
 * Frame size
 
-In this Lab we continue to work with data from Lab3b and with the same type of 
-charts but will use other data subsets.
+In this Lab we continue to work with data from Lab3b and with the same type of charts but will use other data subsets.
 
 Set common theme for line charts
 ```{r line_theme}
@@ -45,12 +44,13 @@ line_theme <- theme_classic() +
           panel.grid.major = element_line(colour = "gray"),
           panel.grid.minor = element_line(colour = "gray", size = 0.1),
           legend.title = element_text(face = "bold", colour = "black", size = 12),
-          legend.text = element_text(size = 10, color = "black"))
+          legend.text = element_text(size = 10, color = "black"),
+          axis.text = element_text(size = 10, colour = "black"))
 ```
 Set common theme for pie charts
 ```{r pie_theme}
 pie_theme <- theme(panel.background = element_rect(fill = "white", color = "white"),
-          plot.title = element_text(face = "bold", size = 16, hjust = 0.6),
+          plot.title = element_text(face = "bold", size = 15, hjust = 0.5),
           legend.title = element_blank(),
           #legend.title = element_text(face = "bold", colour = "black", size = 12),
           legend.text = element_text(size = 10, color = "black"),
@@ -69,7 +69,7 @@ my_data %>%
     geom_line(size = 1.2) +
     geom_point(size = 2) +
     scale_y_continuous(breaks = seq(1e6, 6e6, by = 1e6), labels = scales::dollar) +
-    labs(x = "Year", y = "Total Revenue", color = "Country", title = "Yearly Sales by Country") +
+    labs(x = NULL, y = NULL, color = "Country", title = "Yearly Sales by Country") +
     scale_colour_brewer(palette = "Dark2") +
     line_theme
 ```
@@ -98,8 +98,7 @@ ggplot(ans_2, aes(x = "", y = Prop, fill = reorder(Country, -Prop))) +
     geom_bar(width = 1, stat = "identity", colour = "white", size = 0.7) +
     coord_polar(theta = "y") +
     labs(title = "Sales by Country", x = NULL, y = NULL, fill = "Country") +
-    geom_text(aes(x = c(1.0, 1.1, 1.2, 1.25, 1.25, 1.3), y = 1 - y_tick, label = Percent),
-              size = 5) +
+    geom_text(aes(x = c(1.0, 1.1, 1.2, 1.25, 1.25, 1.3), y = 1 - y_tick, label = Percent), size = 5) +
     scale_fill_brewer(palette = "Dark2") +
     pie_theme
 ```
@@ -121,8 +120,7 @@ ggplot(ans_3, aes(x = Year, y = Total, color = reorder(`Product Category`, - Tot
     geom_line(size = 1.2) +
     geom_point(size = 2) +
     scale_y_continuous(labels = scales::dollar) +
-    labs(x = "Year", y = "Total Revenue", color = " Product\nCategory",
-         title = "Australia Sales by Category") +
+    labs(x = NULL, y = NULL, color = " Product\nCategory", title = "Australia Sales by Category") +
     scale_colour_brewer(palette = "Set2") +
     line_theme
 ```
@@ -156,10 +154,9 @@ ggplot(ans_5, aes(x = "", y = Prop, fill = `Product Category`)) +
     geom_bar(width = 1, stat = "identity", colour = "white", size = 0.7) +
     coord_polar(theta = "y") +
     labs(title = paste("Proportion by Product Category for Australia in", 2014), x = NULL, y = NULL) +
-    geom_text(aes(x = c(1.2, .9, 1.3), y = 1 - y_tick, label = Percent), size = 5) +
-    scale_fill_brewer(palette = "Set2") + #"Dark2"
+    geom_text(aes(x = c(1.2, 1.2, 1.3), y = 1 - y_tick, label = Percent), size = 9) +
+    scale_fill_brewer(palette = "Set2") +
     pie_theme
-# TODO: increase size of labels in geom_text
 ```
 
 #### **Answer:** `r ans_5[ans_5$'Product Category' == "Bikes", ]$Percent`

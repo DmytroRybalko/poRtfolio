@@ -1,16 +1,7 @@
 ---
-title: "DAT205x: Introduction to Data Analysis using R"
+title: "DAT205x: Introduction to Data Analysis using R. Lab1"
 output: html_notebook
 ---
-# Scenario
-You are the new marketing manager of an established Bicycle company. The company
-sells bicycles and accessories, such as clothing and other accessories to bikers
-in six countries.  
-The company has just hired Lucy as its new Sales manager. You are tasked to
-introduce Lucy to the company, its product portfolio and its sales performance
-since 2011. To do this, you have asked Jack, the IT manager to prepare some data
-for you.   
-Now, it's your job to present this data in a compelling manner.  
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
@@ -18,25 +9,32 @@ knitr::opts_chunk$set(
     fig.height = 7)
 ```
 
-#### **Lab1** - Preparation  
-Load [tidyverse](https://www.tidyverse.org), [readxl](https://cran.r-project.org/web/packages/readxl/index.html) libraries.
+# Scenario
 
-```{r}
+You are the new marketing manager of an established Bicycle company. The company sells bicycles and accessories, such as clothing and other accessories to bikers in six countries. The company has just hired Lucy as its new Sales manager. You are tasked to introduce Lucy to the company, its product portfolio and its sales performance since 2011. To do this, you have asked Jack, the IT manager to prepare some data for you. Now, it's your job to present this data in a compelling manner.  
+
+Load necessary libraries
+```{r results='hide'}
 library(tidyverse)
 library(readxl)
 library(DT)
 ```
-Also load raw data from **Lab2Start.xlsx** file.
+Load raw data from **Lab2Start.xlsx** file.
 ```{r my_data, cache.extra = file.info("./week1/raw_data.xlsx")}
 my_data <- read_excel("./week1/raw_data.xlsx")
 ```
-Let's view what our raw data look like:  
+Let's view how our raw data looks like:  
 ```{r}
-(datatable(my_data[1:100, ], style = "bootstrap", options = list(dom = 'tp', scrollX = TRUE)))
-# TODO: make better look for wide table (xtable, datatable(jQuery))
+str(my_data)
+datatable(my_data[1:100, ],
+          class = "cell-border stripe nowrap",
+          options = list(scrollX = T, dom = 'tp', autoWidth = TRUE,
+                         columnDefs = list(list(className = 'dt-body-center', targets = "_all")))) %>% 
+    formatDate(1, method = "toDateString")
 ```
 
-#### **Lab1** - Workflow  
+---
+
 The first thing you'd like to do is to present the data graphically. You do this by creating charts for the three groups of data you received from Jack, your IT manager. If you haven't done so, give the chart a descriptive title.  
 
 Your first solution should look like this (numbers may not be the same).
@@ -54,14 +52,14 @@ my_data %>%
     geom_line(size = 1.2) +
     geom_point(size = 2) +
     scale_y_continuous(labels = scales::dollar) +
-    labs(x = "Year", y = "Total Revenue", color = " Product\nCategory",
-         title = "Yearly Sales by Category") +
+    labs(x = NULL, y = NULL, title = "Yearly Sales by Category", color = " Product\nCategory") +
     theme_classic() +
-    theme(plot.title = element_text(face = "bold"),
+    theme(plot.title = element_text(face = "bold", hjust = 0.5),
           panel.grid.major = element_line(colour = "gray"),
           panel.grid.minor = element_line(colour = "gray", size = 0.1),
           legend.title = element_text(face = "bold", colour = "black", size = 12),
-          legend.text = element_text(size = 10, color = "black"))
+          legend.text = element_text(size = 11, color = "black"),
+          axis.text = element_text(size = 10, colour = "black"))
 ```
 
 #### **Answer:** Similar to the yearly bikes revenue   
@@ -102,15 +100,15 @@ my_data %>%
     group_by(Country) %>%
     summarise(Total = sum(Revenue)) %>%
     ggplot(aes(x = reorder(Country, Total), y = Total)) +
-    geom_bar(stat = "identity", show.legend = F, width = .5, fill = "blue") +
+    geom_bar(stat = "identity", width = .5, fill = "tomato2") +
     scale_y_continuous(labels = scales::dollar) +
     coord_flip() +
     labs(title = "Revenue by Country", x = NULL, y = NULL) +
+    theme_classic() +
     theme(panel.background = element_rect(fill = "white", color = "white"),
-          plot.title = element_text(face = "bold"),
-          legend.title = element_text(face = "bold", colour = "black", size = 12),
-          legend.text = element_text(size = 10, color = "black"))
-```
+          plot.title = element_text(face = "bold", hjust = 0.5),
+          axis.text = element_text(size = 10, colour = "black"))
+    ```
 Save data for next lab:
 ```{r}
 saveRDS(my_data, "week1/data4week2.rds")

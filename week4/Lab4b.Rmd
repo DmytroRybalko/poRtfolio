@@ -33,20 +33,17 @@ ans_1 <- my_data %>%
 ```{r}
 ggplot(ans_1, aes(x = factor(`Frame Size`), y = Total, fill = factor(`Customer Gender`))) +
     geom_bar(stat = "identity", position = position_dodge(0.6), width = 0.5) +
-    scale_x_discrete(expand = c(0, 0)) +
-    scale_y_continuous(labels = scales::dollar, expand = c(0, 0)) +
-    labs(title = "Which Bike's frame size is more popular for each Gender",
-         x = "Frame Size", y = "Sales", fill = "Customer\n  Gender") +
-    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
-          panel.background = element_rect(fill = "white"),
+    scale_x_discrete(expand = c(0.01, 0)) +
+    scale_y_continuous(labels = scales::dollar, expand = c(0.01, 0)) +
+    labs(x = "Frame Size", y = NULL, fill = "Customer\n  Gender") +
+    theme(panel.background = element_rect(fill = "white"),
           legend.title = element_text(colour = "black", size = 10, face = "bold"),
           legend.text = element_text(colour = "black", size = 10, face = "bold"),
-          legend.position = c(.95, .90),
+          legend.position = c(.95, .93),
           legend.background = element_rect(color = "black"),
           axis.line = element_line(colour = "black"),
           axis.text = element_text(size = 10, colour = "black"),
           axis.title = element_text(size = 12))
-# TODO: replace title
 ```
 
 #### **Answer:** Mail - 42; Femail - 38
@@ -69,24 +66,19 @@ ans_2 <- my_data %>%
 ```{r}
 ggplot(ans_2, aes(x = `Age Group`, y = Prop, fill = `Customer Gender`)) +
     geom_bar(stat = "identity", position = position_dodge(0.8), width = 0.75) +
-    scale_x_discrete(expand = c(0, 0)) +
-    scale_y_continuous(expand = c(0, 0), limits = c(0, max(ans_2$Prop)*1.05)) +
-    labs(title = "How does Age Group differentiate by Gender in Australia?",
-         y = "Sales, %", fill = "Customer\n  Gender") +
-    geom_text(aes(label = Percent), vjust = 1.7, colour = "black", position = position_dodge(0.8)) +
-    theme(plot.title = element_text(face = "bold", size = 14, hjust = 0.3),
+    scale_x_discrete(expand = c(0.01, 0)) +
+    scale_y_continuous(expand = c(0.01, 0), breaks = seq(0, .8, by = .1),
+                       labels = map_chr(seq(0, 80, by = 10) ,paste0, "%")) +
+    labs(x = NULL, y = "Sales", fill = "Customer Gender: ") +
+    geom_text(aes(label = Percent), vjust = 1.7, colour = "black", position = position_dodge(0.8), size = 5) +
+    theme(legend.position = "top",
           panel.background = element_rect(fill = "white"),
-          legend.title = element_text(colour = "black", size = 10, face = "bold"),
-          legend.text = element_text(colour = "black", size = 10, face = "bold"),
-          legend.background = element_rect(color = "black"),
+          legend.title = element_text(colour = "black", size = 12, face = "bold"),
+          legend.background = element_rect(colour = "black"),
+          legend.text = element_text(colour = "black", size = 12, face = "bold"),
           axis.line = element_line(colour = "black"),
-          axis.text.x = element_text(size = 10, colour = "black"),
-          axis.text.y = element_blank(),
+          axis.text = element_text(size = 12, colour = "black"),
           axis.title = element_text(size = 12, face = "bold"))
-# TODO:
-# - replace title
-# - positioning legend on top
-# - add scale to y-axis
 ```
 
 #### **Answer:** 1-Young Adults (25-34); 2-Adults (35-64)
