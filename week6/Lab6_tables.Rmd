@@ -1,0 +1,257 @@
+---
+title: "DAT205x: Introduction to Data Analysis using R. Lab6"
+output: html_notebook
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+    fig.width = 9,
+    fig.height = 7,
+    results = 'hide')
+```
+
+<style type="text/css">
+@import url("custom.css");
+</style>
+
+## Scenario
+
+Lucy seems intrigued your presentation on Australia's sales.
+
+Now, she wants to review the sales difference (growth) for Product Category and Sub Category between year 2015 and 2016. She wants to be able to filter the report by all the options available, including Customer Gender and Age Group.
+
+Load libraries
+```{r}
+library(tidyverse, warn.conflicts = F)
+library(scales)
+library(formattable)
+library(htmlwidgets)
+library(sparkline)
+```
+Load data for Lab6
+```{r}
+my_data <- readRDS("./week2/data4week3.rds")
+```
+
+In this Lab we'll be review the sales difference (growth) for Product Category and Sub Category between year 2015 and 2016. So, we will create two type of reports. One with the sales for each year and the other with the % Change in Revenue from Year to Year. Each report is a cross-tabular format with Product Categories and Sub categories on the rows and Year on the columns, with Sum of Revenue as the aggregate data. Also we will create chart representation for each report.
+
+Let's start! First, create two reports just like on picture below
+
+![](../img/mod6-lab6-img2.png)
+   
+For this task we're going to use such packages as [formattable](https://github.com/renkun-ken/formattable) and [sparklines](https://github.com/htmlwidgets/sparkline). Also we'll include external css file for styling our tables.
+
+---  
+  
+Let's make report_1 by combine totals for *Product Category* and *Sub Category*.
+```{r}
+#Totals for Product Category:
+total_product <- my_data %>%
+  group_by(`Product Category`, Year) %>%
+  summarise(Total = sum(Revenue)) %>%
+  ungroup() %>% 
+  mutate(`Sub Category` = `Product Category`) %>% 
+  select(`Product Category`, `Sub Category`, everything())
+total_product
+```
+Count totals for Sub Category:
+```{r}
+total_sub <- my_data %>%
+  group_by(`Product Category`, `Sub Category`, Year) %>%
+  summarise(Total = sum(Revenue)) %>%
+  ungroup()
+total_sub
+```
+Make final tibble with both totals:
+```{r}
+totals <- bind_rows(total_product, total_sub) %>% 
+  group_by(`Product Category`) %>% 
+  arrange(desc(Total), .by_group = TRUE) %>% 
+  spread(key = Year, value = Total) %>% 
+  group_by(`Product Category`) %>% 
+  arrange(desc(`2016`), .by_group = TRUE) %>% 
+  ungroup() %>% 
+  select(-`Product Category`) %>% 
+  mutate_if(is.numeric, accounting, digits = 0)
+totals
+```
+Now add data for making sparklines:
+```{r}
+# Define function with sparklines
+my_sparkline <- function(x){
+  as.character(
+    htmltools::as.tags(
+      sparkline(x)
+    )
+  )
+}
+
+# Make tibble with sparklines as html-widgets:
+df_sparkl <- totals %>% 
+  nest(`2011`:`2016`, .key = 'Sparkl') %>% 
+  mutate_at(vars(Sparkl), map, as.numeric, sparkline_hist) %>% 
+  mutate_at(vars(Sparkl), map, my_sparkline)
+#df_sparkl$Sparkl
+
+# Make final tibble
+report1 <- bind_cols(totals, df_sparkl %>%
+                     select(Sparkl))
+```
+Final table for the first report
+```{r}
+align_column = c("l", "r", "r", "r", "r", "r", "r")
+formattable(report1, align = align_column, table.attr = "class=\'my_table\'",
+    list(
+        area(, 2:(ncol(report1) - 1)) ~ color_tile("#FFFF00", "#FF0000"),
+        `Sub Category` = formatter("span",
+            style = x ~ ifelse(x %in% total_product$`Sub Category`, style(font.weight = "bold"), NA),
+            style = x ~ ifelse(x %in% total_sub$`Sub Category`, style(padding.left = "0.25cm"), NA))
+        )
+    ) %>% 
+  formattable::as.htmlwidget() %>% 
+  htmltools::tagList() %>%
+  htmltools::attachDependencies(htmlwidgets:::widget_dependencies("sparkline","sparkline")) %>%
+  htmltools::browsable()
+```
+ 
+---
+
+Next prepare data for the second report.   
+Calculate changes in totals for Product Category
+```{r}
+dtotal_product <- my_data %>%
+  group_by(`Product Category`, Year) %>%
+  summarise(Total = sum(Revenue)) %>%
+  mutate(Margin = (Total - lag(Total)) / Total) %>%
+  select(-Total) %>%
+  ungroup() %>%
+  mutate(`Sub Category` = `Product Category`) %>%
+  select(`Product Category`, `Sub Category`, everything())
+dtotal_product
+```
+Calculate changes in totals for Sub Category
+```{r}
+dtotal_sub <- my_data %>%
+    group_by(`Product Category`, `Sub Category`, Year) %>%
+    summarise(Total = sum(Revenue)) %>%
+    mutate(Margin = (Total - lag(Total)) / Total) %>% 
+    select(-Total) %>% 
+    ungroup()
+dtotal_sub
+```
+Make final tibble with margin in %
+```{r}
+report2 <- bind_rows(dtotal_product, dtotal_sub) %>% 
+  spread(key = Year, value = Margin) %>% 
+  arrange(match(`Sub Category`, report1$`Sub Category`)) %>% 
+  select(-`Product Category`, -`2011`) %>% 
+  mutate_if(is.numeric, percent, digits = 1)
+report2
+```
+Final table for the first report
+```{r}
+formattable(report2, align = c("l", "l", "l", "l", "l", "l"), table.attr = "class=\'my_table\'",
+            list(
+                area(, 2:ncol(report2)) ~ formatter("span",
+                style = x ~ style(color = ifelse(x < 0 , "red", "green")),
+                x ~ icontext(ifelse(x < 0, "arrow-down", "arrow-up"), percent(x, digits = 1))),
+                `Sub Category` = formatter("span",
+                     style = x ~ ifelse(x %in% dtotal_product$`Sub Category`, style(font.weight = "bold"), NA),
+                     style = x ~ ifelse(x %in% dtotal_sub$`Sub Category`, style(padding.left = "0.25cm"), NA)))
+    )
+```
+
+---
+
+#### **Question 1:** Without applying any filter, which year does the Accessories category have negative growth?
+#### **Answer:** 2015
+
+---
+
+#### **Question 2:** Filter the report for Youth Age Group. Which two years do the Accessories category have negative growth?
+```{r}
+ans2 <- my_data %>%
+    filter(`Age Group` == "Youth") %>%
+    group_by(`Product Category`, `Sub Category`, `Year`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ungroup() %>%
+    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016) %>%
+    group_by(`Sub Category`) %>%
+    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
+               as.numeric()) %>%
+    ungroup() %>%
+    filter(Year > 2011)
+```
+```{r}
+ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
+    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
+    geom_text(aes(label = format(`Margin,%`, justify = "right")),
+              colour = "white", fontface = "bold", size = 5) +
+    scale_x_continuous(expand = c(0, 0),
+                       breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
+    scale_y_discrete(expand = c(0, 0)) +
+    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
+    labs(title = "Change in Revenue from Year to Year for Youth Age Group, %",
+         x = NULL, y = NULL) +
+    theme(
+        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
+        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
+        panel.grid.major.y = element_line(colour = "black", size = 0.2),
+        panel.grid.major.x = element_blank(),
+        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
+        strip.text = element_text(size = rel(1.1)),
+        axis.text = element_text(size = 10, colour = "black"))
+```
+
+#### **Answer:** 2014, 2016
+
+---
+
+#### **Question 3:** Without applying any filter, which two years do the Bikes category have negative growth?  
+#### **Answer:** 2014, 2016 (take a look at heat map report_2)
+
+---
+
+#### **Question 4:** Filter the report for Australia. Which year do the Bikes category have the highest growth?
+```{r warning = FALSE}
+ans4 <- my_data %>%
+    filter(Country == "Australia") %>%
+    group_by(`Product Category`, `Sub Category`, `Year`) %>%
+    summarise(Total = sum(Revenue)) %>%
+    ungroup() %>%
+    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016) %>%
+    group_by(`Sub Category`) %>%
+    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
+               as.numeric()) %>%
+    ungroup() %>%
+    filter(Year > 2011)
+```
+
+```{r}
+ggplot(ans4, aes(x = Year, y = `Sub Category`)) +
+    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
+    geom_text(aes(label = format(`Margin,%`, justify = "right")),
+              colour = "white", fontface = "bold", size = 5) +
+    scale_x_continuous(expand = c(0, 0),
+                       breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
+    scale_y_discrete(expand = c(0, 0)) +
+    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
+    labs(title = "Change in Revenue from Year to Year for Australia, %",
+         x = NULL, y = NULL) +
+    theme(
+        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
+        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
+        panel.grid.major.y = element_line(colour = "black", size = 0.2),
+        panel.grid.major.x = element_blank(),
+        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
+        strip.text = element_text(size = rel(1.1)),
+        axis.text = element_text(size = 10, colour = "black"))
+```
+
+#### **Answer:** 2015
+
+---
+
+#### **Question 5:** Keep the Australia filter. In the year that Bikes sales have the highest growth (previous question), which Sub Category of Bikes has the highest growth?
+
+#### **Answer:** Mounting Bikes, 71%
