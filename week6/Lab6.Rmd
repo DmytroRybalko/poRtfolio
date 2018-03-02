@@ -4,11 +4,12 @@ output: html_notebook
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-    fig.width = 9,
-    fig.height = 7)
-# hide output!
+knitr::opts_chunk$set(fig.height = 7, fig.width = 9)
 ```
+
+<style type="text/css">
+@import url("custom.css");
+</style>
 
 ## Scenario
 
@@ -20,6 +21,9 @@ Load libraries
 ```{r}
 library(tidyverse, warn.conflicts = F)
 library(scales)
+library(formattable)
+library(htmlwidgets)
+library(sparkline)
 ```
 Load data for Lab6
 ```{r}
@@ -28,86 +32,146 @@ my_data <- readRDS("./week2/data4week3.rds")
 
 In this Lab we'll be review the sales difference (growth) for Product Category and Sub Category between year 2015 and 2016. So, we will create two type of reports. One with the sales for each year and the other with the % Change in Revenue from Year to Year. Each report is a cross-tabular format with Product Categories and Sub categories on the rows and Year on the columns, with Sum of Revenue as the aggregate data. Also we will create chart representation for each report.
 
-Let's start! First, create two reports
+Let's start! First, create two reports just like on picture below
 
 ![](../img/mod6-lab6-img2.png)
-  
+    
+For this task we're going to use such packages as [formattable](https://github.com/renkun-ken/formattable) and [sparklines](https://github.com/htmlwidgets/sparkline). Also we'll include external [css]("custom.css") file for styling our tables.
+
 ---  
   
-Let's make quick EDA for our data:
+##1. Helper functions report type 1
+#### Count totals for Product Category
 ```{r}
-my_data %>%
-    group_by(`Product Category`, `Sub Category`, Year) %>%
+product_total <- function(df) {
+  df %>%
+    group_by(`Product Category`, Year) %>%
     summarise(Total = sum(Revenue)) %>%
-    ggplot(aes(x = Year, y = Total, colour = `Sub Category`)) +
-    geom_line() +
-    scale_y_log10() +
-    theme(plot.margin = unit(c(1, 0, 0.1, 0.1), "cm"))
+    mutate(Margin = (Total - lag(Total)) / Total) %>% 
+    ungroup() %>% 
+    mutate(`Sub Category` = `Product Category`) %>% 
+    select(`Product Category`, `Sub Category`, everything())
+}
+my_data %>% product_total()
 ```
-We can see that for years 2011, 2012 there is data for only two products: Mounting Bikes and Road Bikes. To make our data symmetric (table-like) let's turns implicit missing values into explicit missing values using *complete()* function from *tidyr* package   
+####List of unique product in Product Category
 ```{r}
-report_1 <- my_data %>%
-    group_by(`Product Category`, `Sub Category`, Year) %>%
-    summarise(Total = sum(Revenue)) %>%
-    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016)
+uniq_product <- function(df) {
+  unique(df$`Product Category`)
+}
+my_data %>% uniq_product()
 ```
+####Count totals for Sub Category:
 ```{r}
-ggplot(report_1, aes(x = Year, y = `Sub Category`)) +
-    geom_tile(aes(fill = Total), colour = "black", size = 0.5) +
-    geom_text(aes(label = format(prettyNum(report_1$Total, ","), justify = "right")),
-              colour = "black", fontface = "bold", size = 4, hjust = 0.6) +
-    scale_fill_gradient(low = "white", high = "red") +
-    scale_x_continuous(expand = c(0, 0),
-                       breaks = seq(min(report_1$Year), max(report_1$Year), 1)) +
-    scale_y_discrete(expand = c(0, 0)) +
-    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
-    labs(title = "Sales by Years, $", x = NULL, y = NULL) +
-    theme(
-        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
-        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
-        panel.grid.major.y = element_line(colour = "black", size = 0.2),
-        panel.grid.major.x = element_blank(),
-        strip.background = element_rect(colour = "black", fill = "lightblue", size = 0.5),
-        strip.text = element_text(size = rel(1.1)),
-        axis.text = element_text(size = 10, colour = "black"))
-        
-# TODO: add other type of chart
+sub_total <- function(df) {
+  df %>% 
+  group_by(`Product Category`, `Sub Category`, Year) %>%
+  summarise(Total = sum(Revenue)) %>%
+  mutate(Margin = (Total - lag(Total)) / Total) %>% 
+  ungroup()
+}
+my_data %>% sub_total()
 ```
-Next make second report
+####Make data report_1
 ```{r}
-report_2 <- report_1
-report_2 <- report_2 %>%
-    group_by(`Sub Category`) %>%
-    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
-               as.numeric()) %>%
-    ungroup() %>%
-    filter(Year > 2011)
+report_1 <- function(df) {
+  bind_rows(product_total(df), sub_total(df)) %>% 
+  select(-Margin) %>% 
+  group_by(`Product Category`, Year) %>% 
+  spread(key = Year, value = Total) %>% 
+  group_by(`Product Category`) %>% 
+  arrange(desc(`2016`), .by_group = TRUE) %>% 
+  ungroup() %>% 
+  select(-`Product Category`)
+}
+my_data %>% report_1
 ```
-Create heatmap chart
+####Define function that makes sparklines in formattable object
 ```{r}
-percent_label <- ifelse(!is.na(report_2$`Margin,%`),
-                        paste(report_2$`Margin,%`, "%"),
-                        paste(report_2$`Margin,%`))
+my_sparkline <- function(x){
+  as.character(
+    htmltools::as.tags(
+      sparkline(x) # we can add any chart type!
+    )
+  )
+}
+```
+####Make tibble with sparklines as html-widgets:
+```{r}
+sparkl_df <- function(df) {
+  report_1(df) %>% 
+  nest(`2011`:`2016`, .key = 'Sparkl') %>% 
+  mutate_at('Sparkl', map, as.numeric, my_sparkline) %>% 
+  mutate_at('Sparkl', map, my_sparkline)
+}
+#my_data %>% sparkl_df() %>% .$Sparkl
+```
+####Add sparklines objects to report_1:
+```{r}
+report_1_sparkl <- function(df) {
+  bind_cols(report_1(df), sparkl_df(df) %>%
+                        select(Sparkl))
+}
+my_data %>% report_1_sparkl
+```
+####Final table for the first report
+```{r}
+report_1_table <- function(df) {
+  formattable(report_1_sparkl(df),
+    align = c("l", "r", "r", "r", "r", "r", "r"), table.attr = "class=\'my_table\'",
+    list(
+      area(, `2011`:`2016`) ~ color_tile("#FFFF00", "#FF0000"),
+      `Sub Category` = formatter("span",
+               style = x ~ ifelse(x %in% uniq_product(df), 
+                            style(font.weight = "bold"),
+                            style(padding.left = "0.25cm"))
+                                )
+        )
+    ) %>% 
+  formattable::as.htmlwidget() %>% 
+  htmltools::tagList() %>%
+  htmltools::attachDependencies(htmlwidgets:::widget_dependencies("sparkline","sparkline")) %>%
+  htmltools::browsable()
+}
+my_data %>% report_1_table()
+```
+ 
+---
 
-ggplot(report_2, aes(x = Year, y = `Sub Category`)) +
-    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
-    geom_text(aes(label = format(percent_label, justify = "right")),
-              colour = "white", fontface = "bold", size = 5) +
-    scale_fill_gradient(limits = c(-60, 60), breaks = seq(-60, 60, by = 20),
-                        oob = scales::squish) +
-    scale_x_continuous(expand = c(0, 0),
-                       breaks = seq(min(report_2$Year), max(report_2$Year), 1)) +
-    scale_y_discrete(expand = c(0, 0)) +
-    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
-    labs(title = "Change in Revenue from Year to Year, %", x = NULL, y = NULL) +
-    theme(
-        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
-        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
-        panel.grid.major.y = element_line(colour = "black", size = 0.2),
-        panel.grid.major.x = element_blank(),
-        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
-        strip.text = element_text(size = rel(1.1)),
-        axis.text = element_text(size = 10, colour = "black"))
+##2. Helper functions for report type 2
+####Calculate changes in totals by Year for Product Category
+```{r}
+report_2 <- function(df) {
+  bind_rows(product_total(df), sub_total(df)) %>% 
+  select(-Total) %>% 
+  group_by(`Product Category`, Year) %>% 
+  spread(key = Year, value = Margin) %>% 
+  ungroup() %>% 
+  arrange(match(`Sub Category`, report_1(df)$`Sub Category`)) %>% 
+  select(-`Product Category`, -`2011`) %>% 
+  mutate_if(is.numeric, percent, digits = 1)
+}
+my_data %>% report_2
+```
+####Final table for the second report
+```{r}
+report_2_table <- function(df) {
+  formattable(report_2(df), align = c("l", "l", "l", "l", "l", "l"),
+    table.attr = "class=\'my_table\'",
+    list(
+      area(, `2012`:`2016`) ~ formatter("span",
+        style = x ~ style(color = ifelse(x < 0 , "red", "green")),
+                x ~ icontext(ifelse(x < 0, "arrow-down", "arrow-up"), percent(x, digits = 1))),
+     `Sub Category` = formatter("span",
+                style = x ~ ifelse(x %in% uniq_product(df),
+                           style(font.weight = "bold"),
+                           style(padding.left = "0.25cm")
+                                  )
+                                )
+      )
+  )
+}
+my_data %>% report_2_table()
 ```
 
 ---
@@ -119,37 +183,14 @@ ggplot(report_2, aes(x = Year, y = `Sub Category`)) +
 
 #### **Question 2:** Filter the report for Youth Age Group. Which two years do the Accessories category have negative growth?
 ```{r}
-ans2 <- my_data %>%
-    filter(`Age Group` == "Youth") %>%
-    group_by(`Product Category`, `Sub Category`, `Year`) %>%
-    summarise(Total = sum(Revenue)) %>%
-    ungroup() %>%
-    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016) %>%
-    group_by(`Sub Category`) %>%
-    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
-               as.numeric()) %>%
-    ungroup() %>%
-    filter(Year > 2011)
+my_data %>%
+  filter(`Age Group` == "Youth") %>%
+  report_1_table()
 ```
 ```{r}
-ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
-    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
-    geom_text(aes(label = format(`Margin,%`, justify = "right")),
-              colour = "white", fontface = "bold", size = 5) +
-    scale_x_continuous(expand = c(0, 0),
-                       breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
-    scale_y_discrete(expand = c(0, 0)) +
-    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
-    labs(title = "Change in Revenue from Year to Year for Youth Age Group, %",
-         x = NULL, y = NULL) +
-    theme(
-        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
-        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
-        panel.grid.major.y = element_line(colour = "black", size = 0.2),
-        panel.grid.major.x = element_blank(),
-        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
-        strip.text = element_text(size = rel(1.1)),
-        axis.text = element_text(size = 10, colour = "black"))
+my_data %>%
+  filter(`Age Group` == "Youth") %>%
+  report_2_table()
 ```
 
 #### **Answer:** 2014, 2016
@@ -157,44 +198,20 @@ ggplot(ans2, aes(x = Year, y = `Sub Category`)) +
 ---
 
 #### **Question 3:** Without applying any filter, which two years do the Bikes category have negative growth?  
-#### **Answer:** 2014, 2016 (take a look at heat map report_2)
+#### **Answer:** 2014, 2016
 
 ---
 
 #### **Question 4:** Filter the report for Australia. Which year do the Bikes category have the highest growth?
-```{r warning = FALSE}
-ans4 <- my_data %>%
-    filter(Country == "Australia") %>%
-    group_by(`Product Category`, `Sub Category`, `Year`) %>%
-    summarise(Total = sum(Revenue)) %>%
-    ungroup() %>%
-    complete(nesting(`Product Category`, `Sub Category`), Year = 2011:2016) %>%
-    group_by(`Sub Category`) %>%
-    mutate(`Margin,%` = formatC(((Total - lag(Total)) / Total) * 100, digits = 0, format = "d") %>%
-               as.numeric()) %>%
-    ungroup() %>%
-    filter(Year > 2011)
-```
-
 ```{r}
-ggplot(ans4, aes(x = Year, y = `Sub Category`)) +
-    geom_tile(aes(fill = `Margin,%`), colour = "black", size = 0.5) +
-    geom_text(aes(label = format(`Margin,%`, justify = "right")),
-              colour = "white", fontface = "bold", size = 5) +
-    scale_x_continuous(expand = c(0, 0),
-                       breaks = seq(min(my_data$Year), max(my_data$Year), 1)) +
-    scale_y_discrete(expand = c(0, 0)) +
-    facet_grid(`Product Category` ~., scales = "free_y", space = "free") +
-    labs(title = "Change in Revenue from Year to Year for Australia, %",
-         x = NULL, y = NULL) +
-    theme(
-        plot.title = element_text(face = "bold", size = rel(1.25), hjust = 0.5),
-        panel.background = element_rect(fill = "white", colour = "black", size = 0.5),
-        panel.grid.major.y = element_line(colour = "black", size = 0.2),
-        panel.grid.major.x = element_blank(),
-        strip.background = element_rect(colour = "black", fill = "white", size = 0.5),
-        strip.text = element_text(size = rel(1.1)),
-        axis.text = element_text(size = 10, colour = "black"))
+my_data %>%
+  filter(Country == "Australia") %>% 
+  report_1_table()
+```
+```{r}
+my_data %>%
+  filter(Country == "Australia") %>% 
+  report_2_table()
 ```
 
 #### **Answer:** 2015
