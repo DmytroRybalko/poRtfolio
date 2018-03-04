@@ -12,10 +12,11 @@ Before you can create additional reports to Lucy, first you need to prepare the 
 Load libraries
 ```{r}
 library(tidyverse)
-library(lubridate)
+library(formattable)
+library(lubridate, warn.conflicts = F)
 ```
 Load data for Lab2:
-```{r my_data, cache = TRUE, cache.extra = file.info("./week1/data4week2.rds")}
+```{r}
 my_data <- readRDS("./week1/data4week2.rds")
 ```
 
@@ -23,12 +24,12 @@ my_data <- readRDS("./week1/data4week2.rds")
 
 #### **Question 1:** What is the total revenue for all the sales in the United States?
 ```{r}
-my_data %>%
-    filter(Country == "United States") %>%
-    summarise(`US Revenue` = sum(Revenue)) %>%
-    prettyNum(., big.mark = ",") %>%
-    paste0("$", .)
+ans_1 <- my_data %>%
+  filter(Country == "United States") %>%
+  summarise(`US Revenue` = sum(Revenue)) %>%
+  currency(digits = 0)
 ```
+#### **Answer:** `r ans_1` 
 
 ---
 
@@ -42,11 +43,11 @@ my_data <- my_data %>%
 
 #### **Question 2:** What is the total revenue for all the sales in the Month of December?
 ```{r}
-my_data %>% filter(Month == 12) %>%
+ans_2 <- my_data %>% filter(Month == 12) %>%
     summarise(`Total Revenue` = sum(Revenue)) %>%
-    prettyNum(., big.mark = ",") %>%
-    paste0("$", .)
+    currency(digits = 0)
 ```
+#### **Answer:** `r ans_2` 
 
 ---
 
@@ -80,12 +81,12 @@ my_data <- my_data %>%
 
 #### **Question 3:** What is the total revenue for all the sales for Young Adults Age Group?
 ```{r}
-my_data %>%
+ans_3 <- my_data %>%
     filter(`Age Group` == "Young Adults") %>%
     summarise(Total = sum(Revenue)) %>%
-    prettyNum(., big.mark = ",") %>%
-    paste0("$", .)
+    currency(digits = 0)
 ```
+#### **Answer:** `r ans_3` 
 
 ---
 
@@ -101,14 +102,14 @@ my_data <- my_data %>%
 
 #### **Question 4:** What is the total revenue for all the bikes with frame size 62 for the customer age group Seniors?
 ```{r}
-my_data %>%
+ans_4 <- my_data %>%
     filter(`Product Category` == "Bikes",
            `Frame Size` == 62,
            `Age Group` == "Seniors") %>%
     summarise(`Total Revenue` = sum(Revenue)) %>%
-    prettyNum(., big.mark = ",") %>%
-    paste0("$", .)
+    currency(digits = 0)
 ```
+#### **Answer:** `r ans_4` 
 
 ---
 
@@ -120,12 +121,12 @@ my_data <- my_data %>%
 
 #### **Question 5:** What is the total profit for United States sales in the month of October 2015, for customer age group Adults?
 ```{r}
-my_data %>%
+ans_5 <- my_data %>%
     filter(Country == "United States", Year == 2015, Month == 10, `Age Group` == "Adults") %>%
     summarise(`Total Profit` = sum(Profit)) %>%
-    prettyNum(., big.mark = ",") %>%
-    paste0("$", .)
+    currency(digits = 0)
 ```
+#### **Answer:** `r ans_5` 
 
 ---
 

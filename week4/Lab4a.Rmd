@@ -7,7 +7,6 @@ output: html_notebook
 knitr::opts_chunk$set(
     fig.width = 9,
     fig.height = 7)
-#  hide output
 ```
 
 # Scenario
@@ -44,16 +43,17 @@ line_theme <- theme_classic() +
           panel.grid.major = element_line(colour = "gray"),
           panel.grid.minor = element_line(colour = "gray", size = 0.1),
           legend.title = element_text(face = "bold", colour = "black", size = 12),
-          legend.text = element_text(size = 10, color = "black"),
-          axis.text = element_text(size = 10, colour = "black"))
+          legend.text = element_text(size = 11, color = "black"),
+          axis.text = element_text(size = 11, colour = "black"),
+          axis.title = element_text(size = 12, face = "bold"))
 ```
 Set common theme for pie charts
 ```{r pie_theme}
 pie_theme <- theme(panel.background = element_rect(fill = "white", color = "white"),
           plot.title = element_text(face = "bold", size = 15, hjust = 0.5),
-          legend.title = element_blank(),
-          #legend.title = element_text(face = "bold", colour = "black", size = 12),
-          legend.text = element_text(size = 10, color = "black"),
+          #legend.title = element_blank(),
+          legend.title = element_text(face = "bold", colour = "black", size = 12),
+          legend.text = element_text(size = 11, color = "black"),
           axis.text = element_blank(),
           axis.ticks = element_blank())
 ```
@@ -68,8 +68,9 @@ my_data %>%
     ggplot(aes(x = Year, y = Total, color = reorder(Country, -Total))) +
     geom_line(size = 1.2) +
     geom_point(size = 2) +
-    scale_y_continuous(breaks = seq(1e6, 6e6, by = 1e6), labels = scales::dollar) +
-    labs(x = NULL, y = NULL, color = "Country", title = "Yearly Sales by Country") +
+    scale_y_continuous(breaks = seq(0, 7e6, by = 1e6), labels = scales::dollar,
+                       limits = c(0, 7e6), expand = c(0, 0)) +
+    labs(x = "Year", y = "Total Revenue", color = "Country", title = "Yearly Sales by Country") +
     scale_colour_brewer(palette = "Dark2") +
     line_theme
 ```
@@ -119,8 +120,8 @@ ans_3 <- my_data %>%
 ggplot(ans_3, aes(x = Year, y = Total, color = reorder(`Product Category`, - Total))) +
     geom_line(size = 1.2) +
     geom_point(size = 2) +
-    scale_y_continuous(labels = scales::dollar) +
-    labs(x = NULL, y = NULL, color = " Product\nCategory", title = "Australia Sales by Category") +
+    scale_y_continuous(labels = scales::dollar, limits = c(0, 5e6), expand = c(0, 0)) +
+    labs(x = "Year", y = "Total Revenue", color = " Product\nCategory", title = "Australia Sales by Category") +
     scale_colour_brewer(palette = "Set2") +
     line_theme
 ```

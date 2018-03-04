@@ -38,7 +38,7 @@ datatable(my_data[1:100, ],
 The first thing you'd like to do is to present the data graphically. You do this by creating charts for the three groups of data you received from Jack, your IT manager. If you haven't done so, give the chart a descriptive title.  
 
 Your first solution should look like this (numbers may not be the same).
-![](https://prod-edxapp.edx-cdn.org/assets/courseware/v1/6d5311d2f9935b5128c6880f13e980d2/asset-v1:Microsoft+DAT205x+3T2016+type@asset+block/lab1x.PNG)
+![](../img/mod1-lab1-img1.png)
 Create three type of chart as showed above and answer the next questions.  
 
 ---
@@ -51,15 +51,16 @@ my_data %>%
     ggplot(aes(x = Year, y = Total, color = reorder(`Product Category`, -Total))) +
     geom_line(size = 1.2) +
     geom_point(size = 2) +
-    scale_y_continuous(labels = scales::dollar) +
-    labs(x = NULL, y = NULL, title = "Yearly Sales by Category", color = " Product\nCategory") +
+    scale_y_continuous(limits = c(0, 15e6), expand = c(0, 0), labels = scales::dollar) +
+    labs(title = "Yearly Sales by Category", color = " Product\nCategory") +
     theme_classic() +
     theme(plot.title = element_text(face = "bold", hjust = 0.5),
           panel.grid.major = element_line(colour = "gray"),
           panel.grid.minor = element_line(colour = "gray", size = 0.1),
           legend.title = element_text(face = "bold", colour = "black", size = 12),
           legend.text = element_text(size = 11, color = "black"),
-          axis.text = element_text(size = 10, colour = "black"))
+          axis.text = element_text(size = 11, colour = "black"),
+          axis.title = element_text(size = 12, face = "bold"))
 ```
 
 #### **Answer:** Similar to the yearly bikes revenue   
@@ -101,13 +102,15 @@ my_data %>%
     summarise(Total = sum(Revenue)) %>%
     ggplot(aes(x = reorder(Country, Total), y = Total)) +
     geom_bar(stat = "identity", width = .5, fill = "tomato2") +
-    scale_y_continuous(labels = scales::dollar) +
+    scale_y_continuous(labels = scales::dollar, expand = c(0.01, 0)) +
+    scale_x_discrete(expand = c(0.01, 0)) +
     coord_flip() +
-    labs(title = "Revenue by Country", x = NULL, y = NULL) +
+    labs(title = "Revenue by Country", y = "Total", x = "Country") +
     theme_classic() +
     theme(panel.background = element_rect(fill = "white", color = "white"),
           plot.title = element_text(face = "bold", hjust = 0.5),
-          axis.text = element_text(size = 10, colour = "black"))
+          axis.text = element_text(size = 11, colour = "black"),
+          axis.title = element_text(size = 12, face = "bold"))
     ```
 Save data for next lab:
 ```{r}
