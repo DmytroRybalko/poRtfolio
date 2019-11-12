@@ -2,7 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
-packrat/lib*/
 packrat/src/
 *.html
 *cache/
+_publish.R
+_book
+_bookdown_files
