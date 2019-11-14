@@ -7,12 +7,14 @@ Jack has provided you with a different data source. This time the data has more 
 Before you can create additional reports to Lucy, first you need to prepare the data.
 
 Load libraries
-```{r}
+```{r results='hide'}
 library(tidyverse)
-library(formattable)
 library(lubridate, warn.conflicts = F)
+library(formattable)
+library(DT)
+library(kableExtra)
 ```
-Load data for Lab2:
+Load data for **Lab#2**:
 ```{r}
 my_data <- readRDS("data/processing/data4week2.rds")
 ```
@@ -40,9 +42,10 @@ my_data <- my_data %>%
 
 ## What is the total revenue for all the sales in the month of December?
 ```{r}
-ans_2 <- my_data %>% filter(Month == 12) %>%
-    summarise(`Total Revenue` = sum(Revenue)) %>%
-    currency(digits = 0)
+my_data %>%
+  filter(Month == 12) %>%
+  summarise(`Total Revenue` = sum(Revenue)) %>%
+  currency(digits = 0) -> ans_2
 ```
 **Answer:** `r ans_2` 
 
@@ -78,10 +81,10 @@ my_data <- my_data %>%
 
 ## What is the total revenue for all the sales for young adults age group?
 ```{r}
-ans_3 <- my_data %>%
-    filter(`Age Group` == "Young Adults") %>%
-    summarise(Total = sum(Revenue)) %>%
-    currency(digits = 0)
+my_data %>%
+  filter(`Age Group` == "Young Adults") %>%
+  summarise(Total = sum(Revenue)) %>%
+  currency(digits = 0) -> ans_3
 ```
 **Answer:** `r ans_3` 
 
