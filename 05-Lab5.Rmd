@@ -1,0 +1,172 @@
+# Lab6: Scenario  
+
+Lucy was impressed with the dashboard you created. With the dashboard, she is able to narrow down her interest. Specifically, she is interested with the sales in Australia. She would like to perform simple profitability analysis on the product category and sub-category, for specific year. Furthermore, she wants to have the option of going deeper to product level.
+
+Load libraries
+```{r results='hide', warning=FALSE}
+library(tidyverse)
+library(scales)
+library(knitr)
+```
+Load data for Lab:
+```{r}
+my_data <- readRDS("./data/processing/data4week3.rds")
+str(my_data)
+```
+Set common theme for charts:
+```{r}
+common_theme <- theme_classic() +
+    theme(axis.text.x = element_text(angle = 65, vjust = 1.0, hjust = 1.0),
+          axis.text = element_text(size = 11, colour = "black"),
+          axis.title = element_text(size = 12, face = "bold"))
+```
+
+---
+
+Let's start! Filter the pivot table for **Australia** and **2016**, and answer the following questions.
+
+## Which subcategory sold the most quantity?
+```{r}
+ans_1 <- my_data %>%
+    filter(Country == "Australia", Year == 2016) %>%
+    group_by(`Sub Category`) %>%
+    summarise(Quantity = sum(`Order Quantity`)) %>% 
+    arrange(desc(Quantity))
+kable(ans_1)
+```
+Find answer on chart:   
+```{r}
+ggplot(ans_1, aes(x = reorder(`Sub Category`, -Quantity), y = Quantity)) +
+    geom_bar(stat = "identity", width = 0.5, fill="tomato2") +
+    labs(x = "Sub Category") +
+    scale_y_log10(breaks = c(10^(0:5), 3e4), expand = c(0.01, 0.01)) +
+    common_theme
+```
+
+---
+
+## Which subcategory has the most revenue?
+```{r}
+ans_2 <- my_data %>%
+    filter(Country == "Australia", Year == 2016) %>%
+    group_by(`Sub Category`) %>%
+    summarise(`Total Revenue` = sum(Revenue)) %>% 
+    arrange(desc(`Total Revenue`))
+
+ans_2 %>%
+  mutate_at(vars(`Total Revenue`), funs(scales::comma)) %>% 
+  kable()
+```
+Find answer on chart:
+```{r}
+ggplot(ans_2, aes(x = reorder(`Sub Category`, -`Total Revenue`), y = `Total Revenue`)) +
+    geom_bar(stat = "identity", width = 0.5, fill="tomato2") +
+    labs(x = "Sub Category") +
+    scale_y_log10(breaks = 10^(0:6), labels = scales::dollar, expand = c(0.01, 0)) +
+    common_theme
+```
+
+---
+
+Now add a field **Margin** with the value derived from the **Profit** and **Revenue** column. Format the field as percentage with two decimal places. HINT: Margin = Profit / Revenue
+
+## What is the total margin for Australia in the year 2016?   
+```{r}
+ans_3 <- my_data %>% 
+    filter(Year == 2016) %>% 
+    group_by(Country) %>% 
+    summarise(`Margin` = sum(Profit) / sum(Revenue))
+```
+Find answer on chart:   
+```{r}
+ggplot(ans_3, aes(x = reorder(Country, -Margin), y = Margin, fill = Country)) +
+    geom_bar(stat = "identity", width = 0.5, show.legend = FALSE) +
+    labs(x = "Country") +
+    scale_y_continuous(breaks = seq(0, .5, by = .1), expand = c(0.02, 0.0),
+                       limits = c(0, .5), labels = scales::percent) +
+    geom_text(aes(label = paste(formatC(`Margin` * 100, digits = 1, format = "f"), "%")),
+              vjust = -0.5, colour = "black", fontface = "bold", size = 5) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 12, face = "bold"),
+          axis.text = element_text(size = 11, colour = "black"),
+          axis.line.x = )
+```
+
+---
+
+## Using the same filters, which category has the lowest margin?
+```{r}
+ans_4 <- my_data %>%
+    filter(Country == "Australia", Year == 2016) %>%
+    group_by(`Product Category`) %>%
+    summarise(`Margin` = sum(Profit) / sum(Revenue))
+```
+Find answer on chart: 
+```{r}
+ggplot(ans_4, aes(x = reorder(`Product Category`, -`Margin`),
+                  y = `Margin`, fill = `Product Category`)) +
+    geom_bar(stat = "identity", width = 0.5, show.legend = FALSE) +
+    labs(x = "Product Category") +
+    scale_y_continuous(breaks = seq(0, .6, by = .1), expand = c(0.02, 0.0),
+                       limits = c(0, .6), labels = scales::percent) +
+    geom_text(aes(label = paste(formatC(`Margin` * 100, digits = 2, format = "f"), "%")),
+              vjust = -0.5, colour = "black", fontface = "bold", size = 5) +
+    theme_classic() +
+    theme(axis.title = element_text(size = 12, face = "bold"),
+          axis.text = element_text(size = 11, colour = "black"))
+```
+
+---
+
+## Which sub category has the lowest margin?
+```{r}
+ans_5 <- my_data %>%
+    filter(Country == "Australia", Year == 2016) %>%
+    group_by(`Sub Category`) %>%
+    summarise(`Margin` = sum(Profit) / sum(Revenue)) %>% 
+    arrange(Margin)
+
+ans_5 %>%
+  mutate_at(vars(Margin), funs(scales::percent)) %>% 
+  kable()
+```
+Find answer on chart:   
+```{r}
+ggplot(ans_5, aes(x = reorder(`Sub Category`, `Margin`),
+                  y = `Margin`, fill = `Sub Category`)) +
+    geom_bar(stat = "identity", width = 0.5, fill = "tomato2") +
+    labs(x = "Sub Category") +
+    scale_y_continuous(breaks = seq(0, .6, by = .1), expand = c(0.01, 0.0),
+                       labels = scales::percent) +
+    common_theme
+```
+
+---
+
+## Which product has the least margin?
+```{r message=F}
+ans_6 <- my_data %>%
+      filter(Country == "Australia", Year == 2016) %>%
+      group_by(Product, `Sub Category`, `Product Category`) %>%
+      summarise(Margin = formatC(sum(Profit) / sum(Revenue), digits = 2, format = "f") %>% 
+                    as.numeric()) %>%
+      ungroup() %>% 
+      arrange(Margin) %>% 
+      top_n(-10)
+
+ans_6 %>%
+  mutate_at(vars(Margin), funs(scales::percent)) %>% 
+  kable()
+```
+Find answer on chart:
+```{r}
+ggplot(ans_6, aes(y = reorder(Product, -`Margin`), x = Margin), fill = Product) +
+    geom_segment(aes(yend = Product), xend = 0, colour = "grey50") +
+    geom_point(size = 8, color = "tomato2") +
+    labs(y = "Product Item") +
+    scale_x_continuous(breaks = seq(0, .21, by = .05), labels = scales::percent,
+                       limits = c(0, .22), expand = c(0, 0), position = "top") +
+    theme_classic() +
+    theme(axis.text = element_text(size = 11, colour = "black"),
+          axis.title = element_text(size = 12, face = "bold"))
+```
