@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Deep into data | Introduction to Data Analysis using R</title>
+  <meta name="description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Deep into data | Introduction to Data Analysis using R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Deep into data | Introduction to Data Analysis using R" />
+  
+  <meta name="twitter:description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  
+
+<meta name="author" content="Dmytro Rybalko" />
+
+
+<meta name="date" content="2019-11-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-first-overview.html"/>
+<link rel="next" href="aggregation-and-pivoting-data-part-1.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/formattable_widget-binding-0.2.0.1/formattable_widget.js"></script>
+<link href="libs/jquery-sparkline-2.1.2/jquery.sparkline.css" rel="stylesheet" />
+<script src="libs/jquery-sparkline-2.1.2/jquery.sparkline.js"></script>
+<script src="libs/sparkline-binding-2.0/sparkline.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> Introduction to Data Analysis using R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Intro</a></li>
+<li class="chapter" data-level="2" data-path="data-first-overview.html"><a href="data-first-overview.html"><i class="fa fa-check"></i><b>2</b> Data: first overview</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-first-overview.html"><a href="data-first-overview.html#what-does-the-yearly-total-sales-look-like"><i class="fa fa-check"></i><b>2.1</b> What does the yearly total sales look like?</a></li>
+<li class="chapter" data-level="2.2" data-path="data-first-overview.html"><a href="data-first-overview.html#what-percentage-of-the-total-revenue-comes-from-the-bikes-category"><i class="fa fa-check"></i><b>2.2</b> What percentage of the total revenue comes from the bikes category?</a></li>
+<li class="chapter" data-level="2.3" data-path="data-first-overview.html"><a href="data-first-overview.html#for-the-revenue-by-country-sort-the-countries-from-the-one-with-highest-revenue-to-lowest-revenue"><i class="fa fa-check"></i><b>2.3</b> For the revenue by country, sort the countries from the one with highest revenue to lowest revenue</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="deep-into-data.html"><a href="deep-into-data.html"><i class="fa fa-check"></i><b>3</b> Deep into data</a><ul>
+<li class="chapter" data-level="3.1" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-in-the-united-states"><i class="fa fa-check"></i><b>3.1</b> What is the total revenue for all the sales in the United States?</a></li>
+<li class="chapter" data-level="3.2" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-in-the-month-of-december"><i class="fa fa-check"></i><b>3.2</b> What is the total revenue for all the sales in the month of December?</a></li>
+<li class="chapter" data-level="3.3" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-for-young-adults-age-group"><i class="fa fa-check"></i><b>3.3</b> What is the total revenue for all the sales for young adults age group?</a></li>
+<li class="chapter" data-level="3.4" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-bikes-with-frame-size-62-for-the-customer-age-group-seniors"><i class="fa fa-check"></i><b>3.4</b> What is the total revenue for all the bikes with frame size 62 for the customer age group seniors?</a></li>
+<li class="chapter" data-level="3.5" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-profit-for-united-states-sales-in-the-month-of-october-2015-for-customer-age-group-adults"><i class="fa fa-check"></i><b>3.5</b> What is the total profit for United States sales in the month of October 2015, for customer age group adults?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html"><i class="fa fa-check"></i><b>4</b> Aggregation and pivoting data: part 1</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-year-did-the-company-start-selling-touring-bikes"><i class="fa fa-check"></i><b>4.1</b> Which year did the company start selling touring bikes?</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#rank-the-states-for-germany-from-the-highest-to-lowest-revenue"><i class="fa fa-check"></i><b>4.2</b> Rank the states for Germany, from the highest to lowest revenue</a></li>
+<li class="chapter" data-level="4.3" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#rank-the-states-for-germany-from-the-highest-to-lowest-revenue-for-year-2013"><i class="fa fa-check"></i><b>4.3</b> Rank the states for Germany, from the highest to lowest revenue for year 2013</a></li>
+<li class="chapter" data-level="4.4" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-frame-size-sold-the-most"><i class="fa fa-check"></i><b>4.4</b> Which frame size sold the most?</a></li>
+<li class="chapter" data-level="4.5" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-age-group-has-the-lowest-revenue"><i class="fa fa-check"></i><b>4.5</b> Which age group has the lowest revenue?</a></li>
+<li class="chapter" data-level="4.6" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-countrys-trend-is-the-most-different-when-compared-to-the-other-countries"><i class="fa fa-check"></i><b>4.6</b> Which country’s trend is the most different when compared to the other countries?</a></li>
+<li class="chapter" data-level="4.7" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-year-does-the-bikes-category-have-the-least-sales"><i class="fa fa-check"></i><b>4.7</b> Which year does the Bikes category have the least sales?</a></li>
+<li class="chapter" data-level="4.8" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#what-is-the-proportion-of-sales-for-young-adults"><i class="fa fa-check"></i><b>4.8</b> What is the proportion of sales for Young Adults?</a></li>
+<li class="chapter" data-level="4.9" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#in-this-chart-you-can-clearly-see-the-order-of-sales-by-frame-size.-which-frame-size-sold-the-least"><i class="fa fa-check"></i><b>4.9</b> In this chart, you can clearly see the order of sales by frame size. Which frame size sold the least?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html"><i class="fa fa-check"></i><b>5</b> Aggregation and pivoting data: part 2</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#a-quick-glance-on-the-yearly-sales-by-country-shows-that-australia-has-an-unusual-trend-compared-to-the-other-countries.-which-year-does-australia-have-the-least-sales"><i class="fa fa-check"></i><b>5.1</b> A quick glance on the yearly sales by country shows that Australia has an unusual trend compared to the other countries. Which year does Australia have the least sales?</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#what-is-the-percentage-of-australia-sales-of-total-sales-in-the-year-that-it-has-the-least-sales-previous-question"><i class="fa fa-check"></i><b>5.2</b> What is the percentage of Australia sales (of total sales) in the year that it has the least sales (previous question)?</a></li>
+<li class="chapter" data-level="5.3" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#lets-filter-the-charts-by-australia.-what-might-be-the-cause-of-this-trend"><i class="fa fa-check"></i><b>5.3</b> Let’s filter the charts by Australia. What might be the cause of this trend?</a></li>
+<li class="chapter" data-level="5.4" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#for-all-the-years-that-has-all-the-three-categories-which-year-does-the-bikes-has-the-least-proportion"><i class="fa fa-check"></i><b>5.4</b> For all the years that has all the three categories, which year does the Bikes has the least proportion?</a></li>
+<li class="chapter" data-level="5.5" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#what-is-the-percentage-of-bikes-sales-of-total-sales-in-that-year"><i class="fa fa-check"></i><b>5.5</b> What is the percentage of bikes sales (of total sales) in that year?</a></li>
+<li class="chapter" data-level="5.6" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#which-bikes-frame-size-is-more-popular-for-each-gender"><i class="fa fa-check"></i><b>5.6</b> Which bike’s frame size is more popular for each gender?</a></li>
+<li class="chapter" data-level="5.7" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#in-australia-which-age-group-has-more-sales-revenue-to-females-than-to-males-select-two-that-apply"><i class="fa fa-check"></i><b>5.7</b> In Australia, which age group has more sales revenue to females than to males? (Select two that apply)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-drill-down.html"><a href="data-drill-down.html"><i class="fa fa-check"></i><b>6</b> Data: drill down</a><ul>
+<li class="chapter" data-level="6.1" data-path="data-drill-down.html"><a href="data-drill-down.html#which-subcategory-sold-the-most-quantity"><i class="fa fa-check"></i><b>6.1</b> Which subcategory sold the most quantity?</a></li>
+<li class="chapter" data-level="6.2" data-path="data-drill-down.html"><a href="data-drill-down.html#which-subcategory-has-the-most-revenue"><i class="fa fa-check"></i><b>6.2</b> Which subcategory has the most revenue?</a></li>
+<li class="chapter" data-level="6.3" data-path="data-drill-down.html"><a href="data-drill-down.html#what-is-the-total-margin-for-australia-in-the-year-2016"><i class="fa fa-check"></i><b>6.3</b> What is the total margin for Australia in the year 2016?</a></li>
+<li class="chapter" data-level="6.4" data-path="data-drill-down.html"><a href="data-drill-down.html#using-the-same-filters-which-category-has-the-lowest-margin"><i class="fa fa-check"></i><b>6.4</b> Using the same filters, which category has the lowest margin?</a></li>
+<li class="chapter" data-level="6.5" data-path="data-drill-down.html"><a href="data-drill-down.html#which-sub-category-has-the-lowest-margin"><i class="fa fa-check"></i><b>6.5</b> Which sub category has the lowest margin?</a></li>
+<li class="chapter" data-level="6.6" data-path="data-drill-down.html"><a href="data-drill-down.html#which-product-has-the-least-margin"><i class="fa fa-check"></i><b>6.6</b> Which product has the least margin?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reporting-tables.html"><a href="reporting-tables.html"><i class="fa fa-check"></i><b>7</b> Reporting: tables</a><ul>
+<li class="chapter" data-level="7.1" data-path="reporting-tables.html"><a href="reporting-tables.html#helper-functions-for-type-1-report"><i class="fa fa-check"></i><b>7.1</b> Helper functions for type 1 report</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="reporting-tables.html"><a href="reporting-tables.html#count-totals-for-product-category"><i class="fa fa-check"></i><b>7.1.1</b> Count totals for Product Category</a></li>
+<li class="chapter" data-level="7.1.2" data-path="reporting-tables.html"><a href="reporting-tables.html#list-of-unique-product-in-product-category"><i class="fa fa-check"></i><b>7.1.2</b> List of unique product in Product Category</a></li>
+<li class="chapter" data-level="7.1.3" data-path="reporting-tables.html"><a href="reporting-tables.html#count-totals-for-sub-category"><i class="fa fa-check"></i><b>7.1.3</b> Count totals for Sub Category:</a></li>
+<li class="chapter" data-level="7.1.4" data-path="reporting-tables.html"><a href="reporting-tables.html#prepare-report_1"><i class="fa fa-check"></i><b>7.1.4</b> Prepare report_1</a></li>
+<li class="chapter" data-level="7.1.5" data-path="reporting-tables.html"><a href="reporting-tables.html#define-function-that-makes-sparklines-in-formattable-object"><i class="fa fa-check"></i><b>7.1.5</b> Define function that makes sparklines in formattable object</a></li>
+<li class="chapter" data-level="7.1.6" data-path="reporting-tables.html"><a href="reporting-tables.html#make-tibble-with-sparklines-as-html-widgets"><i class="fa fa-check"></i><b>7.1.6</b> Make tibble with sparklines as html-widgets:</a></li>
+<li class="chapter" data-level="7.1.7" data-path="reporting-tables.html"><a href="reporting-tables.html#add-sparklines-objects-to-report_1"><i class="fa fa-check"></i><b>7.1.7</b> Add sparklines objects to report_1:</a></li>
+<li class="chapter" data-level="7.1.8" data-path="reporting-tables.html"><a href="reporting-tables.html#final-table-for-the-first-report"><i class="fa fa-check"></i><b>7.1.8</b> Final table for the first report</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="reporting-tables.html"><a href="reporting-tables.html#helper-functions-for-report-type-2"><i class="fa fa-check"></i><b>7.2</b> Helper functions for report type 2</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reporting-tables.html"><a href="reporting-tables.html#calculate-changes-in-totals-by-year-for-product-category"><i class="fa fa-check"></i><b>7.2.1</b> Calculate changes in totals by year for product category</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reporting-tables.html"><a href="reporting-tables.html#final-table-for-the-second-report"><i class="fa fa-check"></i><b>7.2.2</b> Final table for the second report</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reporting-tables.html"><a href="reporting-tables.html#questions"><i class="fa fa-check"></i><b>7.3</b> Questions</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reporting-tables.html"><a href="reporting-tables.html#without-applying-any-filter-which-year-does-the-accessories-category-have-negative-growth"><i class="fa fa-check"></i><b>7.3.1</b> Without applying any filter, which year does the Accessories category have negative growth?</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reporting-tables.html"><a href="reporting-tables.html#filter-the-reports-for-youth-age-group.-which-two-years-do-the-accessories-category-have-negative-growth"><i class="fa fa-check"></i><b>7.3.2</b> Filter the reports for youth age group. Which two years do the accessories category have negative growth?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reporting-tables.html"><a href="reporting-tables.html#without-applying-any-filter-which-two-years-do-the-bikes-category-have-negative-growth"><i class="fa fa-check"></i><b>7.4</b> Without applying any filter, which two years do the bikes category have negative growth?</a></li>
+<li class="chapter" data-level="7.5" data-path="reporting-tables.html"><a href="reporting-tables.html#filter-the-report-for-australia.-which-year-do-the-bikes-category-have-the-highest-growth"><i class="fa fa-check"></i><b>7.5</b> Filter the report for Australia. Which year do the bikes category have the highest growth?</a></li>
+<li class="chapter" data-level="7.6" data-path="reporting-tables.html"><a href="reporting-tables.html#keep-the-australia-filter.-in-the-year-that-bikes-sales-have-the-highest-growth-previous-question-which-sub-category-of-bikes-has-the-highest-growth"><i class="fa fa-check"></i><b>7.6</b> Keep the Australia filter. In the year that bikes sales have the highest growth (previous question), which sub category of bikes has the highest growth?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html"><i class="fa fa-check"></i><b>8</b> Reporting: hierarchical chart</a><ul>
+<li class="chapter" data-level="8.1" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#explore-the-sales-composition-of-bikes-category-for-each-age-group.-which-age-group-does-the-composition-rank-of-sales-differ-than-the-rest"><i class="fa fa-check"></i><b>8.1</b> Explore the sales composition of bikes category for each age group. Which age group does the composition (rank of sales) differ than the rest?</a></li>
+<li class="chapter" data-level="8.2" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#now-explore-the-sales-composition-of-bikes-category-for-each-age-group-for-the-male-customers.-which-age-group-does-the-composition-differ-than-the-rest"><i class="fa fa-check"></i><b>8.2</b> Now explore the sales composition of bikes category for each age group, for the Male customers. Which age group does the composition differ than the rest?</a></li>
+<li class="chapter" data-level="8.3" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#clear-all-filters.-now-filter-for-the-year-2016-and-germany.-rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category"><i class="fa fa-check"></i><b>8.3</b> Clear all filters. Now, filter for the year 2016 and Germany. Rank the sales from the highest to lowest for the clothing category</a></li>
+<li class="chapter" data-level="8.4" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category.-keep-the-filter-settings-and-add-filter-by-male-customers."><i class="fa fa-check"></i><b>8.4</b> Rank the sales from the highest to lowest for the clothing category. Keep the filter settings and add filter by male customers.</a></li>
+<li class="chapter" data-level="8.5" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category.-keep-the-filter-settings-and-add-filter-by-youth-age-group"><i class="fa fa-check"></i><b>8.5</b> Rank the sales from the highest to lowest for the clothing category. Keep the filter settings and add filter by youth age group</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html"><i class="fa fa-check"></i><b>9</b> Join data from different sources</a><ul>
+<li class="chapter" data-level="9.1" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-three-bought-the-most-quantity-customer-profiles-marital-status-and-number-of-children"><i class="fa fa-check"></i><b>9.1</b> For those customers who bought bikes, what are the top three (bought the most quantity) customer profiles (marital status and number of children)?</a></li>
+<li class="chapter" data-level="9.2" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-three-bought-the-most-quantity-income-brackets-rank-from-highest-to-lowest"><i class="fa fa-check"></i><b>9.2</b> For those customers who bought bikes, what are the top three (bought the most quantity) income brackets? (Rank from highest to Lowest)</a></li>
+<li class="chapter" data-level="9.3" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-two-bought-the-most-quantity-education-levels"><i class="fa fa-check"></i><b>9.3</b> For those customers who bought bikes, what are the top two (bought the most quantity) education levels?</a></li>
+<li class="chapter" data-level="9.4" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#what-is-the-percentage-of-the-customers-who-bought-bikes-and-are-house-owners"><i class="fa fa-check"></i><b>9.4</b> What is the percentage of the customers who bought Bikes and are house owners?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="deep-into-data" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Deep into data</h1>
+<p><strong>Scenario.</strong> While your first attempt to show the company’s performance to Lucy was not bad, clearly she has a lot more requirements than what you provided. She wants to know more about the year over year sales, sliced into different categories, sub-categories, and countries. She also wants to see additional information such as customer demographics.</p>
+<p>Jack has provided you with a different data source. This time the data has more than one hundred thousand rows.</p>
+<p>Before you can create additional reports to Lucy, first you need to prepare the data.</p>
+<p>Load libraries</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(lubridate, <span class="dt">warn.conflicts =</span> F)
+<span class="kw">library</span>(formattable)
+<span class="kw">library</span>(DT)
+<span class="kw">library</span>(kableExtra)</code></pre></div>
+<p>Load data for this Lab:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;data/processing/data4week2.rds&quot;</span>)</code></pre></div>
+<hr />
+<div id="what-is-the-total-revenue-for-all-the-sales-in-the-united-states" class="section level2">
+<h2><span class="header-section-number">3.1</span> What is the total revenue for all the sales in the United States?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ans_<span class="dv">1</span> &lt;-<span class="st"> </span>my_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">US Revenue</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">currency</span>(<span class="dt">digits =</span> <span class="dv">0</span>)</code></pre></div>
+<p><strong>Answer:</strong> $27,975,547</p>
+<hr />
+<p>Now, you need to add several columns, derived from existing columns in the data. First, let’s add a <strong>Month</strong> column. Insert a new column to the left of the <strong>Customer ID</strong> column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data &lt;-<span class="st"> </span>my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Month =</span> <span class="kw">month</span>(Date)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(Date<span class="op">:</span>Year, Month, <span class="kw">everything</span>())</code></pre></div>
+</div>
+<div id="what-is-the-total-revenue-for-all-the-sales-in-the-month-of-december" class="section level2">
+<h2><span class="header-section-number">3.2</span> What is the total revenue for all the sales in the month of December?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Month <span class="op">==</span><span class="st"> </span><span class="dv">12</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Total Revenue</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">currency</span>(<span class="dt">digits =</span> <span class="dv">0</span>) -&gt;<span class="st"> </span>ans_<span class="dv">2</span></code></pre></div>
+<p><strong>Answer:</strong> $9,086,931</p>
+<hr />
+<p>Next, let’s add an “Age Group” column. Insert a new column to the left of the Customer Gender, and use formula to derive the age group from the Customer Age column. Let’s group the customers based on the following criteria:</p>
+<ul>
+<li>Youth (&lt;25);</li>
+<li>Young Adults (25-34);</li>
+<li>Adults (35-64);</li>
+<li>Seniors (&gt;64)</li>
+</ul>
+<p>Define function age_group()</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">age_group &lt;-<span class="st"> </span><span class="cf">function</span>(age) {
+        <span class="cf">if</span> (age <span class="op">&lt;</span><span class="st"> </span><span class="dv">25</span>) {
+            <span class="st">&quot;Youth&quot;</span>
+        } <span class="cf">else</span> <span class="cf">if</span> (age <span class="op">&gt;</span><span class="st"> </span><span class="dv">24</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">35</span>) {
+            <span class="st">&quot;Young Adults&quot;</span>
+        } <span class="cf">else</span> <span class="cf">if</span> (age <span class="op">&gt;</span><span class="st"> </span><span class="dv">34</span> <span class="op">&amp;</span><span class="st"> </span>age <span class="op">&lt;</span><span class="st"> </span><span class="dv">65</span>) {
+            <span class="st">&quot;Adults&quot;</span>
+        } <span class="cf">else</span> {
+            <span class="st">&quot;Seniors&quot;</span>
+        }
+}</code></pre></div>
+<p>Add <strong>Age Group</strong> column</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data &lt;-<span class="st"> </span>my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="st">&#39;Age Group&#39;</span> =<span class="st"> </span><span class="kw">map_chr</span>(.<span class="op">$</span><span class="st">`</span><span class="dt">Customer Age</span><span class="st">`</span>, age_group)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(Date<span class="op">:</span><span class="st">`</span><span class="dt">Customer Age</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Age Group</span><span class="st">`</span>, <span class="kw">everything</span>())</code></pre></div>
+</div>
+<div id="what-is-the-total-revenue-for-all-the-sales-for-young-adults-age-group" class="section level2">
+<h2><span class="header-section-number">3.3</span> What is the total revenue for all the sales for young adults age group?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Age Group</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;Young Adults&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">currency</span>(<span class="dt">digits =</span> <span class="dv">0</span>) -&gt;<span class="st"> </span>ans_<span class="dv">3</span></code></pre></div>
+<p><strong>Answer:</strong> $30,655,614</p>
+<hr />
+<p>Now, let’s add a <strong>Frame Size</strong> column. Insert a new column to the left of the <strong>Order Quantity</strong> use formula to derive the frame size of a bicycle from the last two characters of the <strong>Product</strong> column, when the <strong>Product Category</strong> is <strong>Bikes</strong>, otherwise - NA.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data &lt;-<span class="st"> </span>my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="st">&#39;Frame Size&#39;</span> =<span class="st"> </span><span class="kw">ifelse</span>(my_data<span class="op">$</span><span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span> <span class="op">==</span><span class="st"> &#39;Bikes&#39;</span>, my_data<span class="op">$</span>Product, <span class="ot">NA</span>) <span class="op">%&gt;%</span>
+<span class="st">               </span><span class="kw">str_extract</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d$&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">               </span><span class="kw">as.numeric</span>()) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">select</span>(Date<span class="op">:</span>Product, <span class="st">&#39;Frame Size&#39;</span>, <span class="kw">everything</span>())</code></pre></div>
+</div>
+<div id="what-is-the-total-revenue-for-all-the-bikes-with-frame-size-62-for-the-customer-age-group-seniors" class="section level2">
+<h2><span class="header-section-number">3.4</span> What is the total revenue for all the bikes with frame size 62 for the customer age group seniors?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ans_<span class="dv">4</span> &lt;-<span class="st"> </span>my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;Bikes&quot;</span>,
+           <span class="st">`</span><span class="dt">Frame Size</span><span class="st">`</span> <span class="op">==</span><span class="st"> </span><span class="dv">62</span>,
+           <span class="st">`</span><span class="dt">Age Group</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;Seniors&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Total Revenue</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">currency</span>(<span class="dt">digits =</span> <span class="dv">0</span>)</code></pre></div>
+<p><strong>Answer:</strong> $12,452</p>
+<hr />
+<p>Let’s add a <strong>Profit</strong> column. Insert a new column to the right of the <strong>Revenue</strong>, and use formula to derive the <strong>Profit</strong> from both the <strong>Revenue</strong> and <strong>Cost</strong> columns. Show the <strong>Total</strong> for the <strong>Profit</strong> column.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data &lt;-<span class="st"> </span>my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Profit =</span> Revenue <span class="op">-</span><span class="st"> </span>Cost)</code></pre></div>
+</div>
+<div id="what-is-the-total-profit-for-united-states-sales-in-the-month-of-october-2015-for-customer-age-group-adults" class="section level2">
+<h2><span class="header-section-number">3.5</span> What is the total profit for United States sales in the month of October 2015, for customer age group adults?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ans_<span class="dv">5</span> &lt;-<span class="st"> </span>my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">filter</span>(Country <span class="op">==</span><span class="st"> &quot;United States&quot;</span>, Year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>, Month <span class="op">==</span><span class="st"> </span><span class="dv">10</span>, <span class="st">`</span><span class="dt">Age Group</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;Adults&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">Total Profit</span><span class="st">`</span> =<span class="st"> </span><span class="kw">sum</span>(Profit)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">currency</span>(<span class="dt">digits =</span> <span class="dv">0</span>)</code></pre></div>
+<p><strong>Answer:</strong> $138,419</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-first-overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="aggregation-and-pivoting-data-part-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

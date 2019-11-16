@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Reporting: tables | Introduction to Data Analysis using R</title>
+  <meta name="description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Reporting: tables | Introduction to Data Analysis using R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Reporting: tables | Introduction to Data Analysis using R" />
+  
+  <meta name="twitter:description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  
+
+<meta name="author" content="Dmytro Rybalko" />
+
+
+<meta name="date" content="2019-11-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="data-drill-down.html"/>
+<link rel="next" href="reporting-hierarchical-chart.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/formattable_widget-binding-0.2.0.1/formattable_widget.js"></script>
+<link href="libs/jquery-sparkline-2.1.2/jquery.sparkline.css" rel="stylesheet" />
+<script src="libs/jquery-sparkline-2.1.2/jquery.sparkline.js"></script>
+<script src="libs/sparkline-binding-2.0/sparkline.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> Introduction to Data Analysis using R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Intro</a></li>
+<li class="chapter" data-level="2" data-path="data-first-overview.html"><a href="data-first-overview.html"><i class="fa fa-check"></i><b>2</b> Data: first overview</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-first-overview.html"><a href="data-first-overview.html#what-does-the-yearly-total-sales-look-like"><i class="fa fa-check"></i><b>2.1</b> What does the yearly total sales look like?</a></li>
+<li class="chapter" data-level="2.2" data-path="data-first-overview.html"><a href="data-first-overview.html#what-percentage-of-the-total-revenue-comes-from-the-bikes-category"><i class="fa fa-check"></i><b>2.2</b> What percentage of the total revenue comes from the bikes category?</a></li>
+<li class="chapter" data-level="2.3" data-path="data-first-overview.html"><a href="data-first-overview.html#for-the-revenue-by-country-sort-the-countries-from-the-one-with-highest-revenue-to-lowest-revenue"><i class="fa fa-check"></i><b>2.3</b> For the revenue by country, sort the countries from the one with highest revenue to lowest revenue</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="deep-into-data.html"><a href="deep-into-data.html"><i class="fa fa-check"></i><b>3</b> Deep into data</a><ul>
+<li class="chapter" data-level="3.1" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-in-the-united-states"><i class="fa fa-check"></i><b>3.1</b> What is the total revenue for all the sales in the United States?</a></li>
+<li class="chapter" data-level="3.2" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-in-the-month-of-december"><i class="fa fa-check"></i><b>3.2</b> What is the total revenue for all the sales in the month of December?</a></li>
+<li class="chapter" data-level="3.3" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-for-young-adults-age-group"><i class="fa fa-check"></i><b>3.3</b> What is the total revenue for all the sales for young adults age group?</a></li>
+<li class="chapter" data-level="3.4" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-bikes-with-frame-size-62-for-the-customer-age-group-seniors"><i class="fa fa-check"></i><b>3.4</b> What is the total revenue for all the bikes with frame size 62 for the customer age group seniors?</a></li>
+<li class="chapter" data-level="3.5" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-profit-for-united-states-sales-in-the-month-of-october-2015-for-customer-age-group-adults"><i class="fa fa-check"></i><b>3.5</b> What is the total profit for United States sales in the month of October 2015, for customer age group adults?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html"><i class="fa fa-check"></i><b>4</b> Aggregation and pivoting data: part 1</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-year-did-the-company-start-selling-touring-bikes"><i class="fa fa-check"></i><b>4.1</b> Which year did the company start selling touring bikes?</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#rank-the-states-for-germany-from-the-highest-to-lowest-revenue"><i class="fa fa-check"></i><b>4.2</b> Rank the states for Germany, from the highest to lowest revenue</a></li>
+<li class="chapter" data-level="4.3" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#rank-the-states-for-germany-from-the-highest-to-lowest-revenue-for-year-2013"><i class="fa fa-check"></i><b>4.3</b> Rank the states for Germany, from the highest to lowest revenue for year 2013</a></li>
+<li class="chapter" data-level="4.4" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-frame-size-sold-the-most"><i class="fa fa-check"></i><b>4.4</b> Which frame size sold the most?</a></li>
+<li class="chapter" data-level="4.5" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-age-group-has-the-lowest-revenue"><i class="fa fa-check"></i><b>4.5</b> Which age group has the lowest revenue?</a></li>
+<li class="chapter" data-level="4.6" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-countrys-trend-is-the-most-different-when-compared-to-the-other-countries"><i class="fa fa-check"></i><b>4.6</b> Which country’s trend is the most different when compared to the other countries?</a></li>
+<li class="chapter" data-level="4.7" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-year-does-the-bikes-category-have-the-least-sales"><i class="fa fa-check"></i><b>4.7</b> Which year does the Bikes category have the least sales?</a></li>
+<li class="chapter" data-level="4.8" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#what-is-the-proportion-of-sales-for-young-adults"><i class="fa fa-check"></i><b>4.8</b> What is the proportion of sales for Young Adults?</a></li>
+<li class="chapter" data-level="4.9" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#in-this-chart-you-can-clearly-see-the-order-of-sales-by-frame-size.-which-frame-size-sold-the-least"><i class="fa fa-check"></i><b>4.9</b> In this chart, you can clearly see the order of sales by frame size. Which frame size sold the least?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html"><i class="fa fa-check"></i><b>5</b> Aggregation and pivoting data: part 2</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#a-quick-glance-on-the-yearly-sales-by-country-shows-that-australia-has-an-unusual-trend-compared-to-the-other-countries.-which-year-does-australia-have-the-least-sales"><i class="fa fa-check"></i><b>5.1</b> A quick glance on the yearly sales by country shows that Australia has an unusual trend compared to the other countries. Which year does Australia have the least sales?</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#what-is-the-percentage-of-australia-sales-of-total-sales-in-the-year-that-it-has-the-least-sales-previous-question"><i class="fa fa-check"></i><b>5.2</b> What is the percentage of Australia sales (of total sales) in the year that it has the least sales (previous question)?</a></li>
+<li class="chapter" data-level="5.3" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#lets-filter-the-charts-by-australia.-what-might-be-the-cause-of-this-trend"><i class="fa fa-check"></i><b>5.3</b> Let’s filter the charts by Australia. What might be the cause of this trend?</a></li>
+<li class="chapter" data-level="5.4" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#for-all-the-years-that-has-all-the-three-categories-which-year-does-the-bikes-has-the-least-proportion"><i class="fa fa-check"></i><b>5.4</b> For all the years that has all the three categories, which year does the Bikes has the least proportion?</a></li>
+<li class="chapter" data-level="5.5" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#what-is-the-percentage-of-bikes-sales-of-total-sales-in-that-year"><i class="fa fa-check"></i><b>5.5</b> What is the percentage of bikes sales (of total sales) in that year?</a></li>
+<li class="chapter" data-level="5.6" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#which-bikes-frame-size-is-more-popular-for-each-gender"><i class="fa fa-check"></i><b>5.6</b> Which bike’s frame size is more popular for each gender?</a></li>
+<li class="chapter" data-level="5.7" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#in-australia-which-age-group-has-more-sales-revenue-to-females-than-to-males-select-two-that-apply"><i class="fa fa-check"></i><b>5.7</b> In Australia, which age group has more sales revenue to females than to males? (Select two that apply)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-drill-down.html"><a href="data-drill-down.html"><i class="fa fa-check"></i><b>6</b> Data: drill down</a><ul>
+<li class="chapter" data-level="6.1" data-path="data-drill-down.html"><a href="data-drill-down.html#which-subcategory-sold-the-most-quantity"><i class="fa fa-check"></i><b>6.1</b> Which subcategory sold the most quantity?</a></li>
+<li class="chapter" data-level="6.2" data-path="data-drill-down.html"><a href="data-drill-down.html#which-subcategory-has-the-most-revenue"><i class="fa fa-check"></i><b>6.2</b> Which subcategory has the most revenue?</a></li>
+<li class="chapter" data-level="6.3" data-path="data-drill-down.html"><a href="data-drill-down.html#what-is-the-total-margin-for-australia-in-the-year-2016"><i class="fa fa-check"></i><b>6.3</b> What is the total margin for Australia in the year 2016?</a></li>
+<li class="chapter" data-level="6.4" data-path="data-drill-down.html"><a href="data-drill-down.html#using-the-same-filters-which-category-has-the-lowest-margin"><i class="fa fa-check"></i><b>6.4</b> Using the same filters, which category has the lowest margin?</a></li>
+<li class="chapter" data-level="6.5" data-path="data-drill-down.html"><a href="data-drill-down.html#which-sub-category-has-the-lowest-margin"><i class="fa fa-check"></i><b>6.5</b> Which sub category has the lowest margin?</a></li>
+<li class="chapter" data-level="6.6" data-path="data-drill-down.html"><a href="data-drill-down.html#which-product-has-the-least-margin"><i class="fa fa-check"></i><b>6.6</b> Which product has the least margin?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reporting-tables.html"><a href="reporting-tables.html"><i class="fa fa-check"></i><b>7</b> Reporting: tables</a><ul>
+<li class="chapter" data-level="7.1" data-path="reporting-tables.html"><a href="reporting-tables.html#helper-functions-for-type-1-report"><i class="fa fa-check"></i><b>7.1</b> Helper functions for type 1 report</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="reporting-tables.html"><a href="reporting-tables.html#count-totals-for-product-category"><i class="fa fa-check"></i><b>7.1.1</b> Count totals for Product Category</a></li>
+<li class="chapter" data-level="7.1.2" data-path="reporting-tables.html"><a href="reporting-tables.html#list-of-unique-product-in-product-category"><i class="fa fa-check"></i><b>7.1.2</b> List of unique product in Product Category</a></li>
+<li class="chapter" data-level="7.1.3" data-path="reporting-tables.html"><a href="reporting-tables.html#count-totals-for-sub-category"><i class="fa fa-check"></i><b>7.1.3</b> Count totals for Sub Category:</a></li>
+<li class="chapter" data-level="7.1.4" data-path="reporting-tables.html"><a href="reporting-tables.html#prepare-report_1"><i class="fa fa-check"></i><b>7.1.4</b> Prepare report_1</a></li>
+<li class="chapter" data-level="7.1.5" data-path="reporting-tables.html"><a href="reporting-tables.html#define-function-that-makes-sparklines-in-formattable-object"><i class="fa fa-check"></i><b>7.1.5</b> Define function that makes sparklines in formattable object</a></li>
+<li class="chapter" data-level="7.1.6" data-path="reporting-tables.html"><a href="reporting-tables.html#make-tibble-with-sparklines-as-html-widgets"><i class="fa fa-check"></i><b>7.1.6</b> Make tibble with sparklines as html-widgets:</a></li>
+<li class="chapter" data-level="7.1.7" data-path="reporting-tables.html"><a href="reporting-tables.html#add-sparklines-objects-to-report_1"><i class="fa fa-check"></i><b>7.1.7</b> Add sparklines objects to report_1:</a></li>
+<li class="chapter" data-level="7.1.8" data-path="reporting-tables.html"><a href="reporting-tables.html#final-table-for-the-first-report"><i class="fa fa-check"></i><b>7.1.8</b> Final table for the first report</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="reporting-tables.html"><a href="reporting-tables.html#helper-functions-for-report-type-2"><i class="fa fa-check"></i><b>7.2</b> Helper functions for report type 2</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reporting-tables.html"><a href="reporting-tables.html#calculate-changes-in-totals-by-year-for-product-category"><i class="fa fa-check"></i><b>7.2.1</b> Calculate changes in totals by year for product category</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reporting-tables.html"><a href="reporting-tables.html#final-table-for-the-second-report"><i class="fa fa-check"></i><b>7.2.2</b> Final table for the second report</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reporting-tables.html"><a href="reporting-tables.html#questions"><i class="fa fa-check"></i><b>7.3</b> Questions</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reporting-tables.html"><a href="reporting-tables.html#without-applying-any-filter-which-year-does-the-accessories-category-have-negative-growth"><i class="fa fa-check"></i><b>7.3.1</b> Without applying any filter, which year does the Accessories category have negative growth?</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reporting-tables.html"><a href="reporting-tables.html#filter-the-reports-for-youth-age-group.-which-two-years-do-the-accessories-category-have-negative-growth"><i class="fa fa-check"></i><b>7.3.2</b> Filter the reports for youth age group. Which two years do the accessories category have negative growth?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reporting-tables.html"><a href="reporting-tables.html#without-applying-any-filter-which-two-years-do-the-bikes-category-have-negative-growth"><i class="fa fa-check"></i><b>7.4</b> Without applying any filter, which two years do the bikes category have negative growth?</a></li>
+<li class="chapter" data-level="7.5" data-path="reporting-tables.html"><a href="reporting-tables.html#filter-the-report-for-australia.-which-year-do-the-bikes-category-have-the-highest-growth"><i class="fa fa-check"></i><b>7.5</b> Filter the report for Australia. Which year do the bikes category have the highest growth?</a></li>
+<li class="chapter" data-level="7.6" data-path="reporting-tables.html"><a href="reporting-tables.html#keep-the-australia-filter.-in-the-year-that-bikes-sales-have-the-highest-growth-previous-question-which-sub-category-of-bikes-has-the-highest-growth"><i class="fa fa-check"></i><b>7.6</b> Keep the Australia filter. In the year that bikes sales have the highest growth (previous question), which sub category of bikes has the highest growth?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html"><i class="fa fa-check"></i><b>8</b> Reporting: hierarchical chart</a><ul>
+<li class="chapter" data-level="8.1" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#explore-the-sales-composition-of-bikes-category-for-each-age-group.-which-age-group-does-the-composition-rank-of-sales-differ-than-the-rest"><i class="fa fa-check"></i><b>8.1</b> Explore the sales composition of bikes category for each age group. Which age group does the composition (rank of sales) differ than the rest?</a></li>
+<li class="chapter" data-level="8.2" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#now-explore-the-sales-composition-of-bikes-category-for-each-age-group-for-the-male-customers.-which-age-group-does-the-composition-differ-than-the-rest"><i class="fa fa-check"></i><b>8.2</b> Now explore the sales composition of bikes category for each age group, for the Male customers. Which age group does the composition differ than the rest?</a></li>
+<li class="chapter" data-level="8.3" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#clear-all-filters.-now-filter-for-the-year-2016-and-germany.-rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category"><i class="fa fa-check"></i><b>8.3</b> Clear all filters. Now, filter for the year 2016 and Germany. Rank the sales from the highest to lowest for the clothing category</a></li>
+<li class="chapter" data-level="8.4" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category.-keep-the-filter-settings-and-add-filter-by-male-customers."><i class="fa fa-check"></i><b>8.4</b> Rank the sales from the highest to lowest for the clothing category. Keep the filter settings and add filter by male customers.</a></li>
+<li class="chapter" data-level="8.5" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category.-keep-the-filter-settings-and-add-filter-by-youth-age-group"><i class="fa fa-check"></i><b>8.5</b> Rank the sales from the highest to lowest for the clothing category. Keep the filter settings and add filter by youth age group</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html"><i class="fa fa-check"></i><b>9</b> Join data from different sources</a><ul>
+<li class="chapter" data-level="9.1" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-three-bought-the-most-quantity-customer-profiles-marital-status-and-number-of-children"><i class="fa fa-check"></i><b>9.1</b> For those customers who bought bikes, what are the top three (bought the most quantity) customer profiles (marital status and number of children)?</a></li>
+<li class="chapter" data-level="9.2" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-three-bought-the-most-quantity-income-brackets-rank-from-highest-to-lowest"><i class="fa fa-check"></i><b>9.2</b> For those customers who bought bikes, what are the top three (bought the most quantity) income brackets? (Rank from highest to Lowest)</a></li>
+<li class="chapter" data-level="9.3" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-two-bought-the-most-quantity-education-levels"><i class="fa fa-check"></i><b>9.3</b> For those customers who bought bikes, what are the top two (bought the most quantity) education levels?</a></li>
+<li class="chapter" data-level="9.4" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#what-is-the-percentage-of-the-customers-who-bought-bikes-and-are-house-owners"><i class="fa fa-check"></i><b>9.4</b> What is the percentage of the customers who bought Bikes and are house owners?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="reporting-tables" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Reporting: tables</h1>
+<p><strong>Scenario.</strong> Lucy seems intrigued your presentation on Australia’s sales. Now, she wants to review the sales difference (growth) for <strong>Product Category</strong> and <strong>Sub Category</strong> between year 2015 and 2016. She wants to be able to filter the report by all the options available, including <strong>Customer Gender</strong> and <strong>Age Group</strong>.</p>
+<p>Load libraries</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse, <span class="dt">warn.conflicts =</span> F)
+<span class="kw">library</span>(scales)
+<span class="kw">library</span>(formattable)
+<span class="kw">library</span>(htmlwidgets)
+<span class="kw">library</span>(sparkline)</code></pre></div>
+<p>Load data for this lab:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="st">&quot;./data/processing/data4week3.rds&quot;</span>)
+<span class="kw">str</span>(my_data)</code></pre></div>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    113036 obs. of  19 variables:
+##  $ Date            : POSIXct, format: &quot;2013-11-26&quot; &quot;2015-11-26&quot; ...
+##  $ Year            : num  2013 2015 2014 2016 2014 ...
+##  $ Month           : num  11 11 3 3 5 5 5 5 2 2 ...
+##  $ Customer ID     : num  11019 11019 11039 11039 11046 ...
+##  $ Customer Age    : num  19 19 49 49 47 47 47 47 35 35 ...
+##  $ Age Group       : chr  &quot;Youth&quot; &quot;Youth&quot; &quot;Adults&quot; &quot;Adults&quot; ...
+##  $ Customer Gender : chr  &quot;M&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot; ...
+##  $ Country         : chr  &quot;Canada&quot; &quot;Canada&quot; &quot;Australia&quot; &quot;Australia&quot; ...
+##  $ State           : chr  &quot;British Columbia&quot; &quot;British Columbia&quot; &quot;New South Wales&quot; &quot;New South Wales&quot; ...
+##  $ Product Category: chr  &quot;Accessories&quot; &quot;Accessories&quot; &quot;Accessories&quot; &quot;Accessories&quot; ...
+##  $ Sub Category    : chr  &quot;Bike Racks&quot; &quot;Bike Racks&quot; &quot;Bike Racks&quot; &quot;Bike Racks&quot; ...
+##  $ Product         : chr  &quot;Hitch Rack - 4-Bike&quot; &quot;Hitch Rack - 4-Bike&quot; &quot;Hitch Rack - 4-Bike&quot; &quot;Hitch Rack - 4-Bike&quot; ...
+##  $ Frame Size      : num  NA NA NA NA NA NA NA NA NA NA ...
+##  $ Order Quantity  : num  8 8 23 20 4 5 4 2 22 21 ...
+##  $ Unit Cost       : num  45 45 45 45 45 45 45 45 45 45 ...
+##  $ Unit Price      : num  120 120 120 120 120 120 120 120 120 120 ...
+##  $ Cost            : num  360 360 1035 900 180 ...
+##  $ Revenue         : num  950 950 2401 2088 418 ...
+##  $ Profit          : num  590 590 1366 1188 238 ...</code></pre>
+<p>In this Lab we’ll be review the sales difference (growth) for <strong>Product Category</strong> and <strong>Sub Category</strong> between year 2015 and 2016. So, we will create two type of reports. One with the sales for each year and the other with the <strong>% Change in Revenue</strong> from year to year. Each report is a cross-tabular format with <strong>Product Categories</strong> and <strong>Sub categories</strong> on the rows and year on the columns, with <strong>Sum of Revenue</strong> as the aggregate data. Also we will create chart representation for each report.</p>
+<p>Let’s start! First, create two reports just like on picture below</p>
+<div class="figure">
+<img src="img/mod6-lab6-img2.png" />
+
+</div>
+<p>For this task we’re going to use such packages as <a href="https://github.com/renkun-ken/formattable">formattable</a> and <a href="https://github.com/htmlwidgets/sparkline">sparklines</a>. Also we’ll include external <a href="%22custom.css%22">css</a> file for styling our tables.</p>
+<hr />
+<div id="helper-functions-for-type-1-report" class="section level2">
+<h2><span class="header-section-number">7.1</span> Helper functions for type 1 report</h2>
+<div id="count-totals-for-product-category" class="section level3">
+<h3><span class="header-section-number">7.1.1</span> Count totals for Product Category</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">product_total &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  df <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, Year) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Margin =</span> (Total <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(Total)) <span class="op">/</span><span class="st"> </span>Total) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">Sub Category</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">Product Category</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Sub Category</span><span class="st">`</span>, <span class="kw">everything</span>())
+}</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Product Category
+</th>
+<th style="text-align:left;">
+Sub Category
+</th>
+<th style="text-align:right;">
+Year
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+Margin
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:right;">
+3384215
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:right;">
+4293592
+</td>
+<td style="text-align:right;">
+0.2117987
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:right;">
+3285954
+</td>
+<td style="text-align:right;">
+-0.3066501
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+4154231
+</td>
+<td style="text-align:right;">
+0.2090103
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:right;">
+2011
+</td>
+<td style="text-align:right;">
+8964888
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:right;">
+9175983
+</td>
+<td style="text-align:right;">
+0.0230052
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:right;">
+9858787
+</td>
+<td style="text-align:right;">
+0.0692584
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:right;">
+7611243
+</td>
+<td style="text-align:right;">
+-0.2952926
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:right;">
+14799083
+</td>
+<td style="text-align:right;">
+0.4856950
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:left;">
+Bikes
+</td>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+11372150
+</td>
+<td style="text-align:right;">
+-0.3013443
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:right;">
+1997035
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:right;">
+2247889
+</td>
+<td style="text-align:right;">
+0.1115954
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:right;">
+1938954
+</td>
+<td style="text-align:right;">
+-0.1593308
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:left;">
+Clothing
+</td>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+2187004
+</td>
+<td style="text-align:right;">
+0.1134200
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="list-of-unique-product-in-product-category" class="section level3">
+<h3><span class="header-section-number">7.1.2</span> List of unique product in Product Category</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">uniq_product &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">unique</span>(df<span class="op">$</span><span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>)
+}
+my_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">uniq_product</span>()</code></pre></div>
+<pre><code>## [1] &quot;Accessories&quot; &quot;Clothing&quot;    &quot;Bikes&quot;</code></pre>
+</div>
+<div id="count-totals-for-sub-category" class="section level3">
+<h3><span class="header-section-number">7.1.3</span> Count totals for Sub Category:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sub_total &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, <span class="st">`</span><span class="dt">Sub Category</span><span class="st">`</span>, Year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Margin =</span> (Total <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(Total)) <span class="op">/</span><span class="st"> </span>Total) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>()
+}</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Product Category
+</th>
+<th style="text-align:left;">
+Sub Category
+</th>
+<th style="text-align:right;">
+Year
+</th>
+<th style="text-align:right;">
+Total
+</th>
+<th style="text-align:right;">
+Margin
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Racks
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:right;">
+112605
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Racks
+</td>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:right;">
+152966
+</td>
+<td style="text-align:right;">
+0.2638560
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Racks
+</td>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:right;">
+107813
+</td>
+<td style="text-align:right;">
+-0.4188085
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Racks
+</td>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+144416
+</td>
+<td style="text-align:right;">
+0.2534553
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Stands
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:right;">
+95396
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Stands
+</td>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:right;">
+83148
+</td>
+<td style="text-align:right;">
+-0.1473036
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Stands
+</td>
+<td style="text-align:right;">
+2015
+</td>
+<td style="text-align:right;">
+88822
+</td>
+<td style="text-align:right;">
+0.0638806
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bike Stands
+</td>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+76709
+</td>
+<td style="text-align:right;">
+-0.1579085
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bottles and Cages
+</td>
+<td style="text-align:right;">
+2013
+</td>
+<td style="text-align:right;">
+292535
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Accessories
+</td>
+<td style="text-align:left;">
+Bottles and Cages
+</td>
+<td style="text-align:right;">
+2014
+</td>
+<td style="text-align:right;">
+422000
+</td>
+<td style="text-align:right;">
+0.3067891
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="prepare-report_1" class="section level3">
+<h3><span class="header-section-number">7.1.4</span> Prepare report_1</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">report_<span class="dv">1</span> &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">bind_rows</span>(<span class="kw">product_total</span>(df), <span class="kw">sub_total</span>(df)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Margin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, Year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> Year, <span class="dt">value =</span> Total) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(<span class="st">`</span><span class="dt">2016</span><span class="st">`</span>), <span class="dt">.by_group =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, formattable<span class="op">::</span>comma, <span class="dt">digits =</span> <span class="dv">0</span>)
+}
+my_data <span class="op">%&gt;%</span><span class="st"> </span>report_<span class="dv">1</span></code></pre></div>
+<pre><code>## # A tibble: 20 x 7
+##       `Sub Category`            `2011`            `2012`            `2013`
+##                &lt;chr&gt; &lt;S3: formattable&gt; &lt;S3: formattable&gt; &lt;S3: formattable&gt;
+##  1       Accessories                NA                NA         3,384,215
+##  2           Helmets                NA                NA         1,285,031
+##  3   Tires and Tubes                NA                NA         1,033,740
+##  4 Bottles and Cages                NA                NA           292,535
+##  5           Fenders                NA                NA           284,577
+##  6   Hydration Packs                NA                NA           237,491
+##  7        Bike Racks                NA                NA           112,605
+##  8       Bike Stands                NA                NA            95,396
+##  9          Cleaners                NA                NA            42,840
+## 10             Bikes         8,964,888         9,175,983         9,858,787
+## 11        Road Bikes         6,766,618         6,993,130         4,836,352
+## 12    Mountain Bikes         2,198,270         2,182,853         3,732,841
+## 13     Touring Bikes                NA                NA         1,289,594
+## 14          Clothing                NA                NA         1,997,035
+## 15           Jerseys                NA                NA           956,093
+## 16            Shorts                NA                NA           447,464
+## 17            Gloves                NA                NA           191,818
+## 18             Vests                NA                NA           251,704
+## 19              Caps                NA                NA           117,068
+## 20             Socks                NA                NA            32,888
+## # ... with 3 more variables: `2014` &lt;S3: formattable&gt;, `2015` &lt;S3:
+## #   formattable&gt;, `2016` &lt;S3: formattable&gt;</code></pre>
+</div>
+<div id="define-function-that-makes-sparklines-in-formattable-object" class="section level3">
+<h3><span class="header-section-number">7.1.5</span> Define function that makes sparklines in formattable object</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_sparkline &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">as.character</span>(
+    htmltools<span class="op">::</span><span class="kw">as.tags</span>(
+      <span class="kw">sparkline</span>(x) <span class="co"># we can add any chart type!</span>
+    )
+  )
+}</code></pre></div>
+</div>
+<div id="make-tibble-with-sparklines-as-html-widgets" class="section level3">
+<h3><span class="header-section-number">7.1.6</span> Make tibble with sparklines as html-widgets:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sparkl_df &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">report_1</span>(df) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">nest</span>(<span class="st">`</span><span class="dt">2011</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">2016</span><span class="st">`</span>, <span class="dt">.key =</span> <span class="st">&#39;Sparkl&#39;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="st">&#39;Sparkl&#39;</span>, map, as.numeric, my_sparkline) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="st">&#39;Sparkl&#39;</span>, map, my_sparkline)
+}</code></pre></div>
+</div>
+<div id="add-sparklines-objects-to-report_1" class="section level3">
+<h3><span class="header-section-number">7.1.7</span> Add sparklines objects to report_1:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">report_1_sparkl &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">bind_cols</span>(<span class="kw">report_1</span>(df), <span class="kw">sparkl_df</span>(df) <span class="op">%&gt;%</span>
+<span class="st">                        </span><span class="kw">select</span>(Sparkl))
+}
+my_data <span class="op">%&gt;%</span><span class="st"> </span>report_1_sparkl</code></pre></div>
+<pre><code>## # A tibble: 20 x 8
+##       `Sub Category`            `2011`            `2012`            `2013`
+##                &lt;chr&gt; &lt;S3: formattable&gt; &lt;S3: formattable&gt; &lt;S3: formattable&gt;
+##  1       Accessories                NA                NA         3,384,215
+##  2           Helmets                NA                NA         1,285,031
+##  3   Tires and Tubes                NA                NA         1,033,740
+##  4 Bottles and Cages                NA                NA           292,535
+##  5           Fenders                NA                NA           284,577
+##  6   Hydration Packs                NA                NA           237,491
+##  7        Bike Racks                NA                NA           112,605
+##  8       Bike Stands                NA                NA            95,396
+##  9          Cleaners                NA                NA            42,840
+## 10             Bikes         8,964,888         9,175,983         9,858,787
+## 11        Road Bikes         6,766,618         6,993,130         4,836,352
+## 12    Mountain Bikes         2,198,270         2,182,853         3,732,841
+## 13     Touring Bikes                NA                NA         1,289,594
+## 14          Clothing                NA                NA         1,997,035
+## 15           Jerseys                NA                NA           956,093
+## 16            Shorts                NA                NA           447,464
+## 17            Gloves                NA                NA           191,818
+## 18             Vests                NA                NA           251,704
+## 19              Caps                NA                NA           117,068
+## 20             Socks                NA                NA            32,888
+## # ... with 4 more variables: `2014` &lt;S3: formattable&gt;, `2015` &lt;S3:
+## #   formattable&gt;, `2016` &lt;S3: formattable&gt;, Sparkl &lt;list&gt;</code></pre>
+</div>
+<div id="final-table-for-the-first-report" class="section level3">
+<h3><span class="header-section-number">7.1.8</span> Final table for the first report</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">report_1_table &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">formattable</span>(<span class="kw">report_1_sparkl</span>(df),
+    <span class="dt">align =</span> <span class="kw">c</span>(<span class="st">&quot;l&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;r&quot;</span>, <span class="st">&quot;r&quot;</span>), <span class="dt">table.attr =</span> <span class="st">&quot;class=</span><span class="ch">\&#39;</span><span class="st">my_table</span><span class="ch">\&#39;</span><span class="st">&quot;</span>,
+    <span class="kw">list</span>(
+      <span class="kw">area</span>(, <span class="st">`</span><span class="dt">2011</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">2016</span><span class="st">`</span>) <span class="op">~</span><span class="st"> </span><span class="kw">color_tile</span>(<span class="st">&quot;#FFFF00&quot;</span>, <span class="st">&quot;#FF0000&quot;</span>),
+      <span class="st">`</span><span class="dt">Sub Category</span><span class="st">`</span> =<span class="st"> </span><span class="kw">formatter</span>(<span class="st">&quot;span&quot;</span>,
+               <span class="dt">style =</span> x <span class="op">~</span><span class="st"> </span><span class="kw">ifelse</span>(x <span class="op">%in%</span><span class="st"> </span><span class="kw">uniq_product</span>(df), 
+                            <span class="kw">style</span>(<span class="dt">font.weight =</span> <span class="st">&quot;bold&quot;</span>),
+                            <span class="kw">style</span>(<span class="dt">padding.left =</span> <span class="st">&quot;0.25cm&quot;</span>))
+                                )
+        )
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>formattable<span class="op">::</span><span class="kw">as.htmlwidget</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>htmltools<span class="op">::</span><span class="kw">tagList</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span>htmltools<span class="op">::</span><span class="kw">attachDependencies</span>(htmlwidgets<span class="op">:::</span><span class="kw">widget_dependencies</span>(<span class="st">&quot;sparkline&quot;</span>,<span class="st">&quot;sparkline&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>htmltools<span class="op">::</span><span class="kw">browsable</span>()
+}
+my_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report_1_table</span>()</code></pre></div>
+<div id="htmlwidget-21e344389cbb98eda840" class="formattable_widget html-widget" style="width:100%;height:500px;" width="100%" height="500"></div>
+<script type="application/json" data-for="htmlwidget-21e344389cbb98eda840">{"x":{"html":"<table class='my_table'>\n <thead>\n  <tr>\n   <th style=\"text-align:left;\"> Sub Category <\/th>\n   <th style=\"text-align:right;\"> 2011 <\/th>\n   <th style=\"text-align:right;\"> 2012 <\/th>\n   <th style=\"text-align:right;\"> 2013 <\/th>\n   <th style=\"text-align:right;\"> 2014 <\/th>\n   <th style=\"text-align:right;\"> 2015 <\/th>\n   <th style=\"text-align:right;\"> 2016 <\/th>\n   <th style=\"text-align:left;\"> Sparkl <\/th>\n  <\/tr>\n <\/thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Accessories      <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffc500\">3384215<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffb500\">4293592<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffc600\">3285954<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffb700\">4154231<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-495958fe70bcecf2a3ac\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-495958fe70bcecf2a3ac\">{\"x\":{\"values\":[null,null,3384215,4293592,3285954,4154231],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Helmets          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe900\">1285031<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe300\">1629103<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe900\">1250303<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe400\">1576644<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-83342e6c554f5d7a05d6\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-83342e6c554f5d7a05d6\">{\"x\":{\"values\":[null,null,1285031,1629103,1250303,1576644],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Tires and Tubes  <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffed00\">1033740<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe800\">1336605<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffee00\">1004202<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe900\">1296355<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-6e2c60e5c1c19ac0dba5\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-6e2c60e5c1c19ac0dba5\">{\"x\":{\"values\":[null,null,1033740,1336605,1004202,1296355],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bottles and Cages<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">292535<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff800\">422000<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">285144<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff800\">409495<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-96ea448169c420a63506\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-96ea448169c420a63506\">{\"x\":{\"values\":[null,null,292535,422000,285144,409495],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Fenders          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">284577<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff900\">347236<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">277261<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff900\">336659<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-12d3ce4aa003e44f4eea\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-12d3ce4aa003e44f4eea\">{\"x\":{\"values\":[null,null,284577,347236,277261,336659],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Hydration Packs  <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">237491<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">264521<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">230850<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">257544<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-066807176821694c41f8\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-066807176821694c41f8\">{\"x\":{\"values\":[null,null,237491,264521,230850,257544],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bike Racks       <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">112605<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">152966<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">107813<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">144416<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-295eb9ddfc6b77d836f1\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-295eb9ddfc6b77d836f1\">{\"x\":{\"values\":[null,null,112605,152966,107813,144416],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bike Stands      <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">95396<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">83148<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">88822<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">76709<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-d57627eb60ac10538933\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-d57627eb60ac10538933\">{\"x\":{\"values\":[null,null,95396,83148,88822,76709],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Cleaners         <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">42840<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">58013<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">41559<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">56409<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-4dd0fcd1f5bf6062a975\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-4dd0fcd1f5bf6062a975\">{\"x\":{\"values\":[null,null,42840,58013,41559,56409],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Bikes            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff6400\">8964888<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff6100\">9175983<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff5500\">9858787<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff7c00\">7611243<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff0000\">14799083<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff3b00\">11372150<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-3cf4a94c3101cdb1b6f4\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-3cf4a94c3101cdb1b6f4\">{\"x\":{\"values\":[8964888,9175983,9858787,7611243,14799083,11372150],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Road Bikes       <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff8a00\">6766618<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff8600\">6993130<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffac00\">4836352<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffcb00\">3017127<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff8100\">7279822<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffb200\">4470012<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-817b332b57e72e39fbd9\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-817b332b57e72e39fbd9\">{\"x\":{\"values\":[6766618,6993130,4836352,3017127,7279822,4470012],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Mountain Bikes   <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd900\">2198270<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd900\">2182853<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffbf00\">3732841<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffcc00\">2983026<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff9f00\">5581524<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffb200\">4445012<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-8693ed65e99caf602a84\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-8693ed65e99caf602a84\">{\"x\":{\"values\":[2198270,2182853,3732841,2983026,5581524,4445012],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Touring Bikes    <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe900\">1289594<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe300\">1611090<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffde00\">1937737<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd500\">2457126<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-184cffa1f0fa912fb137\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-184cffa1f0fa912fb137\">{\"x\":{\"values\":[null,null,1289594,1611090,1937737,2457126],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Clothing         <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffdd00\">1997035<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd800\">2247889<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffde00\">1938954<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd900\">2187004<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-308df9b2295bcbc8713b\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-308df9b2295bcbc8713b\">{\"x\":{\"values\":[null,null,1997035,2247889,1938954,2187004],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Jerseys          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffef00\">956093<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffec00\">1129894<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffef00\">927556<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffec00\">1100199<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-d620ae548a807adbd160\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-d620ae548a807adbd160\">{\"x\":{\"values\":[null,null,956093,1129894,927556,1100199],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Shorts           <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff700\">447464<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff800\">435603<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff800\">433788<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff800\">423855<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-e955e2f7fac6f130bd7a\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-e955e2f7fac6f130bd7a\">{\"x\":{\"values\":[null,null,447464,435603,433788,423855],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Gloves           <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">191818<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">250571<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">185339<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">243691<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-9eb3af94ecfe61749235\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-9eb3af94ecfe61749235\">{\"x\":{\"values\":[null,null,191818,250571,185339,243691],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Vests            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">251704<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">228624<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">246717<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">222018<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-a636d3e7ac3c2ea24c28\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-a636d3e7ac3c2ea24c28\">{\"x\":{\"values\":[null,null,251704,228624,246717,222018],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Caps             <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">117068<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">161372<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">113612<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">156725<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-63da1acb7c5a6131f21e\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-63da1acb7c5a6131f21e\">{\"x\":{\"values\":[null,null,117068,161372,113612,156725],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Socks            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">32888<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">41825<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffff00\">31942<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">40516<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-96c68d44d1bacab87ef7\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-96c68d44d1bacab87ef7\">{\"x\":{\"values\":[null,null,32888,41825,31942,40516],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n<\/tbody>\n<\/table>"},"evals":[],"jsHooks":[]}</script>
+<hr />
+</div>
+</div>
+<div id="helper-functions-for-report-type-2" class="section level2">
+<h2><span class="header-section-number">7.2</span> Helper functions for report type 2</h2>
+<div id="calculate-changes-in-totals-by-year-for-product-category" class="section level3">
+<h3><span class="header-section-number">7.2.1</span> Calculate changes in totals by year for product category</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">report_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">bind_rows</span>(<span class="kw">product_total</span>(df), <span class="kw">sub_total</span>(df)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Total) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, Year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> Year, <span class="dt">value =</span> Margin) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">match</span>(<span class="st">`</span><span class="dt">Sub Category</span><span class="st">`</span>, <span class="kw">report_1</span>(df)<span class="op">$</span><span class="st">`</span><span class="dt">Sub Category</span><span class="st">`</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, <span class="op">-</span><span class="st">`</span><span class="dt">2011</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.numeric, formattable<span class="op">::</span>percent, <span class="dt">digits =</span> <span class="dv">1</span>)
+}
+my_data <span class="op">%&gt;%</span><span class="st"> </span>report_<span class="dv">2</span></code></pre></div>
+<pre><code>## # A tibble: 20 x 6
+##       `Sub Category`            `2012`            `2013`            `2014`
+##                &lt;chr&gt; &lt;S3: formattable&gt; &lt;S3: formattable&gt; &lt;S3: formattable&gt;
+##  1       Accessories                NA                NA             21.2%
+##  2           Helmets                NA                NA             21.1%
+##  3   Tires and Tubes                NA                NA             22.7%
+##  4 Bottles and Cages                NA                NA             30.7%
+##  5           Fenders                NA                NA             18.0%
+##  6   Hydration Packs                NA                NA             10.2%
+##  7        Bike Racks                NA                NA             26.4%
+##  8       Bike Stands                NA                NA            -14.7%
+##  9          Cleaners                NA                NA             26.2%
+## 10             Bikes              2.3%              6.9%            -29.5%
+## 11        Road Bikes              3.2%            -44.6%            -60.3%
+## 12    Mountain Bikes             -0.7%             41.5%            -25.1%
+## 13     Touring Bikes                NA                NA             20.0%
+## 14          Clothing                NA                NA             11.2%
+## 15           Jerseys                NA                NA             15.4%
+## 16            Shorts                NA                NA             -2.7%
+## 17            Gloves                NA                NA             23.4%
+## 18             Vests                NA                NA            -10.1%
+## 19              Caps                NA                NA             27.5%
+## 20             Socks                NA                NA             21.4%
+## # ... with 2 more variables: `2015` &lt;S3: formattable&gt;, `2016` &lt;S3:
+## #   formattable&gt;</code></pre>
+</div>
+<div id="final-table-for-the-second-report" class="section level3">
+<h3><span class="header-section-number">7.2.2</span> Final table for the second report</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">report_2_table &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">formattable</span>(<span class="kw">report_2</span>(df), <span class="dt">align =</span> <span class="kw">c</span>(<span class="st">&quot;l&quot;</span>, <span class="st">&quot;l&quot;</span>, <span class="st">&quot;l&quot;</span>, <span class="st">&quot;l&quot;</span>, <span class="st">&quot;l&quot;</span>, <span class="st">&quot;l&quot;</span>),
+    <span class="dt">table.attr =</span> <span class="st">&quot;class=</span><span class="ch">\&#39;</span><span class="st">my_table</span><span class="ch">\&#39;</span><span class="st">&quot;</span>,
+    <span class="kw">list</span>(
+      <span class="kw">area</span>(, <span class="st">`</span><span class="dt">2012</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">2016</span><span class="st">`</span>) <span class="op">~</span><span class="st"> </span><span class="kw">formatter</span>(<span class="st">&quot;span&quot;</span>,
+        <span class="dt">style =</span> x <span class="op">~</span><span class="st"> </span><span class="kw">style</span>(<span class="dt">color =</span> <span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> , <span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>)),
+                x <span class="op">~</span><span class="st"> </span><span class="kw">icontext</span>(<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="st">&quot;arrow-down&quot;</span>, <span class="st">&quot;arrow-up&quot;</span>), formattable<span class="op">::</span><span class="kw">percent</span>(x, <span class="dt">digits =</span> <span class="dv">1</span>))),
+     <span class="st">`</span><span class="dt">Sub Category</span><span class="st">`</span> =<span class="st"> </span><span class="kw">formatter</span>(<span class="st">&quot;span&quot;</span>,
+                <span class="dt">style =</span> x <span class="op">~</span><span class="st"> </span><span class="kw">ifelse</span>(x <span class="op">%in%</span><span class="st"> </span><span class="kw">uniq_product</span>(df),
+                           <span class="kw">style</span>(<span class="dt">font.weight =</span> <span class="st">&quot;bold&quot;</span>),
+                           <span class="kw">style</span>(<span class="dt">padding.left =</span> <span class="st">&quot;0.25cm&quot;</span>)
+                                  )
+                                )
+      )
+  )
+}
+my_data <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">report_2_table</span>()</code></pre></div>
+<table class="my_table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sub Category
+</th>
+<th style="text-align:left;">
+2012
+</th>
+<th style="text-align:left;">
+2013
+</th>
+<th style="text-align:left;">
+2014
+</th>
+<th style="text-align:left;">
+2015
+</th>
+<th style="text-align:left;">
+2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Accessories </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 21.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -30.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 20.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Helmets </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 21.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -30.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 20.7% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Tires and Tubes </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 22.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -33.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 22.5% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bottles and Cages</span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 30.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -48.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 30.4% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Fenders </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 18.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -25.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 17.6% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Hydration Packs </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 10.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -14.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 10.4% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bike Racks </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 26.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -41.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 25.3% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bike Stands </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -14.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 6.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -15.8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Cleaners </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 26.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -39.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 26.3% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 2.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 6.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -29.5% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 48.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -30.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Road Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 3.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -44.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -60.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 58.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -62.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Mountain Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -0.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 41.5% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -25.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 46.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -25.6% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Touring Bikes </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 20.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 16.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 21.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Clothing </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 11.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -15.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 11.3% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Jerseys </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 15.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -21.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 15.7% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Shorts </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -2.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -0.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -2.3% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Gloves </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 23.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -35.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 23.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Vests </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -10.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 7.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -11.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Caps </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 27.5% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -42.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 27.5% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Socks </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 21.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -30.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 21.2% </span>
+</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</div>
+</div>
+<div id="questions" class="section level2">
+<h2><span class="header-section-number">7.3</span> Questions</h2>
+<div id="without-applying-any-filter-which-year-does-the-accessories-category-have-negative-growth" class="section level3">
+<h3><span class="header-section-number">7.3.1</span> Without applying any filter, which year does the Accessories category have negative growth?</h3>
+<p><strong>Answer:</strong> 2015</p>
+<hr />
+</div>
+<div id="filter-the-reports-for-youth-age-group.-which-two-years-do-the-accessories-category-have-negative-growth" class="section level3">
+<h3><span class="header-section-number">7.3.2</span> Filter the reports for youth age group. Which two years do the accessories category have negative growth?</h3>
+<p><strong>Report 1</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Age Group</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;Youth&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">report_1_table</span>()</code></pre></div>
+<p><div id="htmlwidget-df34e8a31b7430d72984" class="formattable_widget html-widget" style="width:100%;height:500px;" width="100%" height="500"></div>
+<script type="application/json" data-for="htmlwidget-df34e8a31b7430d72984">{"x":{"html":"<table class='my_table'>\n <thead>\n  <tr>\n   <th style=\"text-align:left;\"> Sub Category <\/th>\n   <th style=\"text-align:right;\"> 2011 <\/th>\n   <th style=\"text-align:right;\"> 2012 <\/th>\n   <th style=\"text-align:right;\"> 2013 <\/th>\n   <th style=\"text-align:right;\"> 2014 <\/th>\n   <th style=\"text-align:right;\"> 2015 <\/th>\n   <th style=\"text-align:right;\"> 2016 <\/th>\n   <th style=\"text-align:left;\"> Sparkl <\/th>\n  <\/tr>\n <\/thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Accessories      <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffbe00\">565388<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffc300\">524443<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffc000\">551298<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffc500\">506437<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-68901aeb36f0fdf0b836\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-68901aeb36f0fdf0b836\">{\"x\":{\"values\":[null,null,565388,524443,551298,506437],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Tires and Tubes  <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffed00\">159784<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffea00\">185179<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffed00\">156949<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffea00\">180616<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-b23cd5344f3ad6e4ccb3\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-b23cd5344f3ad6e4ccb3\">{\"x\":{\"values\":[null,null,159784,185179,156949,180616],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Helmets          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe600\">218141<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffea00\">187054<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe700\">212533<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffeb00\">179695<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-7c212ff6da8e0f7e4170\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-7c212ff6da8e0f7e4170\">{\"x\":{\"values\":[null,null,218141,187054,212533,179695],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bottles and Cages<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">46183<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff800\">66257<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">45404<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff800\">64037<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-0fef3a04fe9a94535aef\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-0fef3a04fe9a94535aef\">{\"x\":{\"values\":[null,null,46183,66257,45404,64037],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Fenders          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff900\">51931<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">37304<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff900\">50358<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">36518<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-791479a50488eb0fcac1\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-791479a50488eb0fcac1\">{\"x\":{\"values\":[null,null,51931,37304,50358,36518],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Hydration Packs  <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">46218<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">22435<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">44475<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">21123<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-c62667708c0eddc50eb2\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-c62667708c0eddc50eb2\">{\"x\":{\"values\":[null,null,46218,22435,44475,21123],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Cleaners         <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">7470<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">8794<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">7225<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">8589<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-eb1dced92e164d0cd92d\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-eb1dced92e164d0cd92d\">{\"x\":{\"values\":[null,null,7470,8794,7225,8589],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bike Stands      <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">23974<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">9799<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">23109<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">8097<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-70ca5fdde8261f228901\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-70ca5fdde8261f228901\">{\"x\":{\"values\":[null,null,23974,9799,23109,8097],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bike Racks       <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">11687<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">7621<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">11245<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">7762<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-c273902e94dc0b96b810\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-c273902e94dc0b96b810\">{\"x\":{\"values\":[null,null,11687,7621,11245,7762],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Bikes            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff4700\">1607053<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff4900\">1587065<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff5800\">1457244<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffba00\">605045<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff0000\">2225649<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff9600\">913296<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-8171c9298c107e9514ac\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-8171c9298c107e9514ac\">{\"x\":{\"values\":[1607053,1587065,1457244,605045,2225649,913296],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Road Bikes       <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff6e00\">1263715<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff6f00\">1252823<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffac00\">722606<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffdb00\">317270<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff7e00\">1121490<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffca00\">462207<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-27cfaebdc6762b428149\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-27cfaebdc6762b428149\">{\"x\":{\"values\":[1263715,1252823,722606,317270,1121490,462207],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Mountain Bikes   <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd800\">343338<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd900\">334242<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffbd00\">574369<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe700\">212828<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff9d00\">857511<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd800\">339023<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-21a16aee54744fadde49\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-21a16aee54744fadde49\">{\"x\":{\"values\":[343338,334242,574369,212828,857511,339023],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Touring Bikes    <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffed00\">160269<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff700\">74947<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe300\">246648<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff200\">112066<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-77f479ef83468ed79876\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-77f479ef83468ed79876\">{\"x\":{\"values\":[null,null,160269,74947,246648,112066],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Clothing         <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd200\">393533<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe800\">204156<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd300\">385117<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe800\">197475<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-168cc9c6d2d4c7a556a3\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-168cc9c6d2d4c7a556a3\">{\"x\":{\"values\":[null,null,393533,204156,385117,197475],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Jerseys          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffeb00\">174234<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff300\">109536<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffec00\">170150<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff300\">106581<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-b50d2efb840e54926769\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-b50d2efb840e54926769\">{\"x\":{\"values\":[null,null,174234,109536,170150,106581],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Gloves           <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">31496<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">38705<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">30847<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">37400<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-fa6ee7798f41d8ba54cb\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-fa6ee7798f41d8ba54cb\">{\"x\":{\"values\":[null,null,31496,38705,30847,37400],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Caps             <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">20808<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">21177<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">20146<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">20793<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-d4bad7390a2460918f33\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-d4bad7390a2460918f33\">{\"x\":{\"values\":[null,null,20808,21177,20146,20793],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Shorts           <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff200\">118142<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">16578<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff200\">116748<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">15334<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-e111d2f3ccd8d0dec0cf\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-e111d2f3ccd8d0dec0cf\">{\"x\":{\"values\":[null,null,118142,16578,116748,15334],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Vests            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">42292<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">12190<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">40715<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">11773<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-9817ca521cba7f1da884\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-9817ca521cba7f1da884\">{\"x\":{\"values\":[null,null,42292,12190,40715,11773],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Socks            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">6561<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">5970<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">6511<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffff00\">5594<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-a898ccec3c4034fef098\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-a898ccec3c4034fef098\">{\"x\":{\"values\":[null,null,6561,5970,6511,5594],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n<\/tbody>\n<\/table>"},"evals":[],"jsHooks":[]}</script> <strong>Report 2</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="st">`</span><span class="dt">Age Group</span><span class="st">`</span> <span class="op">==</span><span class="st"> &quot;Youth&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">report_2_table</span>()</code></pre></div>
+<table class="my_table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sub Category
+</th>
+<th style="text-align:left;">
+2012
+</th>
+<th style="text-align:left;">
+2013
+</th>
+<th style="text-align:left;">
+2014
+</th>
+<th style="text-align:left;">
+2015
+</th>
+<th style="text-align:left;">
+2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Accessories </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -7.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 4.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -8.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Tires and Tubes </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 13.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -18.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 13.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Helmets </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -16.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 12.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -18.3% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bottles and Cages</span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 30.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -45.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 29.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Fenders </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -39.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 25.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -37.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Hydration Packs </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -106.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 49.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -110.6% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Cleaners </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 15.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -21.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 15.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bike Stands </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -144.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 57.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -185.4% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bike Racks </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -53.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 32.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -44.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -1.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -8.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -140.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 72.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -143.7% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Road Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -0.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -73.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -127.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 71.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -142.6% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Mountain Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -2.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 41.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -169.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 75.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -152.9% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Touring Bikes </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -113.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 69.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -120.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Clothing </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -92.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 47.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -95.0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Jerseys </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -59.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 35.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -59.6% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Gloves </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 18.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -25.5% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 17.5% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Caps </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 1.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -5.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 3.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Shorts </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -612.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 85.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -661.4% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Vests </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -246.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 70.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -245.8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Socks </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -9.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 8.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -16.4% </span>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Answer:</strong> 2014, 2016</p>
+<hr />
+</div>
+</div>
+<div id="without-applying-any-filter-which-two-years-do-the-bikes-category-have-negative-growth" class="section level2">
+<h2><span class="header-section-number">7.4</span> Without applying any filter, which two years do the bikes category have negative growth?</h2>
+<p><strong>Answer:</strong> 2014, 2016</p>
+<hr />
+</div>
+<div id="filter-the-report-for-australia.-which-year-do-the-bikes-category-have-the-highest-growth" class="section level2">
+<h2><span class="header-section-number">7.5</span> Filter the report for Australia. Which year do the bikes category have the highest growth?</h2>
+<p><strong>Report 1</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Country <span class="op">==</span><span class="st"> &quot;Australia&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">report_1_table</span>()</code></pre></div>
+<p><div id="htmlwidget-bef378379299f9f7edec" class="formattable_widget html-widget" style="width:100%;height:500px;" width="100%" height="500"></div>
+<script type="application/json" data-for="htmlwidget-bef378379299f9f7edec">{"x":{"html":"<table class='my_table'>\n <thead>\n  <tr>\n   <th style=\"text-align:left;\"> Sub Category <\/th>\n   <th style=\"text-align:right;\"> 2011 <\/th>\n   <th style=\"text-align:right;\"> 2012 <\/th>\n   <th style=\"text-align:right;\"> 2013 <\/th>\n   <th style=\"text-align:right;\"> 2014 <\/th>\n   <th style=\"text-align:right;\"> 2015 <\/th>\n   <th style=\"text-align:right;\"> 2016 <\/th>\n   <th style=\"text-align:left;\"> Sparkl <\/th>\n  <\/tr>\n <\/thead>\n<tbody>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Accessories      <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffdd00\">624112<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd500\">769797<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffde00\">607396<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd600\">745100<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-b6cb0762c57102822f5e\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-b6cb0762c57102822f5e\">{\"x\":{\"values\":[null,null,624112,769797,607396,745100],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Helmets          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff200\">233579<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffef00\">286682<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff200\">227653<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff000\">277482<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-9829aa2ced66b650f40e\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-9829aa2ced66b650f40e\">{\"x\":{\"values\":[null,null,233579,286682,227653,277482],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Tires and Tubes  <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff500\">182803<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff200\">242870<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff500\">178124<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff200\">235712<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-ace4939e17a8ebaf8b80\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-ace4939e17a8ebaf8b80\">{\"x\":{\"values\":[null,null,182803,242870,178124,235712],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bottles and Cages<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">55031<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">78182<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">53626<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">75314<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-e5c42cb9b4319656f6c6\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-e5c42cb9b4319656f6c6\">{\"x\":{\"values\":[null,null,55031,78182,53626,75314],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Hydration Packs  <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">63673<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">56986<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">61732<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">55097<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-9bbc1f909711605cac73\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-9bbc1f909711605cac73\">{\"x\":{\"values\":[null,null,63673,56986,61732,55097],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Fenders          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">42913<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">47456<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">41992<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">46352<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-af3d49ad757733f78c90\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-af3d49ad757733f78c90\">{\"x\":{\"values\":[null,null,42913,47456,41992,46352],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bike Racks       <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">9235<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">23596<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">8739<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">22015<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-47baba10f3bb026655a5\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-47baba10f3bb026655a5\">{\"x\":{\"values\":[null,null,9235,23596,8739,22015],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Bike Stands      <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">27872<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">20051<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">26696<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">19326<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-61f83c12dbc127432afe\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-61f83c12dbc127432afe\">{\"x\":{\"values\":[null,null,27872,20051,26696,19326],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Cleaners         <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">9006<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">13974<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">8834<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">13802<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-8be552b68893603e4a15\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-8be552b68893603e4a15\">{\"x\":{\"values\":[null,null,9006,13974,8834,13802],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Bikes            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff7500\">2529914<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff7300\">2557511<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff5800\">3050202<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffa400\">1655516<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff0000\">4677632<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff7700\">2482043<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-b13f9c0e33db0047cc8c\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-b13f9c0e33db0047cc8c\">{\"x\":{\"values\":[2529914,2557511,3050202,1655516,4677632,2482043],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Road Bikes       <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffa100\">1726566<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff9e00\">1770989<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffa200\">1693594<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffcd00\">918168<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ff7100\">2590091<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffb300\">1395135<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-6dd32f33d5e1f69cb441\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-6dd32f33d5e1f69cb441\">{\"x\":{\"values\":[1726566,1770989,1693594,918168,2590091,1395135],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Mountain Bikes   <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd300\">803348<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffd400\">786522<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffc500\">1054237<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe500\">465630<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffa600\">1624435<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffda00\">679575<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-9faeddde8a088d1a46de\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-9faeddde8a088d1a46de\">{\"x\":{\"values\":[803348,786522,1054237,465630,1624435,679575],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Touring Bikes    <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffee00\">302371<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff000\">271718<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe600\">463106<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe900\">407333<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-092300fbddfb5e8dcb91\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-092300fbddfb5e8dcb91\">{\"x\":{\"values\":[null,null,302371,271718,463106,407333],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"font-weight: bold\">Clothing         <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe700\">433156<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffea00\">377529<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffe800\">427311<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffeb00\">364840<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-7ab518a222868362fd43\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-7ab518a222868362fd43\">{\"x\":{\"values\":[null,null,433156,377529,427311,364840],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Jerseys          <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff300\">214235<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff400\">199857<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff300\">209512<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fff400\">192735<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-ea9a5036ae518964d96d\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-ea9a5036ae518964d96d\">{\"x\":{\"values\":[null,null,214235,199857,209512,192735],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Shorts           <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">66666<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">49389<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffb00\">64809<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">47562<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-d777cceaa3f92c2445a7\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-d777cceaa3f92c2445a7\">{\"x\":{\"values\":[null,null,66666,49389,64809,47562],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Gloves           <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">36311<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">46507<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">34887<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">45198<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-0f3be9d610fbe25f9814\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-0f3be9d610fbe25f9814\">{\"x\":{\"values\":[null,null,36311,46507,34887,45198],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Vests            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">88053<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">44406<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffa00\">90881<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffc00\">43392<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-f39d1ee7806e1fb19ec2\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-f39d1ee7806e1fb19ec2\">{\"x\":{\"values\":[null,null,88053,44406,90881,43392],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Caps             <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">21774<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">29562<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">21204<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffd00\">28349<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-ef87a869015f6d140ab9\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-ef87a869015f6d140ab9\">{\"x\":{\"values\":[null,null,21774,29562,21204,28349],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n  <tr>\n   <td style=\"text-align:left;\"> <span style=\"padding-left: 0.25cm\">Socks            <\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px\">NA<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">6117<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">7808<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #ffff00\">6018<\/span> <\/td>\n   <td style=\"text-align:right;\"> <span style=\"display: block; padding: 0 4px; border-radius: 4px; background-color: #fffe00\">7604<\/span> <\/td>\n   <td style=\"text-align:left;\"> <span id=\"htmlwidget-386133dbfe4eab8a6209\" class=\"sparkline html-widget\"><\/span>\n<script type=\"application/json\" data-for=\"htmlwidget-386133dbfe4eab8a6209\">{\"x\":{\"values\":[null,null,6117,7808,6018,7604],\"options\":{\"height\":20,\"width\":60},\"width\":60,\"height\":20},\"evals\":[],\"jsHooks\":[]}<\/script> <\/td>\n  <\/tr>\n<\/tbody>\n<\/table>"},"evals":[],"jsHooks":[]}</script> <strong>Report 2</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Country <span class="op">==</span><span class="st"> &quot;Australia&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">report_2_table</span>()</code></pre></div>
+<table class="my_table">
+<thead>
+<tr>
+<th style="text-align:left;">
+Sub Category
+</th>
+<th style="text-align:left;">
+2012
+</th>
+<th style="text-align:left;">
+2013
+</th>
+<th style="text-align:left;">
+2014
+</th>
+<th style="text-align:left;">
+2015
+</th>
+<th style="text-align:left;">
+2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Accessories </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 18.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -26.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 18.5% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Helmets </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 18.5% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -25.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 18.0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Tires and Tubes </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 24.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -36.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 24.4% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bottles and Cages</span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 29.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -45.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 28.8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Hydration Packs </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -11.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 7.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -12.0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Fenders </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 9.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -13.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 9.4% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bike Racks </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 60.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -170.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 60.3% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Bike Stands </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -39.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 24.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -38.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Cleaners </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 35.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -58.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 36.0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 1.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 16.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -84.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 64.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -88.5% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Road Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 2.5% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -4.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -84.5% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 64.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -85.7% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Mountain Bikes </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -2.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 25.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -126.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 71.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -139.0% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Touring Bikes </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -11.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 41.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -13.7% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="font-weight: bold">Clothing </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -14.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 11.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -17.1% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Jerseys </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -7.2% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 4.6% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -8.7% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Shorts </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -35.0% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 23.8% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -36.3% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Gloves </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 21.9% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -33.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 22.8% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Vests </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -98.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 51.1% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -109.4% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Caps </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 26.3% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -39.4% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 25.2% </span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span style="padding-left: 0.25cm">Socks </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span> <i class></i> NA </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 21.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: red"> <i class="glyphicon glyphicon-arrow-down"></i> -29.7% </span>
+</td>
+<td style="text-align:left;">
+<span style="color: green"> <i class="glyphicon glyphicon-arrow-up"></i> 20.9% </span>
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Answer:</strong> 2015</p>
+<hr />
+</div>
+<div id="keep-the-australia-filter.-in-the-year-that-bikes-sales-have-the-highest-growth-previous-question-which-sub-category-of-bikes-has-the-highest-growth" class="section level2">
+<h2><span class="header-section-number">7.6</span> Keep the Australia filter. In the year that bikes sales have the highest growth (previous question), which sub category of bikes has the highest growth?</h2>
+<p><strong>Answer:</strong> Mounting Bikes, 71%</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="data-drill-down.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="reporting-hierarchical-chart.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

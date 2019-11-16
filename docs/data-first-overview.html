@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Data: first overview | Introduction to Data Analysis using R</title>
+  <meta name="description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Data: first overview | Introduction to Data Analysis using R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Data: first overview | Introduction to Data Analysis using R" />
+  
+  <meta name="twitter:description" content="Here is present my expirience in data analysis and visualizatioin in R of using the bookdown package to write a book" />
+  
+
+<meta name="author" content="Dmytro Rybalko" />
+
+
+<meta name="date" content="2019-11-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="deep-into-data.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<script src="libs/datatables-binding-0.2/datatables.js"></script>
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.12/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.12/js/jquery.dataTables.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/formattable_widget-binding-0.2.0.1/formattable_widget.js"></script>
+<link href="libs/jquery-sparkline-2.1.2/jquery.sparkline.css" rel="stylesheet" />
+<script src="libs/jquery-sparkline-2.1.2/jquery.sparkline.js"></script>
+<script src="libs/sparkline-binding-2.0/sparkline.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./"> Introduction to Data Analysis using R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Intro</a></li>
+<li class="chapter" data-level="2" data-path="data-first-overview.html"><a href="data-first-overview.html"><i class="fa fa-check"></i><b>2</b> Data: first overview</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-first-overview.html"><a href="data-first-overview.html#what-does-the-yearly-total-sales-look-like"><i class="fa fa-check"></i><b>2.1</b> What does the yearly total sales look like?</a></li>
+<li class="chapter" data-level="2.2" data-path="data-first-overview.html"><a href="data-first-overview.html#what-percentage-of-the-total-revenue-comes-from-the-bikes-category"><i class="fa fa-check"></i><b>2.2</b> What percentage of the total revenue comes from the bikes category?</a></li>
+<li class="chapter" data-level="2.3" data-path="data-first-overview.html"><a href="data-first-overview.html#for-the-revenue-by-country-sort-the-countries-from-the-one-with-highest-revenue-to-lowest-revenue"><i class="fa fa-check"></i><b>2.3</b> For the revenue by country, sort the countries from the one with highest revenue to lowest revenue</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="deep-into-data.html"><a href="deep-into-data.html"><i class="fa fa-check"></i><b>3</b> Deep into data</a><ul>
+<li class="chapter" data-level="3.1" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-in-the-united-states"><i class="fa fa-check"></i><b>3.1</b> What is the total revenue for all the sales in the United States?</a></li>
+<li class="chapter" data-level="3.2" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-in-the-month-of-december"><i class="fa fa-check"></i><b>3.2</b> What is the total revenue for all the sales in the month of December?</a></li>
+<li class="chapter" data-level="3.3" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-sales-for-young-adults-age-group"><i class="fa fa-check"></i><b>3.3</b> What is the total revenue for all the sales for young adults age group?</a></li>
+<li class="chapter" data-level="3.4" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-revenue-for-all-the-bikes-with-frame-size-62-for-the-customer-age-group-seniors"><i class="fa fa-check"></i><b>3.4</b> What is the total revenue for all the bikes with frame size 62 for the customer age group seniors?</a></li>
+<li class="chapter" data-level="3.5" data-path="deep-into-data.html"><a href="deep-into-data.html#what-is-the-total-profit-for-united-states-sales-in-the-month-of-october-2015-for-customer-age-group-adults"><i class="fa fa-check"></i><b>3.5</b> What is the total profit for United States sales in the month of October 2015, for customer age group adults?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html"><i class="fa fa-check"></i><b>4</b> Aggregation and pivoting data: part 1</a><ul>
+<li class="chapter" data-level="4.1" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-year-did-the-company-start-selling-touring-bikes"><i class="fa fa-check"></i><b>4.1</b> Which year did the company start selling touring bikes?</a></li>
+<li class="chapter" data-level="4.2" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#rank-the-states-for-germany-from-the-highest-to-lowest-revenue"><i class="fa fa-check"></i><b>4.2</b> Rank the states for Germany, from the highest to lowest revenue</a></li>
+<li class="chapter" data-level="4.3" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#rank-the-states-for-germany-from-the-highest-to-lowest-revenue-for-year-2013"><i class="fa fa-check"></i><b>4.3</b> Rank the states for Germany, from the highest to lowest revenue for year 2013</a></li>
+<li class="chapter" data-level="4.4" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-frame-size-sold-the-most"><i class="fa fa-check"></i><b>4.4</b> Which frame size sold the most?</a></li>
+<li class="chapter" data-level="4.5" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-age-group-has-the-lowest-revenue"><i class="fa fa-check"></i><b>4.5</b> Which age group has the lowest revenue?</a></li>
+<li class="chapter" data-level="4.6" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-countrys-trend-is-the-most-different-when-compared-to-the-other-countries"><i class="fa fa-check"></i><b>4.6</b> Which country’s trend is the most different when compared to the other countries?</a></li>
+<li class="chapter" data-level="4.7" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#which-year-does-the-bikes-category-have-the-least-sales"><i class="fa fa-check"></i><b>4.7</b> Which year does the Bikes category have the least sales?</a></li>
+<li class="chapter" data-level="4.8" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#what-is-the-proportion-of-sales-for-young-adults"><i class="fa fa-check"></i><b>4.8</b> What is the proportion of sales for Young Adults?</a></li>
+<li class="chapter" data-level="4.9" data-path="aggregation-and-pivoting-data-part-1.html"><a href="aggregation-and-pivoting-data-part-1.html#in-this-chart-you-can-clearly-see-the-order-of-sales-by-frame-size.-which-frame-size-sold-the-least"><i class="fa fa-check"></i><b>4.9</b> In this chart, you can clearly see the order of sales by frame size. Which frame size sold the least?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html"><i class="fa fa-check"></i><b>5</b> Aggregation and pivoting data: part 2</a><ul>
+<li class="chapter" data-level="5.1" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#a-quick-glance-on-the-yearly-sales-by-country-shows-that-australia-has-an-unusual-trend-compared-to-the-other-countries.-which-year-does-australia-have-the-least-sales"><i class="fa fa-check"></i><b>5.1</b> A quick glance on the yearly sales by country shows that Australia has an unusual trend compared to the other countries. Which year does Australia have the least sales?</a></li>
+<li class="chapter" data-level="5.2" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#what-is-the-percentage-of-australia-sales-of-total-sales-in-the-year-that-it-has-the-least-sales-previous-question"><i class="fa fa-check"></i><b>5.2</b> What is the percentage of Australia sales (of total sales) in the year that it has the least sales (previous question)?</a></li>
+<li class="chapter" data-level="5.3" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#lets-filter-the-charts-by-australia.-what-might-be-the-cause-of-this-trend"><i class="fa fa-check"></i><b>5.3</b> Let’s filter the charts by Australia. What might be the cause of this trend?</a></li>
+<li class="chapter" data-level="5.4" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#for-all-the-years-that-has-all-the-three-categories-which-year-does-the-bikes-has-the-least-proportion"><i class="fa fa-check"></i><b>5.4</b> For all the years that has all the three categories, which year does the Bikes has the least proportion?</a></li>
+<li class="chapter" data-level="5.5" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#what-is-the-percentage-of-bikes-sales-of-total-sales-in-that-year"><i class="fa fa-check"></i><b>5.5</b> What is the percentage of bikes sales (of total sales) in that year?</a></li>
+<li class="chapter" data-level="5.6" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#which-bikes-frame-size-is-more-popular-for-each-gender"><i class="fa fa-check"></i><b>5.6</b> Which bike’s frame size is more popular for each gender?</a></li>
+<li class="chapter" data-level="5.7" data-path="aggregation-and-pivoting-data-part-2.html"><a href="aggregation-and-pivoting-data-part-2.html#in-australia-which-age-group-has-more-sales-revenue-to-females-than-to-males-select-two-that-apply"><i class="fa fa-check"></i><b>5.7</b> In Australia, which age group has more sales revenue to females than to males? (Select two that apply)</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="data-drill-down.html"><a href="data-drill-down.html"><i class="fa fa-check"></i><b>6</b> Data: drill down</a><ul>
+<li class="chapter" data-level="6.1" data-path="data-drill-down.html"><a href="data-drill-down.html#which-subcategory-sold-the-most-quantity"><i class="fa fa-check"></i><b>6.1</b> Which subcategory sold the most quantity?</a></li>
+<li class="chapter" data-level="6.2" data-path="data-drill-down.html"><a href="data-drill-down.html#which-subcategory-has-the-most-revenue"><i class="fa fa-check"></i><b>6.2</b> Which subcategory has the most revenue?</a></li>
+<li class="chapter" data-level="6.3" data-path="data-drill-down.html"><a href="data-drill-down.html#what-is-the-total-margin-for-australia-in-the-year-2016"><i class="fa fa-check"></i><b>6.3</b> What is the total margin for Australia in the year 2016?</a></li>
+<li class="chapter" data-level="6.4" data-path="data-drill-down.html"><a href="data-drill-down.html#using-the-same-filters-which-category-has-the-lowest-margin"><i class="fa fa-check"></i><b>6.4</b> Using the same filters, which category has the lowest margin?</a></li>
+<li class="chapter" data-level="6.5" data-path="data-drill-down.html"><a href="data-drill-down.html#which-sub-category-has-the-lowest-margin"><i class="fa fa-check"></i><b>6.5</b> Which sub category has the lowest margin?</a></li>
+<li class="chapter" data-level="6.6" data-path="data-drill-down.html"><a href="data-drill-down.html#which-product-has-the-least-margin"><i class="fa fa-check"></i><b>6.6</b> Which product has the least margin?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="reporting-tables.html"><a href="reporting-tables.html"><i class="fa fa-check"></i><b>7</b> Reporting: tables</a><ul>
+<li class="chapter" data-level="7.1" data-path="reporting-tables.html"><a href="reporting-tables.html#helper-functions-for-type-1-report"><i class="fa fa-check"></i><b>7.1</b> Helper functions for type 1 report</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="reporting-tables.html"><a href="reporting-tables.html#count-totals-for-product-category"><i class="fa fa-check"></i><b>7.1.1</b> Count totals for Product Category</a></li>
+<li class="chapter" data-level="7.1.2" data-path="reporting-tables.html"><a href="reporting-tables.html#list-of-unique-product-in-product-category"><i class="fa fa-check"></i><b>7.1.2</b> List of unique product in Product Category</a></li>
+<li class="chapter" data-level="7.1.3" data-path="reporting-tables.html"><a href="reporting-tables.html#count-totals-for-sub-category"><i class="fa fa-check"></i><b>7.1.3</b> Count totals for Sub Category:</a></li>
+<li class="chapter" data-level="7.1.4" data-path="reporting-tables.html"><a href="reporting-tables.html#prepare-report_1"><i class="fa fa-check"></i><b>7.1.4</b> Prepare report_1</a></li>
+<li class="chapter" data-level="7.1.5" data-path="reporting-tables.html"><a href="reporting-tables.html#define-function-that-makes-sparklines-in-formattable-object"><i class="fa fa-check"></i><b>7.1.5</b> Define function that makes sparklines in formattable object</a></li>
+<li class="chapter" data-level="7.1.6" data-path="reporting-tables.html"><a href="reporting-tables.html#make-tibble-with-sparklines-as-html-widgets"><i class="fa fa-check"></i><b>7.1.6</b> Make tibble with sparklines as html-widgets:</a></li>
+<li class="chapter" data-level="7.1.7" data-path="reporting-tables.html"><a href="reporting-tables.html#add-sparklines-objects-to-report_1"><i class="fa fa-check"></i><b>7.1.7</b> Add sparklines objects to report_1:</a></li>
+<li class="chapter" data-level="7.1.8" data-path="reporting-tables.html"><a href="reporting-tables.html#final-table-for-the-first-report"><i class="fa fa-check"></i><b>7.1.8</b> Final table for the first report</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="reporting-tables.html"><a href="reporting-tables.html#helper-functions-for-report-type-2"><i class="fa fa-check"></i><b>7.2</b> Helper functions for report type 2</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="reporting-tables.html"><a href="reporting-tables.html#calculate-changes-in-totals-by-year-for-product-category"><i class="fa fa-check"></i><b>7.2.1</b> Calculate changes in totals by year for product category</a></li>
+<li class="chapter" data-level="7.2.2" data-path="reporting-tables.html"><a href="reporting-tables.html#final-table-for-the-second-report"><i class="fa fa-check"></i><b>7.2.2</b> Final table for the second report</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="reporting-tables.html"><a href="reporting-tables.html#questions"><i class="fa fa-check"></i><b>7.3</b> Questions</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="reporting-tables.html"><a href="reporting-tables.html#without-applying-any-filter-which-year-does-the-accessories-category-have-negative-growth"><i class="fa fa-check"></i><b>7.3.1</b> Without applying any filter, which year does the Accessories category have negative growth?</a></li>
+<li class="chapter" data-level="7.3.2" data-path="reporting-tables.html"><a href="reporting-tables.html#filter-the-reports-for-youth-age-group.-which-two-years-do-the-accessories-category-have-negative-growth"><i class="fa fa-check"></i><b>7.3.2</b> Filter the reports for youth age group. Which two years do the accessories category have negative growth?</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="reporting-tables.html"><a href="reporting-tables.html#without-applying-any-filter-which-two-years-do-the-bikes-category-have-negative-growth"><i class="fa fa-check"></i><b>7.4</b> Without applying any filter, which two years do the bikes category have negative growth?</a></li>
+<li class="chapter" data-level="7.5" data-path="reporting-tables.html"><a href="reporting-tables.html#filter-the-report-for-australia.-which-year-do-the-bikes-category-have-the-highest-growth"><i class="fa fa-check"></i><b>7.5</b> Filter the report for Australia. Which year do the bikes category have the highest growth?</a></li>
+<li class="chapter" data-level="7.6" data-path="reporting-tables.html"><a href="reporting-tables.html#keep-the-australia-filter.-in-the-year-that-bikes-sales-have-the-highest-growth-previous-question-which-sub-category-of-bikes-has-the-highest-growth"><i class="fa fa-check"></i><b>7.6</b> Keep the Australia filter. In the year that bikes sales have the highest growth (previous question), which sub category of bikes has the highest growth?</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html"><i class="fa fa-check"></i><b>8</b> Reporting: hierarchical chart</a><ul>
+<li class="chapter" data-level="8.1" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#explore-the-sales-composition-of-bikes-category-for-each-age-group.-which-age-group-does-the-composition-rank-of-sales-differ-than-the-rest"><i class="fa fa-check"></i><b>8.1</b> Explore the sales composition of bikes category for each age group. Which age group does the composition (rank of sales) differ than the rest?</a></li>
+<li class="chapter" data-level="8.2" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#now-explore-the-sales-composition-of-bikes-category-for-each-age-group-for-the-male-customers.-which-age-group-does-the-composition-differ-than-the-rest"><i class="fa fa-check"></i><b>8.2</b> Now explore the sales composition of bikes category for each age group, for the Male customers. Which age group does the composition differ than the rest?</a></li>
+<li class="chapter" data-level="8.3" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#clear-all-filters.-now-filter-for-the-year-2016-and-germany.-rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category"><i class="fa fa-check"></i><b>8.3</b> Clear all filters. Now, filter for the year 2016 and Germany. Rank the sales from the highest to lowest for the clothing category</a></li>
+<li class="chapter" data-level="8.4" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category.-keep-the-filter-settings-and-add-filter-by-male-customers."><i class="fa fa-check"></i><b>8.4</b> Rank the sales from the highest to lowest for the clothing category. Keep the filter settings and add filter by male customers.</a></li>
+<li class="chapter" data-level="8.5" data-path="reporting-hierarchical-chart.html"><a href="reporting-hierarchical-chart.html#rank-the-sales-from-the-highest-to-lowest-for-the-clothing-category.-keep-the-filter-settings-and-add-filter-by-youth-age-group"><i class="fa fa-check"></i><b>8.5</b> Rank the sales from the highest to lowest for the clothing category. Keep the filter settings and add filter by youth age group</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html"><i class="fa fa-check"></i><b>9</b> Join data from different sources</a><ul>
+<li class="chapter" data-level="9.1" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-three-bought-the-most-quantity-customer-profiles-marital-status-and-number-of-children"><i class="fa fa-check"></i><b>9.1</b> For those customers who bought bikes, what are the top three (bought the most quantity) customer profiles (marital status and number of children)?</a></li>
+<li class="chapter" data-level="9.2" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-three-bought-the-most-quantity-income-brackets-rank-from-highest-to-lowest"><i class="fa fa-check"></i><b>9.2</b> For those customers who bought bikes, what are the top three (bought the most quantity) income brackets? (Rank from highest to Lowest)</a></li>
+<li class="chapter" data-level="9.3" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#for-those-customers-who-bought-bikes-what-are-the-top-two-bought-the-most-quantity-education-levels"><i class="fa fa-check"></i><b>9.3</b> For those customers who bought bikes, what are the top two (bought the most quantity) education levels?</a></li>
+<li class="chapter" data-level="9.4" data-path="join-data-from-different-sources.html"><a href="join-data-from-different-sources.html#what-is-the-percentage-of-the-customers-who-bought-bikes-and-are-house-owners"><i class="fa fa-check"></i><b>9.4</b> What is the percentage of the customers who bought Bikes and are house owners?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Data Analysis using R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-first-overview" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Data: first overview</h1>
+<p><strong>Scenario.</strong> You are the new marketing manager of an established Bicycle company. The company sells bicycles and accessories, such as clothing and other accessories to bikers in six countries. The company has just hired Lucy as its new Sales manager. You are tasked to introduce Lucy to the company, its product portfolio and its sales performance since 2011. To do this, you have asked Jack, the IT manager to prepare some data for you. Now, it’s your job to present this data in a compelling manner.</p>
+<p>Load necessary libraries:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(readxl)
+<span class="kw">library</span>(DT)
+<span class="kw">library</span>(RColorBrewer)</code></pre></div>
+<p>Load raw data from <strong>Lab2Start.xlsx</strong> file:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;./data/raw/raw_data.xlsx&quot;</span>)</code></pre></div>
+<p>Let’s view structure of our data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(my_data)</code></pre></div>
+<pre><code>## Classes &#39;tbl_df&#39;, &#39;tbl&#39; and &#39;data.frame&#39;:    113036 obs. of  15 variables:
+##  $ Date            : POSIXct, format: &quot;2013-11-26&quot; &quot;2015-11-26&quot; ...
+##  $ Year            : num  2013 2015 2014 2016 2014 ...
+##  $ Customer ID     : num  11019 11019 11039 11039 11046 ...
+##  $ Customer Age    : num  19 19 49 49 47 47 47 47 35 35 ...
+##  $ Customer Gender : chr  &quot;M&quot; &quot;M&quot; &quot;M&quot; &quot;M&quot; ...
+##  $ Country         : chr  &quot;Canada&quot; &quot;Canada&quot; &quot;Australia&quot; &quot;Australia&quot; ...
+##  $ State           : chr  &quot;British Columbia&quot; &quot;British Columbia&quot; &quot;New South Wales&quot; &quot;New South Wales&quot; ...
+##  $ Product Category: chr  &quot;Accessories&quot; &quot;Accessories&quot; &quot;Accessories&quot; &quot;Accessories&quot; ...
+##  $ Sub Category    : chr  &quot;Bike Racks&quot; &quot;Bike Racks&quot; &quot;Bike Racks&quot; &quot;Bike Racks&quot; ...
+##  $ Product         : chr  &quot;Hitch Rack - 4-Bike&quot; &quot;Hitch Rack - 4-Bike&quot; &quot;Hitch Rack - 4-Bike&quot; &quot;Hitch Rack - 4-Bike&quot; ...
+##  $ Order Quantity  : num  8 8 23 20 4 5 4 2 22 21 ...
+##  $ Unit Cost       : num  45 45 45 45 45 45 45 45 45 45 ...
+##  $ Unit Price      : num  120 120 120 120 120 120 120 120 120 120 ...
+##  $ Cost            : num  360 360 1035 900 180 ...
+##  $ Revenue         : num  950 950 2401 2088 418 ...</code></pre>
+<p>To see how our raw data looks like we use <code>datatable()</code> function from <code>DT</code> package:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">datatable</span>(my_data[<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, ],
+          <span class="dt">class =</span> <span class="st">&quot;cell-border stripe nowrap&quot;</span>,
+          <span class="dt">options =</span> <span class="kw">list</span>(<span class="dt">scrollX =</span> T, <span class="dt">dom =</span> <span class="st">&#39;tp&#39;</span>, <span class="dt">autoWidth =</span> <span class="ot">TRUE</span>,
+                         <span class="dt">columnDefs =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">className =</span> <span class="st">&#39;dt-body-center&#39;</span>, <span class="dt">targets =</span> <span class="st">&quot;_all&quot;</span>)))) <span class="op">%&gt;%</span>
+<span class="st">     </span><span class="kw">formatDate</span>(<span class="dv">1</span>, <span class="dt">method =</span> <span class="st">&quot;toDateString&quot;</span>)</code></pre></div>
+<div id="htmlwidget-f0e65243f92398a5530b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f0e65243f92398a5530b">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100"],["2013-11-26T00:00:00Z","2015-11-26T00:00:00Z","2014-03-23T00:00:00Z","2016-03-23T00:00:00Z","2014-05-15T00:00:00Z","2016-05-15T00:00:00Z","2014-05-22T00:00:00Z","2016-05-22T00:00:00Z","2014-02-22T00:00:00Z","2016-02-22T00:00:00Z","2013-07-30T00:00:00Z","2015-07-30T00:00:00Z","2013-07-15T00:00:00Z","2015-07-15T00:00:00Z","2013-08-02T00:00:00Z","2015-08-02T00:00:00Z","2013-09-02T00:00:00Z","2015-09-02T00:00:00Z","2014-01-22T00:00:00Z","2016-01-22T00:00:00Z","2014-05-17T00:00:00Z","2016-05-17T00:00:00Z","2014-03-27T00:00:00Z","2016-03-27T00:00:00Z","2013-08-25T00:00:00Z","2015-08-25T00:00:00Z","2013-12-26T00:00:00Z","2015-12-26T00:00:00Z","2014-01-02T00:00:00Z","2016-01-02T00:00:00Z","2014-03-13T00:00:00Z","2016-03-13T00:00:00Z","2014-05-23T00:00:00Z","2016-05-23T00:00:00Z","2013-07-19T00:00:00Z","2015-07-19T00:00:00Z","2013-11-11T00:00:00Z","2015-11-11T00:00:00Z","2013-07-13T00:00:00Z","2015-07-13T00:00:00Z","2014-03-31T00:00:00Z","2016-03-31T00:00:00Z","2013-08-28T00:00:00Z","2015-08-28T00:00:00Z","2013-08-27T00:00:00Z","2015-08-27T00:00:00Z","2013-11-17T00:00:00Z","2015-11-17T00:00:00Z","2013-08-07T00:00:00Z","2015-08-07T00:00:00Z","2013-07-15T00:00:00Z","2015-07-15T00:00:00Z","2013-08-17T00:00:00Z","2015-08-17T00:00:00Z","2013-07-17T00:00:00Z","2015-07-17T00:00:00Z","2013-12-31T00:00:00Z","2015-12-31T00:00:00Z","2013-09-17T00:00:00Z","2015-09-17T00:00:00Z","2013-09-24T00:00:00Z","2015-09-24T00:00:00Z","2013-09-25T00:00:00Z","2015-09-25T00:00:00Z","2013-11-26T00:00:00Z","2015-11-26T00:00:00Z","2013-08-03T00:00:00Z","2015-08-03T00:00:00Z","2014-06-19T00:00:00Z","2016-06-19T00:00:00Z","2014-03-04T00:00:00Z","2016-03-04T00:00:00Z","2014-05-30T00:00:00Z","2016-05-30T00:00:00Z","2014-06-28T00:00:00Z","2016-06-28T00:00:00Z","2014-07-10T00:00:00Z","2016-07-10T00:00:00Z","2014-03-12T00:00:00Z","2016-03-12T00:00:00Z","2013-09-03T00:00:00Z","2015-09-03T00:00:00Z","2014-03-26T00:00:00Z","2016-03-26T00:00:00Z","2014-05-04T00:00:00Z","2016-05-04T00:00:00Z","2014-02-04T00:00:00Z","2016-02-04T00:00:00Z","2013-11-06T00:00:00Z","2015-11-06T00:00:00Z","2014-02-12T00:00:00Z","2016-02-12T00:00:00Z","2014-05-17T00:00:00Z","2016-05-17T00:00:00Z","2013-09-23T00:00:00Z","2015-09-23T00:00:00Z","2013-09-20T00:00:00Z","2015-09-20T00:00:00Z","2013-10-25T00:00:00Z","2015-10-25T00:00:00Z"],[2013,2015,2014,2016,2014,2016,2014,2016,2014,2016,2013,2015,2013,2015,2013,2015,2013,2015,2014,2016,2014,2016,2014,2016,2013,2015,2013,2015,2014,2016,2014,2016,2014,2016,2013,2015,2013,2015,2013,2015,2014,2016,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2013,2015,2014,2016,2014,2016,2014,2016,2014,2016,2014,2016,2014,2016,2013,2015,2014,2016,2014,2016,2014,2016,2013,2015,2014,2016,2014,2016,2013,2015,2013,2015,2013,2015],[11019,11019,11039,11039,11046,11046,11047,11047,11094,11094,11101,11101,11109,11109,11176,11176,11176,11176,11176,11176,11176,11176,11196,11196,11203,11203,11203,11203,11211,11211,11211,11211,11215,11215,11259,11259,11277,11277,11295,11295,11295,11295,11299,11299,11330,11330,11331,11331,11380,11380,11417,11417,11425,11425,11452,11452,11499,11499,11550,11550,11576,11576,11598,11598,11632,11632,11711,11711,11711,11711,11733,11733,11733,11733,11733,11733,11733,11733,12037,12037,12083,12083,12111,12111,12111,12111,12117,12117,12119,12119,12119,12119,12119,12119,12128,12128,12143,12143,12146,12146],[19,19,49,49,47,47,47,47,35,35,32,32,34,34,29,29,29,29,29,29,29,29,51,51,49,49,49,49,48,48,48,48,47,47,32,32,34,34,43,43,43,43,61,61,57,57,29,29,38,38,52,52,43,43,24,24,23,23,29,29,32,32,19,19,26,26,35,35,35,35,38,38,38,38,38,38,38,38,54,54,51,51,47,47,47,47,46,46,46,46,46,46,46,46,41,41,32,32,32,32],["M","M","M","M","F","F","F","F","M","M","F","F","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","M","F","F","F","F","F","F","F","F","M","M","F","F","F","F","M","M","M","M","F","F","M","M","F","F","F","F","F","F","M","M","F","F","M","M","F","F","F","F","M","M","M","M","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","F","M","M","M","M","M","M","M","M","F","F","M","M","M","M"],["Canada","Canada","Australia","Australia","Australia","Australia","Australia","Australia","Australia","Australia","Australia","Australia","Australia","Australia","Canada","Canada","Canada","Canada","Canada","Canada","Canada","Canada","United States","United States","Canada","Canada","Canada","Canada","Canada","Canada","Canada","Canada","Canada","Canada","United States","United States","Canada","Canada","United States","United States","United States","United States","United States","United States","Canada","Canada","Canada","Canada","Germany","Germany","France","France","France","France","Australia","Australia","United States","United States","United Kingdom","United Kingdom","France","France","Germany","Germany","Canada","Canada","Canada","Canada","Canada","Canada","United States","United States","United States","United States","United States","United States","United States","United States","Australia","Australia","United States","United States","United States","United States","United States","United States","United States","United States","United States","United States","United States","United States","United States","United States","Germany","Germany","United States","United States","United States","United States"],["British Columbia","British Columbia","New South Wales","New South Wales","New South Wales","New South Wales","Victoria","Victoria","Victoria","Victoria","Victoria","Victoria","Victoria","Victoria","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","Oregon","Oregon","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","Oregon","Oregon","British Columbia","British Columbia","California","California","California","California","California","California","British Columbia","British Columbia","British Columbia","British Columbia","Saarland","Saarland","Seine Saint Denis","Seine Saint Denis","Moselle","Moselle","Queensland","Queensland","California","California","England","England","Nord","Nord","Saarland","Saarland","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","British Columbia","California","California","California","California","California","California","California","California","Queensland","Queensland","Washington","Washington","California","California","California","California","Washington","Washington","California","California","California","California","California","California","Hessen","Hessen","Washington","Washington","California","California"],["Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories","Accessories"],["Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks","Bike Racks"],["Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike","Hitch Rack - 4-Bike"],[8,8,23,20,4,5,4,2,22,21,8,8,7,7,5,7,2,1,1,1,6,8,9,7,3,1,6,5,4,4,20,22,24,23,9,9,25,23,10,10,11,11,8,10,2,1,12,14,3,1,8,8,28,27,9,6,6,7,15,15,6,3,6,8,7,8,1,1,10,12,4,3,2,2,10,7,13,12,7,6,7,9,6,4,17,16,1,3,5,4,30,27,5,2,28,29,3,1,8,9],[45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45],[120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120,120],[360,360,1035,900,180,225,180,90,990,945,360,360,315,315,225,315,90,45,45,45,270,360,405,315,135,45,270,225,180,180,900,990,1080,1035,405,405,1125,1035,450,450,495,495,360,450,90,45,540,630,135,45,360,360,1260,1215,405,270,270,315,675,675,270,135,270,360,315,360,45,45,450,540,180,135,90,90,450,315,585,540,315,270,315,405,270,180,765,720,45,135,225,180,1350,1215,225,90,1260,1305,135,45,360,405],[950,950,2401,2088,418,522,379,190,2086,1991,758,758,664,664,594,832,238,119,119,119,713,950,929,722,356,119,713,594,475,475,2376,2614,2851,2732,929,929,2970,2732,1176,1176,1294,1294,941,1176,238,119,1426,1663,295,98,787,787,2957,2851,907,605,706,823,1728,1728,626,313,590,787,832,950,119,119,1188,1426,470,353,235,235,1176,823,1529,1411,706,605,655,842,706,470,1999,1882,94,281,588,470,3528,3175,588,235,3125,3236,281,94,941,1058]],"container":"<table class=\"cell-border stripe nowrap\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Date<\/th>\n      <th>Year<\/th>\n      <th>Customer ID<\/th>\n      <th>Customer Age<\/th>\n      <th>Customer Gender<\/th>\n      <th>Country<\/th>\n      <th>State<\/th>\n      <th>Product Category<\/th>\n      <th>Sub Category<\/th>\n      <th>Product<\/th>\n      <th>Order Quantity<\/th>\n      <th>Unit Cost<\/th>\n      <th>Unit Price<\/th>\n      <th>Cost<\/th>\n      <th>Revenue<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"scrollX":true,"dom":"tp","autoWidth":true,"columnDefs":[{"className":"dt-body-center","targets":"_all"},{"className":"dt-right","targets":[2,3,4,11,12,13,14,15]},{"orderable":false,"targets":0}],"order":[],"orderClasses":false,"rowCallback":"function(row, data) {\nDTWidget.formatDate(this, row, data, 1, 'toDateString')\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<hr />
+<p>The first thing you’d like to do is to present the data graphically. You do this by creating charts for the three groups of data you received from Jack, your IT manager. If you haven’t done so, give the chart a descriptive title.</p>
+<p>Your first solution should look like this (numbers may not be the same). <img src="img/mod1-lab1-img1.png" /> Create three type of chart as showed above and answer the next questions.</p>
+<hr />
+<div id="what-does-the-yearly-total-sales-look-like" class="section level2">
+<h2><span class="header-section-number">2.1</span> What does the yearly total sales look like?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(Year, <span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Year, <span class="dt">y =</span> Total, <span class="dt">color =</span> <span class="kw">reorder</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, <span class="op">-</span>Total))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">size =</span> <span class="fl">1.2</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_point</span>(<span class="dt">size =</span> <span class="dv">2</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">15e6</span>), <span class="dt">expand =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), <span class="dt">labels =</span> scales<span class="op">::</span>dollar) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Total Yearly Sales by Category&quot;</span>, <span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>, <span class="dt">color =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>),
+          <span class="dt">panel.grid.major =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;gray&quot;</span>),
+          <span class="dt">panel.grid.minor =</span> <span class="kw">element_line</span>(<span class="dt">colour =</span> <span class="st">&quot;gray&quot;</span>, <span class="dt">size =</span> <span class="fl">0.1</span>),
+          <span class="co">#legend.title = element_text(face = &quot;bold&quot;, colour = &quot;black&quot;, size = 12),</span>
+          <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">11</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>),
+          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">11</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>),
+          <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-4-1.png" width="864" /></p>
+<p><strong>Answer:</strong> Similar to the yearly bikes revenue</p>
+<hr />
+</div>
+<div id="what-percentage-of-the-total-revenue-comes-from-the-bikes-category" class="section level2">
+<h2><span class="header-section-number">2.2</span> What percentage of the total revenue comes from the bikes category?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">arrange</span>(<span class="kw">desc</span>(Total)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Prop =</span> <span class="kw">formatC</span>(Total <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(Total), <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">format =</span> <span class="st">&quot;f&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">               </span><span class="kw">as.numeric</span>(),
+           <span class="dt">Percent =</span> <span class="kw">paste</span>(Prop <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="st">&quot;%&quot;</span>),
+           <span class="dt">y_tick =</span> <span class="kw">cumsum</span>(Prop) <span class="op">-</span><span class="st"> </span>Prop <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;&quot;</span>, <span class="dt">y =</span> Prop, <span class="dt">fill =</span> <span class="kw">reorder</span>(<span class="st">`</span><span class="dt">Product Category</span><span class="st">`</span>, <span class="op">-</span>Prop))) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">width =</span> <span class="dv">1</span>, <span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="fl">0.7</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Revenue by Category&quot;</span>, <span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">1.2</span>, <span class="fl">1.3</span>), <span class="dt">y =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span>y_tick, <span class="dt">label =</span> Percent), <span class="dt">size =</span> <span class="dv">5</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;Set2&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>),
+          <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>),
+          <span class="dt">legend.title =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">legend.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>),
+          <span class="dt">axis.text =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.ticks =</span> <span class="kw">element_blank</span>(),
+          <span class="dt">axis.line =</span> <span class="kw">element_blank</span>())</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-5-1.png" width="864" /></p>
+<p><strong>Answer:</strong> 72%</p>
+<hr />
+</div>
+<div id="for-the-revenue-by-country-sort-the-countries-from-the-one-with-highest-revenue-to-lowest-revenue" class="section level2">
+<h2><span class="header-section-number">2.3</span> For the revenue by country, sort the countries from the one with highest revenue to lowest revenue</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">group_by</span>(Country) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Total =</span> <span class="kw">sum</span>(Revenue)) <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">reorder</span>(Country, Total), <span class="dt">y =</span> Total)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">width =</span> .<span class="dv">5</span>, <span class="dt">fill =</span> <span class="st">&quot;tomato2&quot;</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> scales<span class="op">::</span>dollar, <span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">scale_x_discrete</span>(<span class="dt">expand =</span> <span class="kw">c</span>(<span class="fl">0.01</span>, <span class="dv">0</span>)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Total revenue by country&quot;</span>, <span class="dt">y =</span> <span class="ot">NULL</span>, <span class="dt">x =</span> <span class="ot">NULL</span>) <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme_classic</span>() <span class="op">+</span>
+<span class="st">    </span><span class="kw">theme</span>(<span class="dt">panel.background =</span> <span class="kw">element_rect</span>(<span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">color =</span> <span class="st">&quot;white&quot;</span>),
+          <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="dt">hjust =</span> <span class="fl">0.5</span>),
+          <span class="dt">axis.text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">11</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>),
+          <span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">12</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>))</code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-6-1.png" width="864" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="deep-into-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
