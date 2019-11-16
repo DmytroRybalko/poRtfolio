@@ -3,7 +3,6 @@
 .RData
 .Ruserdata
 packrat/src/
-*.html
 *cache/
 _publish.R
 _book
