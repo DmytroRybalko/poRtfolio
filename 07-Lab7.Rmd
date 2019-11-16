@@ -1,6 +1,6 @@
-# Lab8: Scenario
+# Reporting: hierarchical chart
 
-Upon reviewing the growth report you created, Lucy asked for a report that shows composition of **Product Categories** and **Sub Categories** based on certain filters, including **Year**, **Country**, **Customer Gender**, and **Age Group**.
+**Scenario.** Upon reviewing the growth report you created, Lucy asked for a report that shows composition of **Product Categories** and **Sub Categories** based on certain filters, including **Year**, **Country**, **Customer Gender**, and **Age Group**.
 
 Specifically, Lucy wants to see the report visualized using a hierarchical chart.
 

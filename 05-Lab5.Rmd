@@ -1,6 +1,6 @@
-# Lab6: Scenario  
+# Data: drill down
 
-Lucy was impressed with the dashboard you created. With the dashboard, she is able to narrow down her interest. Specifically, she is interested with the sales in Australia. She would like to perform simple profitability analysis on the product category and sub-category, for specific year. Furthermore, she wants to have the option of going deeper to product level.
+**Scenario.** Lucy was impressed with the dashboard you created. With the dashboard, she is able to narrow down her interest. Specifically, she is interested with the sales in Australia. She would like to perform simple profitability analysis on the product category and sub-category, for specific year. Furthermore, she wants to have the option of going deeper to product level.
 
 Load libraries
 ```{r results='hide', warning=FALSE}

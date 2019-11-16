@@ -1,6 +1,6 @@
-# Lab3: Scenario  
+# Deep into data
 
-While your first attempt to show the company's performance to Lucy was not bad, clearly she has a lot more requirements than what you provided. She wants to know more about the year over year sales, sliced into different categories, sub-categories, and countries. She also wants to see additional information such as customer demographics.
+**Scenario.** While your first attempt to show the company's performance to Lucy was not bad, clearly she has a lot more requirements than what you provided. She wants to know more about the year over year sales, sliced into different categories, sub-categories, and countries. She also wants to see additional information such as customer demographics.
 
 Jack has provided you with a different data source. This time the data has more than one hundred thousand rows.
 

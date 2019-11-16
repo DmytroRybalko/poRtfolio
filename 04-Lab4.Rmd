@@ -1,6 +1,6 @@
-# Lab5: Scenario
+# Aggregation and pivoting data: part 2
 
-You have created several pivot tables and pivot charts for Lucy.
+**Scenario.** You have created several pivot tables and pivot charts for Lucy.
 
 Load libraries
 ```{r results='hide', warning=FALSE}

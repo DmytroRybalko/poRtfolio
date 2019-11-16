@@ -1,6 +1,6 @@
+# Join data from different sources
 
-# Lab8: Scenario
-Lastly, Lucy wants to have more information about the customer demographics in addition to the already available age and gender. Since your data has **Customer ID** for each row, you can "connect" these rows with your customer demographics database. Your customer demographics is stored in file "Customer_demographics.txt".
+**Scenario.** Lastly, Lucy wants to have more information about the customer demographics in addition to the already available age and gender. Since your data has **Customer ID** for each row, you can "connect" these rows with your customer demographics database. Your customer demographics is stored in file "Customer_demographics.txt".
 
 Load necessary libraries
 ```{r}

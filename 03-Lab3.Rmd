@@ -1,6 +1,6 @@
-# Lab4: Scenario
+# Aggregation and pivoting data: part 1
 
-Now that you have prepared the data, you can start to create pivot tables to aggregate the data and create some reports. From your conversation with Lucy, you know that she is interested in looking into the yearly sales data broken down by **Countries**, **Product Categories** and **Age Groups**.
+**Scenario.** Now that you have prepared the data, you can start to create pivot tables to aggregate the data and create some reports. From your conversation with Lucy, you know that she is interested in looking into the yearly sales data broken down by **Countries**, **Product Categories** and **Age Groups**.
 
 Load libraries
 ```{r results='hide', warning=FALSE}

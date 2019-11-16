@@ -3,9 +3,9 @@
 @import url("css/custom_lab6.css");
 </style>
 
-# Lab7: Scenario
+# Reporting: tables
 
-Lucy seems intrigued your presentation on Australia's sales. Now, she wants to review the sales difference (growth) for **Product Category** and **Sub Category** between year 2015 and 2016. She wants to be able to filter the report by all the options available, including **Customer Gender** and **Age Group**.  
+**Scenario.** Lucy seems intrigued your presentation on Australia's sales. Now, she wants to review the sales difference (growth) for **Product Category** and **Sub Category** between year 2015 and 2016. She wants to be able to filter the report by all the options available, including **Customer Gender** and **Age Group**.  
   
 Load libraries
 ```{r}
